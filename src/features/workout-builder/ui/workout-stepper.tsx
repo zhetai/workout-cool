@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { StepperStepProps } from "../types";
 import { useWorkoutStepper } from "../model/use-workout-stepper";
 import { StepperHeader } from "./stepper-header";
+import { MuscleSelection } from "./muscle-selection";
 import { EquipmentSelection } from "./equipment-selection";
 
 function NavigationFooter({
@@ -17,6 +18,7 @@ function NavigationFooter({
   onPrevious,
   onNext,
   selectedEquipment,
+  selectedMuscles,
 }: {
   currentStep: number;
   totalSteps: number;
@@ -24,6 +26,7 @@ function NavigationFooter({
   onPrevious: () => void;
   onNext: () => void;
   selectedEquipment: any[];
+  selectedMuscles: any[];
 }) {
   const t = useI18n();
   const isFirstStep = currentStep === 1;
@@ -40,10 +43,7 @@ function NavigationFooter({
               <div className="flex items-center gap-2 text-sm">
                 <Zap className="h-4 w-4 text-emerald-500" />
                 <span className="font-medium text-slate-700 dark:text-slate-300">
-                  {selectedEquipment.length}{" "}
-                  {selectedEquipment.length === 1
-                    ? t("workout_builder.stats.equipment_selected")
-                    : t("workout_builder.stats.equipment_selected_plural")}
+                  {t("workout_builder.stats.equipment_selected", { count: selectedEquipment.length })}
                 </span>
               </div>
             )}
@@ -51,7 +51,7 @@ function NavigationFooter({
               <div className="flex items-center gap-2 text-sm">
                 <CheckCircle className="h-4 w-4 text-blue-500" />
                 <span className="font-medium text-slate-700 dark:text-slate-300">
-                  {t(`workout_builder.steps.${currentStep === 2 ? "muscles" : "exercises"}.title`)}
+                  {t("workout_builder.stats.muscle_selected", { count: selectedMuscles.length })}
                 </span>
               </div>
             )}
@@ -103,10 +103,7 @@ function NavigationFooter({
             <div className="flex items-center gap-2 text-sm">
               <Zap className="h-4 w-4 text-emerald-500" />
               <span className="font-medium text-slate-700 dark:text-slate-300">
-                {selectedEquipment.length}{" "}
-                {selectedEquipment.length === 1
-                  ? t("workout_builder.stats.equipment_selected")
-                  : t("workout_builder.stats.equipment_selected_plural")}
+                {t("workout_builder.stats.equipment_selected", { count: selectedEquipment.length })}
               </span>
             </div>
           )}
@@ -114,7 +111,7 @@ function NavigationFooter({
             <div className="flex items-center gap-2 text-sm">
               <CheckCircle className="h-4 w-4 text-blue-500" />
               <span className="font-medium text-slate-700 dark:text-slate-300">
-                {t(`workout_builder.steps.${currentStep === 2 ? "muscles" : "exercises"}.title`)}
+                {t("workout_builder.stats.muscle_selected", { count: selectedMuscles.length })}
               </span>
             </div>
           )}
@@ -142,8 +139,21 @@ function NavigationFooter({
 
 export function WorkoutStepper() {
   const t = useI18n();
-  const { currentStep, selectedEquipment, nextStep, prevStep, toggleEquipment, clearEquipment, canProceedToStep2, canProceedToStep3 } =
-    useWorkoutStepper();
+  const {
+    currentStep,
+    selectedEquipment,
+    nextStep,
+    prevStep,
+    toggleEquipment,
+    clearEquipment,
+    selectedMuscles,
+    toggleMuscle,
+    canProceedToStep2,
+    canProceedToStep3,
+  } = useWorkoutStepper();
+
+  // Calculer si on peut continuer selon l'étape
+  const canContinue = currentStep === 1 ? canProceedToStep2 : currentStep === 2 ? canProceedToStep3 : false;
 
   // Calculer l'état des étapes avec traductions
   const STEPPER_STEPS: StepperStepProps[] = [
@@ -176,9 +186,6 @@ export function WorkoutStepper() {
     isCompleted: step.stepNumber < currentStep,
   }));
 
-  // Déterminer si on peut continuer
-  const canContinue = (currentStep === 1 && canProceedToStep2) || (currentStep === 2 && canProceedToStep3) || currentStep === 3;
-
   // Rendu du contenu de l'étape actuelle
   const renderStepContent = () => {
     switch (currentStep) {
@@ -187,17 +194,12 @@ export function WorkoutStepper() {
           <EquipmentSelection onClearEquipment={clearEquipment} onToggleEquipment={toggleEquipment} selectedEquipment={selectedEquipment} />
         );
       case 2:
-        return (
-          <div className="text-center py-12">
-            <h2 className="text-2xl font-bold mb-4">{t("workout_builder.selection.muscle_selection_coming_soon")}</h2>
-            <p className="text-muted-foreground">{t("workout_builder.selection.muscle_selection_description")}</p>
-          </div>
-        );
+        return <MuscleSelection onToggleMuscle={toggleMuscle} selectedEquipment={selectedEquipment} selectedMuscles={selectedMuscles} />;
       case 3:
         return (
-          <div className="text-center py-12">
-            <h2 className="text-2xl font-bold mb-4">{t("workout_builder.selection.exercise_selection_coming_soon")}</h2>
-            <p className="text-muted-foreground">{t("workout_builder.selection.exercise_selection_description")}</p>
+          <div className="text-center py-20">
+            <h3 className="text-xl font-semibold mb-4">{t("workout_builder.coming_soon.exercises")}</h3>
+            <p className="text-slate-600 dark:text-slate-400">{t("workout_builder.coming_soon.exercises_description")}</p>
           </div>
         );
       default:
@@ -220,6 +222,7 @@ export function WorkoutStepper() {
         onNext={nextStep}
         onPrevious={prevStep}
         selectedEquipment={selectedEquipment}
+        selectedMuscles={selectedMuscles}
         totalSteps={STEPPER_STEPS.length}
       />
     </div>
