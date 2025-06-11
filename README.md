@@ -49,15 +49,6 @@ The opensource fitness community deserves better than broken promises and abando
 
 I'm not building this for profit.
 
-I've rebuilt the concept from the ground up with:
-
-- ✨ **Modern Tech Stack**: Next.js 14, TypeScript, PostgreSQL
-- 🏗️ **Better Architecture**: Feature-Sliced Design for maintainability
-- 🌐 **Internationalization**: Multi-language support from day one
-- 💡 **Sustainable Video Strategy**: Smart approach to exercise demonstrations without prohibitive licensing costs
-- 🎯 **Community-Driven**: Actively implementing the backlog of user-requested features that have been waiting for 12+ months
-- 🚀 **Active Development**: Committed to long-term maintenance and growth
-
 This isn't just a revival : it's an evolution. **workout.cool** represents everything the original project could have been, with the
 reliability, modern approach, and **maintenance** that the fitness open source community deserves.
 
