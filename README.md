@@ -19,11 +19,9 @@ vast exercise database with detailed instructions and video demonstrations.
 ## Features
 
 - 🏋️ **Comprehensive Exercise Database** - Thousands of exercises with detailed descriptions, videos, and muscle targeting
-- 👨‍🏫 **Coach Management** - Tools for fitness coaches to manage their clients
 - 📊 **Progress Tracking** - Monitor client progress and workout statistics
 - 🎯 **Custom Workouts** - Create personalized workout routines
 - 🌐 **Multi-language Support** - English and French translations
-- 📱 **Responsive Design** - Works seamlessly on desktop and mobile
 
 ## Tech Stack
 
