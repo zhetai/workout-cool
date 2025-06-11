@@ -5,11 +5,10 @@ import { LogIn, UserPlus, LogOut, User } from "lucide-react";
 
 import { useI18n } from "locales/client";
 import Logo from "@public/logo.png";
+import { ReleaseNotesDialog } from "@/features/release-notes";
 import { useLogout } from "@/features/auth/model/useLogout";
 import { useSession } from "@/features/auth/lib/auth-client";
 import { Link } from "@/components/ui/link";
-import { ReleaseNotesDialog } from "@/features/release-notes";
-
 
 export const Header = () => {
   const session = useSession();
@@ -24,24 +23,32 @@ export const Header = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 px-0">
+    <div className="navbar bg-base-100 px-4">
       {/* Logo and Title */}
       <div className="navbar-start">
-        <Link className="btn btn-ghost text-xl" href="/">
-          <Image alt="workout cool logo" className="w-8" height={32} src={Logo} width={32} />
-          <span className="font-semibold hidden sm:inline">Workout.cool</span>
+        <Link className="group flex items-center space-x-3 rounded-xl bg-gradient-to-r px-4 py-2 transition-all duration-200 " href="/">
+          <div className="relative">
+            <Image
+              alt="workout cool logo"
+              className="h-8 w-8 transition-transform duration-200 group-hover:rotate-[20deg] group-hover:scale-110"
+              height={32}
+              src={Logo}
+              width={32}
+            />
+            <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-emerald-400 opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+          </div>
+          <div className="flex flex-col">
+            <span className="font-bold transition-colors duration-200 group-hover:text-blue-400">Workout.cool</span>
+          </div>
         </Link>
-
-        <div className="badge badge-secondary badge-sm ml-2">Beta</div>
       </div>
 
       {/* User Menu */}
       <div className="navbar-end">
         <ReleaseNotesDialog />
-        
         <div className="dropdown dropdown-end">
           <div className="btn btn-ghost btn-circle avatar" role="button" tabIndex={0}>
-            <div className="w-8 rounded-full bg-primary text-primary-content flex items-center justify-center text-sm font-medium">
+            <div className="w-8 rounded-full bg-primary text-primary-content !flex items-center justify-center text-sm font-medium">
               {userAvatar || <User className="w-4 h-4" />}
             </div>
           </div>
@@ -52,9 +59,8 @@ export const Header = () => {
                 {t("commons.profile")}
               </Link>
             </li>
-            <li>
-              <hr className="my-1" />
-            </li>
+
+            <hr className="my-1" />
 
             {!session.data ? (
               <>
