@@ -268,6 +268,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 💖 Sponsor This Project
 
+Appear in the README and on the website as supporter by donating:
+
 <div align="center">
   <a href="https://ko-fi.com/workoutcool" target="_blank">
     <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Sponsor on Ko-fi" />
