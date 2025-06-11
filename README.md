@@ -9,6 +9,9 @@
 <img src="https://img.shields.io/github/issues/Snouzy/workout-cool" alt="Issues">
 <img src="https://img.shields.io/github/languages/count/Snouzy/workout-cool" alt="Languages">
 <img src="https://img.shields.io/github/repo-size/Snouzy/workout-cool" alt="Repository Size">
+<a href="https://ko-fi.com/workoutcool">
+   <img src="https://img.shields.io/badge/sponsor%20on-ko--fi-ff5f5f?logo=ko-fi&logoColor=white&style=flat-square">
+</a>
 </p>
 </div>
 
@@ -263,8 +266,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 🔄 **Spread the word** to fellow fitness enthusiasts who lost hope
 - 🤝 **Contribute code** if you're a developer : let's build this together
 
----
+## 💖 Sponsor This Project
 
 <div align="center">
-Made with 💛 by fitness enthusiasts for the fitness community
+  <a href="https://ko-fi.com/workoutcool" target="_blank">
+    <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Sponsor on Ko-fi" />
+  </a>
 </div>
+
+<p align="center">
+  <em>If you believe in open-source fitness tools and want to help this project thrive,<br>
+  consider buying me a coffee ☕ or sponsoring the continued development.</em>
+</p>
+
+<p align="center">
+  Your support helps cover hosting costs, exercise database updates, and continuous improvement.<br>
+  Thank you for keeping <strong>Workout Cool</strong> alive and evolving 💪
+</p>
