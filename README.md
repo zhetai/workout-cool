@@ -1,4 +1,5 @@
 <div align="center">
+<img src="public/logo.png" alt="Workout Cool Logo" width="120" height="120">
 <h1>Workout Cool</h1>
 <h3><em>Modern fitness coaching platform with comprehensive exercise database</em></h3>
 <p>
@@ -129,9 +130,16 @@ id,name,name_en,description,description_en,full_video_url,full_video_image_url,i
 
 This project follows **Feature-Sliced Design (FSD)** principles with Next.js App Router:
 
-src/ ├── app/ # Next.js pages, routes and layouts ├── processes/ # Business flows (multi-feature) ├── widgets/ # Composable UI with logic
-(Sidebar, Header) ├── features/ # Business units (auth, exercise-management) ├── entities/ # Domain entities (user, exercise, workout) ├──
-shared/ # Shared code (UI, lib, config, types) └── styles/ # Global CSS, themes
+```
+src/
+├── app/ # Next.js pages, routes and layouts
+├── processes/ # Business flows (multi-feature)
+├── widgets/ # Composable UI with logic (Sidebar, Header)
+├── features/ # Business units (auth, exercise-management)
+├── entities/ # Domain entities (user, exercise, workout)
+├── shared/ # Shared code (UI, lib, config, types)
+└── styles/ # Global CSS, themes
+```
 
 ### Architecture Principles
 
@@ -141,8 +149,14 @@ shared/ # Shared code (UI, lib, config, types) └── styles/ # Global CSS, t
 
 ### Example Feature Structure
 
-features/ └── exercise-management/ ├── ui/ # UI components (ExerciseForm, ExerciseCard) ├── model/ # Hooks, state management (useExercises)
-├── lib/ # Utilities (exercise-helpers) └── api/ # Server actions or API calls
+```
+features/
+└── exercise-management/
+├── ui/ # UI components (ExerciseForm, ExerciseCard)
+├── model/ # Hooks, state management (useExercises)
+├── lib/ # Utilities (exercise-helpers)
+└── api/ # Server actions or API calls
+```
 
 ## Contributing
 
