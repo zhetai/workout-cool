@@ -14,23 +14,57 @@
 
 ## About
 
-A comprehensive fitness coaching platform that allows trainers to manage their clients, create workout plans, track progress, and access a
-vast exercise database with detailed instructions and video demonstrations.
+A comprehensive fitness coaching platform that allows create workout plans for you, track progress, and access a vast exercise database with
+detailed instructions and video demonstrations.
 
-## Features
+## 🎯 Project Origin & Motivation
 
-- 🏋️ **Comprehensive Exercise Database** - Thousands of exercises with detailed descriptions, videos, and muscle targeting
-- 📊 **Progress Tracking** - Monitor client progress and workout statistics
-- 🎯 **Custom Workouts** - Create personalized workout routines
-- 🌐 **Multi-language Support** - English and French translations
+This project was born from a personal mission to revive and improve upon a previous fitness platform. As the **primary contributor** to the
+original [workout.lol](https://github.com/workout-lol/workout-lol) project, I witnessed its journey and abandonment. 🥹
 
-## Tech Stack
+### The Story Behind **_workout.cool_**
 
-- **Framework**: Next.js 14 with App Router
-- **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: Better Auth
-- **Language**: TypeScript
-- **Architecture**: Feature-Sliced Design (FSD)
+- 🏗️ **Original Contributor**: I was the main contributor to workout.lol
+- 💼 **Business Challenges**: The original project faced major hurdles with exercise video partnerships (no reliable video provider) could
+  be established
+- 💰 **Project Sale**: Due to these partnership issues, the project was sold to another party
+- 📉 **Abandonment**: The new owner quickly realized that **exercise video licensing costs were prohibitively expensive**, began to be sick
+  and abandoned the entire project
+- 🔄 **Revival Attempts**: For the past **9 months**, I've been trying to reconnect with the new stakeholder
+- 📧 **Radio Silence**: Despite multiple (15) attempts, there has been no response
+- 🚀 **New Beginning**: Rather than let this valuable work disappear, I decided to create a fresh, modern implementation
+
+### Why Workout Cool Exists
+
+**Someone had to step up.**
+
+The opensource fitness community deserves better than broken promises and abandoned platforms.
+
+I'm not building this for profit.
+
+I've rebuilt the concept from the ground up with:
+
+- ✨ **Modern Tech Stack**: Next.js 14, TypeScript, PostgreSQL
+- 🏗️ **Better Architecture**: Feature-Sliced Design for maintainability
+- 🌐 **Internationalization**: Multi-language support from day one
+- 💡 **Sustainable Video Strategy**: Smart approach to exercise demonstrations without prohibitive licensing costs
+- 🎯 **Community-Driven**: Actively implementing the backlog of user-requested features that have been waiting for 12+ months
+- 🚀 **Active Development**: Committed to long-term maintenance and growth
+
+This isn't just a revival : it's an evolution. **workout.cool** represents everything the original project could have been, with the
+reliability, modern approach, and **maintenance** that the fitness open source community deserves.
+
+## 👥 From the Community, For the Community
+
+**I'm not just a developer : I'm a user who refused to let our community down.**
+
+I experienced firsthand the frustration of watching a beloved tool slowly disappear. Like many of you, I had workouts saved, progress
+tracked, and a routine built around the platform.
+
+### My Mission: Rescue & Revive.
+
+_If you were part of the original workout.lol community, welcome back! If you're new here, welcome to the future of fitness platform
+management._
 
 ## Quick Start
 
@@ -45,7 +79,7 @@ vast exercise database with detailed instructions and video demonstrations.
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/mathiasbradiceanu/workout-cool.git
+   git clone https://github.com/Snouzy/workout-cool.git
    cd workout-cool
    ```
 
@@ -180,7 +214,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## Deployment
 
-### Using Docker
+### Using Docker (Not ready yet : todo)
 
 ```bash
 # Build the Docker image
@@ -217,17 +251,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-## Support
+## 🤝 Join the Rescue Mission
 
-If you found this project helpful, consider:
+**This is about rebuilding what we lost, together.**
 
-- ⭐ Starring the repository
-- 🐛 Reporting bugs
-- 💡 Suggesting new features
-- 🤝 Contributing to the codebase
+### How You Can Help
+
+- 🌟 **Star this repo** to show the world our community is alive and thriving
+- 🐛 **Report issues** you find. I'm listening to every single one
+- 💡 **Share your feature requests** finally, someone who will actually implement them !
+- 🔄 **Spread the word** to fellow fitness enthusiasts who lost hope
+- 🤝 **Contribute code** if you're a developer : let's build this together
 
 ---
 
 <div align="center">
-Made with ❤️ by fitness enthusiasts for the fitness community
+Made with 💛 by fitness enthusiasts for the fitness community
 </div>
