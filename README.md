@@ -15,6 +15,10 @@
 </p>
 </div>
 
+## Contributors
+
+[![snouzy_biceps](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/248202501-4d5ae3c3-b83b-4a2c-b7e2-0e38705f5487.jpg)](https://twitter.com/snouzy_biceps)
+
 ## About
 
 A comprehensive fitness coaching platform that allows create workout plans for you, track progress, and access a vast exercise database with
@@ -273,6 +277,10 @@ Appear in the README and on the website as supporter by donating:
 <div align="center">
   <a href="https://ko-fi.com/workoutcool" target="_blank">
     <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Sponsor on Ko-fi" />
+  </a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://buymeacoffee.com/workout_cool" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174" />
   </a>
 </div>
 
