@@ -270,9 +270,10 @@ Appear in the README and on the website as supporter by donating:
     <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Sponsor on Ko-fi" />
   </a>
   &nbsp;&nbsp;&nbsp;
-  <a href="https://buymeacoffee.com/workout_cool" target="_blank">
+  <!-- TODO: setup -->
+  <!-- <a href="https://buymeacoffee.com/workout_cool" target="_blank">
     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174" />
-  </a>
+  </a> -->
 </div>
 
 <p align="center">
