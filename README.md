@@ -20,6 +20,7 @@
 <a href="https://github.com/Snouzy/workout-cool/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Snouzy/workout-cool" />
 </a>
+
 ## About
 
 A comprehensive fitness coaching platform that allows create workout plans for you, track progress, and access a vast exercise database with
