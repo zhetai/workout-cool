@@ -9,6 +9,23 @@ export default {
   error: {
     invalid_credentials: "Invalid credentials or account does not exist",
   },
+
+  // Release Notes
+  release_notes: {
+    title: "What's New",
+    release_notes: "Release Notes",
+    notes: {
+      note_2024_06_01: {
+        title: "🎉 New: Release Notes Dialog",
+        content: "You can now view what's new directly from the header! Stay tuned for more updates.",
+      },
+      note_2024_05_20: {
+        title: "UI Improvements",
+        content: "Improved mobile responsiveness and added subtle hover effects to buttons.",
+      },
+    },
+  },
+
   // Contact Support
   contact_support: "Contact Support",
   contact_support_subtitle: "Describe your issue and we'll help you as soon as possible. You can also write to us directly at",
