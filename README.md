@@ -1,6 +1,6 @@
 <div align="center">
-<img src="public/logo.png" alt="Workout Cool Logo" width="120" height="120">
-<h1>Workout Cool</h1>
+<img src="public/logo.png" alt="Workout.cool Logo" width="120" height="120">
+<h1>Workout.cool</h1>
 <h3><em>Modern fitness coaching platform with comprehensive exercise database</em></h3>
 <p>
 <img src="https://img.shields.io/github/contributors/Snouzy/workout-cool?style=plastic" alt="Contributors">
@@ -41,7 +41,7 @@ original [workout.lol](https://github.com/workout-lol/workout-lol) project, I wi
 - 📧 **Radio Silence**: Despite multiple (15) attempts, there has been no response
 - 🚀 **New Beginning**: Rather than let this valuable work disappear, I decided to create a fresh, modern implementation
 
-### Why Workout Cool Exists
+### Why **_workout.cool_** Exists
 
 **Someone had to step up.**
 
@@ -291,5 +291,5 @@ Appear in the README and on the website as supporter by donating:
 
 <p align="center">
   Your support helps cover hosting costs, exercise database updates, and continuous improvement.<br>
-  Thank you for keeping <strong>Workout Cool</strong> alive and evolving 💪
+  Thank you for keeping <strong>workout.cool</strong> alive and evolving 💪
 </p>
