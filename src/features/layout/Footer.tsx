@@ -6,14 +6,14 @@ import { Link } from "@/components/ui/link";
 
 const SOCIAL_LINKS = [
   {
-    href: "https://github.com/Vincenius/workout-lol",
+    href: "https://github.com/Snouzy/workout-cool",
     icon: Github,
     label: "GitHub",
   },
   {
-    href: "https://twitter.com/wweb_dev",
+    href: "https://x.com/snouzy_biceps",
     icon: Twitter,
-    label: "Twitter",
+    label: "Twitter/X",
   },
   {
     href: "mailto:info@workout.cool",
@@ -23,7 +23,7 @@ const SOCIAL_LINKS = [
 ];
 
 const NAVIGATION = (t: TFunction) => [
-  { name: t("commons.donate"), href: "https://ko-fi.com/workout_lol" },
+  { name: t("commons.donate"), href: "https://ko-fi.com/workoutcool" },
   { name: t("commons.about"), href: "/about" },
   { name: t("commons.privacy"), href: "/legal/privacy" },
 ];

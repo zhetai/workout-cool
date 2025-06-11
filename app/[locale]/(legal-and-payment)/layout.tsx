@@ -15,9 +15,6 @@ export default function RouteLayout({ children, params: _ }: LayoutParams<Locale
       <main className="flex-1 px-4 py-12">
         <div className="mx-auto w-full max-w-4xl">{children}</div>
       </main>
-
-      {/* Pied de page */}
-      <Footer />
     </div>
   );
 }
