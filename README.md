@@ -2,12 +2,12 @@
 <h1>Workout Cool</h1>
 <h3><em>Modern fitness coaching platform with comprehensive exercise database</em></h3>
 <p>
-<img src="https://img.shields.io/github/contributors/mathiasbradiceanu/workout-cool?style=plastic" alt="Contributors">
-<img src="https://img.shields.io/github/forks/mathiasbradiceanu/workout-cool" alt="Forks">
-<img src="https://img.shields.io/github/stars/mathiasbradiceanu/workout-cool" alt="Stars">
-<img src="https://img.shields.io/github/issues/mathiasbradiceanu/workout-cool" alt="Issues">
-<img src="https://img.shields.io/github/languages/count/mathiasbradiceanu/workout-cool" alt="Languages">
-<img src="https://img.shields.io/github/repo-size/mathiasbradiceanu/workout-cool" alt="Repository Size">
+<img src="https://img.shields.io/github/contributors/Snouzy/workout-cool?style=plastic" alt="Contributors">
+<img src="https://img.shields.io/github/forks/Snouzy/workout-cool" alt="Forks">
+<img src="https://img.shields.io/github/stars/Snouzy/workout-cool" alt="Stars">
+<img src="https://img.shields.io/github/issues/Snouzy/workout-cool" alt="Issues">
+<img src="https://img.shields.io/github/languages/count/Snouzy/workout-cool" alt="Languages">
+<img src="https://img.shields.io/github/repo-size/Snouzy/workout-cool" alt="Repository Size">
 </p>
 </div>
 
