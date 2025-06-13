@@ -87,7 +87,7 @@ export function WorkoutSessionHeader({
                   <Clock className="h-4 w-4 text-blue-400" />
                 </div>
                 <div>
-                  <h3 className="text-slate-700 dark:text-white font-semibold text-base">{t("workout_builder.session.elapsed_time")}</h3>
+                  <h3 className="text-slate-700 dark:text-white font-semibold text-base">{t("workout_builder.session.chronometer")}</h3>
                 </div>
               </div>
 

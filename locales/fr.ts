@@ -170,6 +170,7 @@ export default {
       workout_in_progress: "Entraînement en cours",
       quit_workout: "Quitter l'Entraînement",
       elapsed_time: "Temps écoulé",
+      chronometer: "Chronomètre",
       total_workout_time: "Temps total d'entraînement",
       exercise_progress: "Progression",
       current_exercise: "Exercice actuel",
