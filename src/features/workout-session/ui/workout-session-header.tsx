@@ -75,7 +75,7 @@ export function WorkoutSessionHeader({
           </div>
 
           {/* Main content - Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {/* Card 1: Temps écoulé */}
             <div className="bg-white dark:bg-gradient-to-br dark:from-slate-800/80 dark:to-slate-700/80 rounded-lg p-3 border border-slate-100 dark:border-slate-600/30">
               <div className="flex items-center gap-2 mb-2">
