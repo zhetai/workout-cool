@@ -66,10 +66,10 @@ export function WorkoutStepper() {
 
   // Fetch exercises quand on arrive à l'étape 3
   useEffect(() => {
-    if (currentStep === 3) {
+    if (currentStep === 3 && exercisesByMuscle.length === 0) {
       fetchExercises();
     }
-  }, [currentStep, selectedEquipment, selectedMuscles]);
+  }, [currentStep, selectedEquipment, selectedMuscles, exercisesByMuscle.length]);
 
   const {
     isWorkoutActive,
