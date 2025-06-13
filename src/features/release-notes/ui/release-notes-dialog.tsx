@@ -19,7 +19,7 @@ export function ReleaseNotesDialog() {
     <Dialog>
       <DialogTrigger asChild>
         <Button aria-label={t("release_notes.release_notes")} className="rounded-full hover:bg-slate-100" size="small" variant="ghost">
-          <InlineTooltip title="Annonces / Changelog">
+          <InlineTooltip title={t("commons.changelog")}>
             <Bell className="text-blue-500 h-6 w-6" />
           </InlineTooltip>
         </Button>

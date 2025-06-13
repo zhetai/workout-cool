@@ -90,7 +90,7 @@ export const useWorkoutSessionStore = create<WorkoutSessionState>((set, get) => 
     set({
       session: newSession,
       elapsedTime: 0,
-      isTimerRunning: true,
+      isTimerRunning: false,
       isWorkoutActive: true,
       currentExerciseIndex: 0,
       currentExercise: sessionExercises[0],

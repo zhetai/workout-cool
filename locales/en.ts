@@ -153,6 +153,9 @@ export default {
       exercise_selection_description: "This step will show you personalized exercise recommendations.",
     },
     session: {
+      congrats: "Congratulations, workout finished! 🎉",
+      congrats_subtitle: "You've done it !",
+      see_instructions: "See instructions",
       finish_set: "Finish Set",
       finish_session: "Finish Session",
       bodyweight: "Bodyweight",
@@ -168,6 +171,7 @@ export default {
       set_number_singular: "Set {number}",
       set_number_plural_singular: "Sets {number}",
       workout_in_progress: "Workout in Progress",
+      started_at: "Started at",
       quit_workout: "Quit Workout",
       elapsed_time: "Elapsed Time",
       chronometer: "Chronometer",
@@ -283,5 +287,7 @@ export default {
     donate: "Donate",
     my_account: "My account",
     dashboard: "Dashboard",
+    home: "Home",
+    changelog: "Changelog",
   },
 } as const;

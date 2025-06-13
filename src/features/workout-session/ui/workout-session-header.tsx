@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Clock, Play, Pause, RotateCcw, X, Target } from "lucide-react";
 
-import { useI18n } from "locales/client";
+import { useCurrentLocale, useI18n } from "locales/client";
 import { cn } from "@/shared/lib/utils";
 import { useWorkoutSession } from "@/features/workout-session/model/use-workout-session";
 import { Timer } from "@/components/ui/timer";
@@ -33,8 +33,8 @@ export function WorkoutSessionHeader({
   const t = useI18n();
   const [showQuitDialog, setShowQuitDialog] = useState(false);
   const [resetCount, setResetCount] = useState(0);
-
-  const { getExercisesCompleted, getTotalExercises } = useWorkoutSession();
+  const locale = useCurrentLocale();
+  const { getExercisesCompleted, getTotalExercises, session } = useWorkoutSession();
   const exercisesCompleted = getExercisesCompleted();
   const totalExercises = getTotalExercises();
 
@@ -63,9 +63,10 @@ export function WorkoutSessionHeader({
         <div className="rounded-xl p-3 bg-slate-50">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
               <span className="text-emerald-400 font-semibold text-xs uppercase tracking-wider">
-                {t("workout_builder.session.workout_in_progress")}
+                {t("workout_builder.session.started_at")}{" "}
+                {new Date(session?.startedAt || "").toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}
               </span>
             </div>
 

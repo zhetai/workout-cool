@@ -32,11 +32,6 @@ export function WorkoutSessionSets({
   const exerciseDetailsMap = Object.fromEntries(session?.exercises.map((ex) => [ex.id, ex]) || []);
   const [videoModal, setVideoModal] = useState<{ open: boolean; exerciseId?: string }>({ open: false });
 
-  // Calcul de la progression (exercices terminés / total)
-  const totalExercises = session?.exercises.length || 0;
-  const completedExercises = session?.exercises.filter((ex) => ex.sets.length > 0 && ex.sets.every((set) => set.completed)).length || 0;
-  const progressPercent = totalExercises > 0 ? Math.round((completedExercises / totalExercises) * 100) : 0;
-
   if (showCongrats) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
@@ -149,7 +144,7 @@ export function WorkoutSessionSets({
                         setVideoModal({ open: true, exerciseId: ex.id });
                       }}
                     >
-                      Voir les instructions
+                      {t("workout_builder.session.see_instructions")}
                     </span>
                   )}
                   {/* Fallback: description si pas d'introduction */}
