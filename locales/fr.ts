@@ -10,6 +10,10 @@ export default {
     invalid_credentials: "Identifiants invalides ou compte inexistant",
   },
 
+  profile: {
+    new_workout: "Nouvelle séance",
+  },
+
   // Release Notes
   release_notes: {
     title: "Nouveautés",
@@ -153,6 +157,9 @@ export default {
       exercise_selection_description: "Cette étape vous montrera des recommandations d'exercices personnalisées.",
     },
     session: {
+      congrats: "Bravo, séance terminée ! 🎉",
+      congrats_subtitle: "Tu l'as fait !",
+      see_instructions: "Voir les instructions",
       finish_set: "Valider la série",
       finish_session: "Terminer la séance",
       bodyweight: "Poids du corps",
@@ -168,8 +175,10 @@ export default {
       set_number_singular: "Série {number}",
       set_number_plural_singular: "Séries {number}",
       workout_in_progress: "Entraînement en cours",
+      started_at: "Débuté à",
       quit_workout: "Quitter l'Entraînement",
       elapsed_time: "Temps écoulé",
+      chronometer: "Chronomètre",
       total_workout_time: "Temps total d'entraînement",
       exercise_progress: "Progression",
       current_exercise: "Exercice actuel",
@@ -283,5 +292,7 @@ export default {
     donate: "Faire un don",
     my_account: "Mon compte",
     dashboard: "Tableau de bord",
+    home: "Accueil",
+    changelog: "Annonces & notes de version",
   },
 } as const;

@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertTriangle, Save, Trash2 } from "lucide-react";
+import { AlertTriangle, Trash2 } from "lucide-react";
 
 import { useI18n } from "locales/client";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -64,18 +64,12 @@ export function QuitWorkoutDialog({
 
         {/* Action Buttons */}
         <div className="space-y-3">
-          {/* Save and Quit */}
-          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={onQuitWithSave} size="large">
-            <Save className="h-4 w-4 mr-2" />
-            {t("workout_builder.session.save_and_quit")}
-          </Button>
-
           {/* Quit without saving */}
           <Button
-            className="w-full border-red-500/30 text-red-400 hover:bg-red-500/10 hover:border-red-500"
+            className="w-full bg-red-500/10 border-red-500/30 text-red-400 hover:bg-red-500/10 hover:border-red-500"
             onClick={onQuitWithoutSave}
             size="large"
-            variant="outline"
+            variant="default"
           >
             <Trash2 className="h-4 w-4 mr-2" />
             {t("workout_builder.session.quit_without_save")}

@@ -66,10 +66,10 @@ export function WorkoutStepper() {
 
   // Fetch exercises quand on arrive à l'étape 3
   useEffect(() => {
-    if (currentStep === 3) {
+    if (currentStep === 3 && exercisesByMuscle.length === 0) {
       fetchExercises();
     }
-  }, [currentStep, selectedEquipment, selectedMuscles]);
+  }, [currentStep, selectedEquipment, selectedMuscles, exercisesByMuscle.length]);
 
   const {
     isWorkoutActive,
@@ -125,8 +125,8 @@ export function WorkoutStepper() {
     return (
       <div className="flex flex-col items-center justify-center py-16">
         <Image alt="Trophée" className="w-56 h-56" src={Trophy} />
-        <h2 className="text-2xl font-bold mb-2">Bravo, séance terminée ! 🎉</h2>
-        <p className="text-lg text-slate-600 mb-6">Tu as complété tous tes exercices.</p>
+        <h2 className="text-2xl font-bold mb-2">{t("workout_builder.session.congrats")}</h2>
+        <p className="text-lg text-slate-600 mb-6">{t("workout_builder.session.congrats_subtitle")}</p>
         <Button onClick={() => router.push("/profile")}>{t("commons.go_to_profile")}</Button>
       </div>
     );

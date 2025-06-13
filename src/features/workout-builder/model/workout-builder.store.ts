@@ -24,6 +24,12 @@ interface WorkoutBuilderState {
   clearMuscles: () => void;
   fetchExercises: () => Promise<void>;
   setExercisesOrder: (order: string[]) => void;
+  loadFromSession: (params: {
+    equipment: ExerciseAttributeValueEnum[];
+    muscles: ExerciseAttributeValueEnum[];
+    exercisesByMuscle: any[];
+    exercisesOrder: string[];
+  }) => void;
 }
 
 export const useWorkoutBuilderStore = create<WorkoutBuilderState>((set, get) => ({
@@ -74,4 +80,16 @@ export const useWorkoutBuilderStore = create<WorkoutBuilderState>((set, get) => 
   },
 
   setExercisesOrder: (order) => set({ exercisesOrder: order }),
+
+  loadFromSession: ({ equipment, muscles, exercisesByMuscle, exercisesOrder }) => {
+    set({
+      selectedEquipment: equipment,
+      selectedMuscles: muscles,
+      exercisesByMuscle,
+      exercisesOrder,
+      currentStep: 3,
+      isLoadingExercises: false,
+      exercisesError: null,
+    });
+  },
 }));

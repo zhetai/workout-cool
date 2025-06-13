@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Repeat2, Trash2 } from "lucide-react";
 
 import { useCurrentLocale, useI18n } from "locales/client";
 import { workoutSessionLocal } from "@/shared/lib/workout-session/workout-session.local";
+import { useWorkoutBuilderStore } from "@/features/workout-builder/model/workout-builder.store";
 import { InlineTooltip } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 
@@ -20,6 +22,8 @@ const BADGE_COLORS = [
 export function WorkoutSessionList({ onSelect }: { onSelect: (id: string) => void }) {
   const locale = useCurrentLocale();
   const t = useI18n();
+  const router = useRouter();
+  const loadFromSession = useWorkoutBuilderStore((s) => s.loadFromSession);
 
   const [sessions, setSessions] = useState<WorkoutSession[]>(() =>
     workoutSessionLocal.getAll().sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()),
@@ -33,30 +37,44 @@ export function WorkoutSessionList({ onSelect }: { onSelect: (id: string) => voi
   const handleRepeat = (id: string) => {
     const sessionToCopy = sessions.find((s) => s.id === id);
     if (!sessionToCopy) return;
-    // Deep copy des exercices et sets, reset des champs nécessaires
-    const newExercises = sessionToCopy.exercises.map((ex, idx) => ({
-      ...ex,
-      sets: ex.sets.map((set, setIdx) => ({
-        ...set,
-        id: `${ex.id}-set-${setIdx + 1}-${Date.now()}`,
-        completed: false,
-      })),
+    // prepare data for the builder
+
+    const allEquipment = Array.from(
+      new Set(
+        sessionToCopy.exercises
+          .flatMap((ex) =>
+            ex.attributes?.filter((attr) => attr.attributeName?.name === "EQUIPMENT").map((attr) => attr.attributeValue.value),
+          )
+          .filter(Boolean),
+      ),
+    );
+
+    const allMuscles = Array.from(
+      new Set(
+        sessionToCopy.exercises
+          .flatMap((ex) =>
+            ex.attributes?.filter((attr) => attr.attributeName?.name === "PRIMARY_MUSCLE").map((attr) => attr.attributeValue.value),
+          )
+          .filter(Boolean),
+      ),
+    );
+    const exercisesByMuscle = allMuscles.map((muscle) => ({
+      muscle,
+      exercises: sessionToCopy.exercises.filter((ex) =>
+        ex.attributes?.some((attr) => attr.attributeName?.name === "PRIMARY_MUSCLE" && attr.attributeValue.value === muscle),
+      ),
     }));
-    const newSession: WorkoutSession = {
-      ...sessionToCopy,
-      id: `${Date.now()}`,
-      startedAt: new Date().toISOString(),
-      endedAt: undefined,
-      duration: 0,
-      status: "active",
-      currentExerciseIndex: 0,
-      isActive: true,
-      exercises: newExercises,
-    };
-    workoutSessionLocal.add(newSession);
-    workoutSessionLocal.setCurrent(newSession.id);
-    setSessions(workoutSessionLocal.getAll().sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()));
-    onSelect(newSession.id);
+
+    const exercisesOrder = sessionToCopy.exercises.map((ex) => ex.id);
+
+    // 5. inject in the builder and go step 3
+    loadFromSession({
+      equipment: allEquipment,
+      muscles: allMuscles,
+      exercisesByMuscle,
+      exercisesOrder,
+    });
+    router.push("/");
   };
 
   return (
