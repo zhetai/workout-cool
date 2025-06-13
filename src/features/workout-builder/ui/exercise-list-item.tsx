@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Play, Shuffle, Star, Trash2, GripVertical } from "lucide-react";
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
 
 import { useCurrentLocale, useI18n } from "locales/client";
 import { InlineTooltip } from "@/components/ui/tooltip";
@@ -28,6 +30,15 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
   const exerciseName = locale === "fr" ? exercise.name : exercise.nameEn;
   const [showVideo, setShowVideo] = useState(false);
 
+  // dnd-kit sortable
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: exercise.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 50 : undefined,
+    boxShadow: isDragging ? "0 4px 16px 0 rgba(0,0,0,0.10)" : undefined,
+  };
 
   const handleOpenVideo = () => {
     setShowVideo(true);
@@ -50,11 +61,16 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
 
   return (
     <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
       className={`
         group relative overflow-hidden transition-all duration-300 ease-out
         bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/70
         border-b border-slate-200 dark:border-slate-700/50
         ${isHovered ? "shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50" : ""}
+        ${isDragging ? "ring-2 ring-blue-400" : ""}
       `}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -112,7 +128,7 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
         <div className="flex items-center gap-2 shrink-0">
           {/* Bouton shuffle */}
           <Button onClick={() => onShuffle(exercise.id, muscle)} size="small" variant="outline">
-            <Shuffle />
+            <Shuffle className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">{t("workout_builder.exercise.shuffle")}</span>
           </Button>
 
@@ -124,7 +140,7 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
             onClick={() => onPick(exercise.id)}
             size="small"
           >
-            <Star />
+            <Star className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">{t("workout_builder.exercise.pick")}</span>
           </Button>
 
@@ -141,14 +157,7 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
       </div>
 
       {/* Video Modal */}
-      {exercise.fullVideoUrl && (
-        <ExerciseVideoModal
-          onOpenChange={setShowVideo}
-          open={showVideo}
-          title={exerciseName || exercise.name}
-          videoUrl={exercise.fullVideoUrl}
-        />
-      )}
+      {exercise.fullVideoUrl && <ExerciseVideoModal exercise={exercise} onOpenChange={setShowVideo} open={showVideo} />}
     </div>
   );
 }
