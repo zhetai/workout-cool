@@ -10,6 +10,10 @@ export default {
     invalid_credentials: "Identifiants invalides ou compte inexistant",
   },
 
+  profile: {
+    new_workout: "Nouvelle séance",
+  },
+
   // Release Notes
   release_notes: {
     title: "Nouveautés",
