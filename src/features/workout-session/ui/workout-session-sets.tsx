@@ -136,7 +136,7 @@ export function WorkoutSessionSets({
                 )}
                 <div
                   className={cn(
-                    "text-xl",
+                    "text-xl leading-[1.3]",
                     idx === currentExerciseIndex
                       ? "font-bold text-blue-600"
                       : "text-slate-700 dark:text-slate-300 transition-colors hover:text-blue-500",
