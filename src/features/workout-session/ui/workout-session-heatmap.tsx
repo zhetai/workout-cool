@@ -12,7 +12,13 @@ interface Props {
 
 const DEFAULT_WEEK_NAMES = ["L", "M", "M", "J", "V", "S", "D"]; // TODO i18n
 const DEFAULT_MONTH_NAMES = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"]; // TODO i18n
-const DEFAULT_PANEL_COLORS = ["#EEE", "#34D399", "#059669", "#065F46", "#042F2E"];
+const DEFAULT_PANEL_COLORS = [
+  "var(--color-base-300)", // 0: empty
+  "var(--color-success)", // 1: low activity
+  "var(--color-success-content)", // 2: medium activity
+  "var(--color-primary)", // 3: high activity
+  "var(--color-primary-content)", // 4: max activity
+];
 const DEFAULT_DATE_FORMAT = "YYYY-MM-DD";
 
 const PANEL_SIZE = 18;
@@ -132,7 +138,15 @@ export const WorkoutSessionHeatmap: React.FC<Props> = ({
     const x = WEEK_LABEL_WIDTH / 2;
     const y = MONTH_LABEL_HEIGHT + (PANEL_SIZE + PANEL_MARGIN) * i + PANEL_SIZE / 2;
     innerDom.push(
-      <text alignmentBaseline="central" fill="#AAA" fontSize={10} key={`week_label_${i}`} textAnchor="middle" x={x} y={y}>
+      <text
+        alignmentBaseline="central"
+        fill="var(--color-base-content)"
+        fontSize={10}
+        key={`week_label_${i}`}
+        textAnchor="middle"
+        x={x}
+        y={y}
+      >
         {weekNames[i]}
       </text>,
     );
@@ -149,7 +163,15 @@ export const WorkoutSessionHeatmap: React.FC<Props> = ({
       const x = WEEK_LABEL_WIDTH + (PANEL_SIZE + PANEL_MARGIN) * i + PANEL_SIZE / 2;
       const y = MONTH_LABEL_HEIGHT / 1.5;
       innerDom.push(
-        <text alignmentBaseline="central" fill="#AAA" fontSize={12} key={`month_label_${i}`} textAnchor="middle" x={x} y={y}>
+        <text
+          alignmentBaseline="central"
+          fill="var(--color-base-content)"
+          fontSize={12}
+          key={`month_label_${i}`}
+          textAnchor="middle"
+          x={x}
+          y={y}
+        >
           {monthNames[c.month]}
         </text>,
       );
@@ -173,6 +195,7 @@ export const WorkoutSessionHeatmap: React.FC<Props> = ({
         boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
         whiteSpace: "nowrap",
         maxWidth: 220,
+        border: "1px solid var(--color-base-300)",
       }}
     >
       {hovered.tooltip}
