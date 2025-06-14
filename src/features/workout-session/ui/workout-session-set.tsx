@@ -76,7 +76,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
         return (
           <div className="flex gap-1 w-full">
             <input
-              className="border border-black rounded px-1 py-2 w-1/2 text-sm text-center font-bold dark:bg-slate-800 dark:placeholder:text-slate-500"
+              className="border border-black rounded px-1 py-2 w-1/2 text-base sm:text-sm text-center font-bold dark:bg-slate-800 dark:placeholder:text-slate-500"
               disabled={set.completed}
               min={0}
               onChange={handleValueIntChange(columnIndex)}
@@ -86,7 +86,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
               value={valuesInt[columnIndex] ?? ""}
             />
             <input
-              className="border border-black rounded px-1 py-2 w-1/2 text-sm text-center font-bold dark:bg-slate-800 dark:placeholder:text-slate-500"
+              className="border border-black rounded px-1 py-2 w-1/2 text-base sm:text-sm text-center font-bold dark:bg-slate-800 dark:placeholder:text-slate-500"
               disabled={set.completed}
               max={59}
               min={0}
@@ -102,7 +102,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
         return (
           <div className="flex gap-1 w-full items-center">
             <input
-              className="border border-black rounded px-1 py-2 w-1/2 text-sm text-center font-bold dark:bg-slate-800"
+              className="border border-black rounded px-1 py-2 w-1/2 text-base sm:text-sm text-center font-bold dark:bg-slate-800"
               disabled={set.completed}
               min={0}
               onChange={handleValueIntChange(columnIndex)}
@@ -112,7 +112,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
               value={valuesInt[columnIndex] ?? ""}
             />
             <select
-              className="border border-black rounded px-1 py-2 w-1/2 text-sm font-bold bg-white dark:bg-slate-800 dark:text-gray-200 h-10 "
+              className="border border-black rounded px-1 py-2 w-1/2 text-base sm:text-sm font-bold bg-white dark:bg-slate-800 dark:text-gray-200 h-10 "
               disabled={set.completed}
               onChange={handleUnitChange(columnIndex)}
               value={units[columnIndex] ?? "kg"}
@@ -125,7 +125,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
       case "REPS":
         return (
           <input
-            className="border border-black rounded px-1 py-2 w-full text-sm text-center font-bold dark:bg-slate-800"
+            className="border border-black rounded px-1 py-2 w-full text-base sm:text-sm text-center font-bold dark:bg-slate-800"
             disabled={set.completed}
             min={0}
             onChange={handleValueIntChange(columnIndex)}
@@ -138,7 +138,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
       case "BODYWEIGHT":
         return (
           <input
-            className="border border-black rounded px-1 py-2 w-full text-sm text-center font-bold dark:bg-slate-800"
+            className="border border-black rounded px-1 py-2 w-full text-base sm:text-sm text-center font-bold dark:bg-slate-800"
             disabled={set.completed}
             placeholder=""
             readOnly
@@ -173,7 +173,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
           <div className="flex flex-col w-full md:w-auto" key={columnIndex}>
             <div className="flex items-center w-full gap-1 mb-1">
               <select
-                className="border border-black dark:border-slate-700 rounded font-bold px-1 py-2 text-sm w-full bg-white dark:bg-slate-800 dark:text-gray-200 min-w-0 h-10 "
+                className="border border-black dark:border-slate-700 rounded font-bold px-1 py-2 text-base sm:text-sm w-full bg-white dark:bg-slate-800 dark:text-gray-200 min-w-0 h-10 "
                 disabled={set.completed}
                 onChange={handleTypeChange(columnIndex)}
                 value={type}
