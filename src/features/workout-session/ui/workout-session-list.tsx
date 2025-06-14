@@ -1,9 +1,10 @@
 import { useRouter } from "next/navigation";
-import { Repeat2, Trash2 } from "lucide-react";
+import { Play, Repeat2, Trash2 } from "lucide-react";
 
 import { useCurrentLocale, useI18n } from "locales/client";
 import { useWorkoutSessions } from "@/features/workout-session/model/use-workout-sessions";
 import { useWorkoutBuilderStore } from "@/features/workout-builder/model/workout-builder.store";
+import { Link } from "@/components/ui/link";
 import { Button } from "@/components/ui/button";
 
 const BADGE_COLORS = [
@@ -26,7 +27,7 @@ export function WorkoutSessionList() {
   // );
 
   const { data: sessions = [] } = useWorkoutSessions();
-  console.log("sessions:", sessions);
+  const activeSession = sessions.find((s) => s.status === "active");
 
   const handleDelete = (_id: string) => {
     // TODO: delete by service
@@ -84,6 +85,7 @@ export function WorkoutSessionList() {
       {sessions.length === 0 && <div className="text-slate-500 dark:text-slate-400">{t("workout_builder.session.no_workout_yet")}</div>}
       <ul className="divide-y divide-slate-200 dark:divide-slate-700/50">
         {sessions.map((session) => {
+          const isActive = session.status === "active";
           return (
             <li
               className="px-2 flex flex-col sm:flex-row items-start sm:items-center justify-between py-4 gap-2 sm:gap-0 hover:bg-slate-50 dark:hover:bg-slate-800/70 rounded-lg space-x-4"
@@ -105,6 +107,14 @@ export function WorkoutSessionList() {
                     {new Date(session.endedAt).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}
                   </span>
                 )}
+                {session.status === "active" && (
+                  <div className="relative mt-1">
+                    <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-300 text-xs font-semibold">
+                      {t("commons.in_progress")}
+                    </span>
+                    <span className="absolute top-0 right-0 w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span>
+                  </div>
+                )}
               </div>
               <div className="flex flex-wrap gap-2 flex-1">
                 {session.exercises?.map((ex, idx) => {
@@ -120,27 +130,45 @@ export function WorkoutSessionList() {
                 })}
               </div>
               <div className="flex gap-2 items-center mt-2 sm:mt-0">
-                <div className="tooltip" data-tip={t("workout_builder.session.repeat")}>
-                  <Button
-                    aria-label={t("workout_builder.session.repeat")}
-                    className="w-12 h-12"
-                    onClick={() => handleRepeat(session.id)}
-                    size="icon"
-                    variant="ghost"
+                {isActive && (
+                  <Link className="w-auto flex items-center gap-2 flex-col" href="/" variant="nav">
+                    <Play className="w-7 h-7 text-blue-500 dark:text-blue-400" />
+                    <span className="sr-only">{t("workout_builder.session.back_to_workout")}</span>
+                    <span>{t("workout_builder.session.back_to_workout")}</span>
+                  </Link>
+                )}
+                {!isActive && (
+                  <div
+                    className="tooltip tooltip-left"
+                    data-tip={
+                      activeSession ? t("workout_builder.session.already_have_a_active_session") : t("workout_builder.session.repeat")
+                    }
                   >
-                    <Repeat2 className="w-7 h-7 text-blue-500 dark:text-blue-400" />
-                  </Button>
-                </div>
-                <div className="tooltip" data-tip={t("workout_builder.session.delete")}>
-                  <Button
-                    aria-label={t("workout_builder.session.delete")}
-                    onClick={() => handleDelete(session.id)}
-                    size="icon"
-                    variant="ghost"
-                  >
-                    <Trash2 className="w-7 h-7 text-red-500 dark:text-red-400" />
-                  </Button>
-                </div>
+                    <Button
+                      aria-label={t("workout_builder.session.repeat")}
+                      className="w-12 h-12"
+                      disabled={!!activeSession}
+                      onClick={() => handleRepeat(session.id)}
+                      size="icon"
+                      variant="ghost"
+                    >
+                      <Repeat2 className="w-7 h-7 text-blue-500 dark:text-blue-400" />
+                    </Button>
+                  </div>
+                )}
+
+                {!isActive && (
+                  <div className="tooltip" data-tip={t("workout_builder.session.delete")}>
+                    <Button
+                      aria-label={t("workout_builder.session.delete")}
+                      onClick={() => handleDelete(session.id)}
+                      size="icon"
+                      variant="ghost"
+                    >
+                      <Trash2 className="w-7 h-7 text-red-500 dark:text-red-400" />
+                    </Button>
+                  </div>
+                )}
               </div>
             </li>
           );

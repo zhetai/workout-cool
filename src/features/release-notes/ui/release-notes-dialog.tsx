@@ -29,10 +29,10 @@ export function ReleaseNotesDialog() {
         </DialogHeader>
         <div className="space-y-4">
           {releaseNotes.map((note) => (
-            <div className="border-b pb-2 last:border-b-0 last:pb-0" key={note.date}>
+            <div className="border-b pb-2 last:border-b-0 last:pb-0 py-2" key={note.date}>
               <div className="text-xs text-muted-foreground">{formatDate(note.date, locale)}</div>
-              <div className="font-semibold">{t(note.titleKey as keyof typeof t)}</div>
-              <div className="text-sm">{t(note.contentKey as keyof typeof t)}</div>
+              <div className="font-semibold mb-1">{t(note.titleKey as keyof typeof t)}</div>
+              <div className="text-sm mb-4">{t(note.contentKey as keyof typeof t)}</div>
             </div>
           ))}
         </div>

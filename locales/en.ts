@@ -197,6 +197,7 @@ export default {
       exercise_selection_description: "This step will show you personalized exercise recommendations.",
     },
     session: {
+      back_to_workout: "Back to workout",
       congrats: "Congratulations, workout finished! 🎉",
       congrats_subtitle: "You've done it !",
       see_instructions: "See instructions",
@@ -223,6 +224,7 @@ export default {
       current_exercise: "Current Exercise",
       complete: "Complete",
       active: "Active",
+      already_have_a_active_session: "You already have an active session. Impossible to repeat without finishing or quitting the workout.",
       no_exercise_selected: "No exercise selected",
       quit_workout_title: "Quit Workout?",
       progress: "Progress",
@@ -400,5 +402,6 @@ export default {
     satisfied: "Satisfied",
     support: "Support",
     change_language: "Change language",
+    in_progress: "In progress",
   },
 } as const;
