@@ -234,7 +234,7 @@ export const useWorkoutSessionStore = create<WorkoutSessionState>((set, get) => 
     if (!exercise) return;
 
     if (exercise.sets.every((set) => set.completed)) {
-      get().goToNextExercise();
+      // get().goToNextExercise();
       // update exercisesCompleted
       const exercisesCompleted = get().exercisesCompleted;
       set({ exercisesCompleted: exercisesCompleted + 1 });

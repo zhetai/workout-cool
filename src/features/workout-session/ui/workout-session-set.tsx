@@ -200,12 +200,13 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
       </div>
 
       {/* Add column button */}
-      {types.length < maxColumns && (
+      {types.length < maxColumns && !set.completed && (
         <div className="flex w-full justify-start mt-1">
           <Button
-            className="bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 text-sm rounded w-full md:w-auto mt-2"
+            className="font-bold px-4 py-2 text-sm rounded-xl w-full md:w-auto mt-2"
             disabled={set.completed}
             onClick={addColumn}
+            variant="outline"
           >
             <Plus className="h-4 w-4" />
             {t("workout_builder.session.add_column")}
@@ -216,9 +217,10 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
       {/* Finish & Edit buttons, full width on mobile */}
       <div className="flex gap-2 w-full md:w-auto mt-2">
         <Button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 py-2 text-sm rounded flex-1"
+          className=" dark:text-white font-bold px-4 py-2 text-sm rounded-xl flex-1"
           disabled={set.completed}
           onClick={onFinish}
+          variant="default"
         >
           {t("workout_builder.session.finish_set")}
         </Button>
