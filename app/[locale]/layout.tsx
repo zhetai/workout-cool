@@ -158,7 +158,7 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
             {/* Main Card Container */}
             <div className="card w-full max-w-3xl min-h-[500px] max-h-[90vh] h-[80vh] bg-white dark:bg-[#232324] shadow-xl border border-base-200 dark:border-gray-800 flex flex-col justify-between overflow-hidden max-sm:rounded-none max-sm:h-full">
               <Header />
-              <div className="flex-1 overflow-auto px-2 sm:px-6 pb-6 flex flex-col">{children}</div>
+              <div className="flex-1 overflow-auto px-2 sm:px-6 flex flex-col">{children}</div>
               <Footer />
             </div>
 

@@ -210,7 +210,7 @@ export function WorkoutStepper() {
     <div className="w-full max-w-6xl mx-auto">
       <StepperHeader steps={steps} />
 
-      <div className="min-h-[400px] mb-8">{renderStepContent()}</div>
+      <div className="">{renderStepContent()}</div>
 
       <WorkoutBuilderFooter
         canContinue={canContinue}

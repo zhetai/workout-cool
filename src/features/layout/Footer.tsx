@@ -32,7 +32,7 @@ export const Footer = async () => {
   const t = await getI18n();
 
   return (
-    <footer className="border-t border-base-300 dark:border-gray-800 bg-base-100 dark:bg-black px-6 py-4 rounded-b-lg">
+    <footer className="border-t border-base-300 dark:border-gray-800 bg-base-100 dark:bg-black px-2 sm:px-6 py-4 rounded-b-lg">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         {/* Social Icons */}
         <div className="flex gap-2">
@@ -51,10 +51,10 @@ export const Footer = async () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-center text-gray-700 dark:text-gray-300">
+        <div className="flex sm:flex-row gap-2 sm:gap-4 text-center text-gray-700 dark:text-gray-300">
           {NAVIGATION(t).map(({ name, href }) => (
             <Link
-              className="hover:underline hover:text-blue-500 dark:hover:text-blue-400"
+              className="hover:underline hover:text-blue-500 dark:hover:text-blue-400 text-xs sm:text-sm"
               href={href}
               key={name}
               size="sm"
