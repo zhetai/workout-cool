@@ -1,17 +1,29 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useI18n } from "locales/client";
-import { workoutSessionLocal } from "@/shared/lib/workout-session/workout-session.local";
+import { useWorkoutSessionService } from "@/shared/lib/workout-session/use-workout-session.service";
 import { WorkoutSessionList } from "@/features/workout-session/ui/workout-session-list";
 import { WorkoutSessionHeatmap } from "@/features/workout-session/ui/workout-session-heatmap";
 import { Button } from "@/components/ui/button";
 
+import type { WorkoutSession } from "@/shared/lib/workout-session/types/workout-session";
+
 export default function ProfilePage() {
   const router = useRouter();
   const t = useI18n();
+  const [sessions, setSessions] = useState<WorkoutSession[]>([]);
+  const { getAll } = useWorkoutSessionService();
 
-  const sessions = typeof window !== "undefined" ? workoutSessionLocal.getAll() : [];
+  useEffect(() => {
+    const loadSessions = async () => {
+      const loadedSessions = await getAll();
+      setSessions(loadedSessions);
+    };
+    loadSessions();
+  }, []);
+
   const values: Record<string, number> = {};
   sessions.forEach((session) => {
     const date = session.startedAt.slice(0, 10);

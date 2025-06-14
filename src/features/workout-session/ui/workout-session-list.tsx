@@ -1,14 +1,11 @@
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Repeat2, Trash2 } from "lucide-react";
 
 import { useCurrentLocale, useI18n } from "locales/client";
-import { workoutSessionLocal } from "@/shared/lib/workout-session/workout-session.local";
+import { useWorkoutSessions } from "@/features/workout-session/model/use-workout-sessions";
 import { useWorkoutBuilderStore } from "@/features/workout-builder/model/workout-builder.store";
 import { InlineTooltip } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
-
-import type { WorkoutSession } from "@/shared/lib/workout-session/types/workout-session";
 
 const BADGE_COLORS = [
   "bg-blue-100 text-blue-700 border-blue-300",
@@ -25,13 +22,16 @@ export function WorkoutSessionList() {
   const router = useRouter();
   const loadFromSession = useWorkoutBuilderStore((s) => s.loadFromSession);
 
-  const [sessions, setSessions] = useState<WorkoutSession[]>(() =>
-    workoutSessionLocal.getAll().sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()),
-  );
+  // const [sessions, setSessions] = useState<WorkoutSession[]>(() =>
+  //   workoutSessionLocal.getAll().sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()),
+  // );
+
+  const { data: sessions = [], isLoading } = useWorkoutSessions();
+  console.log("sessions:", sessions);
 
   const handleDelete = (id: string) => {
-    workoutSessionLocal.remove(id);
-    setSessions(workoutSessionLocal.getAll().sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()));
+    // TODO: delete by service
+    // workoutSessionLocal.remove(id);
   };
 
   const handleRepeat = (id: string) => {

@@ -41,7 +41,7 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
   try {
     const { session } = parsedInput;
 
-    const { status, ...sessionData } = session;
+    const { status: _s, ...sessionData } = session;
 
     const result = await prisma.workoutSession.upsert({
       where: { id: session.id },
@@ -72,7 +72,6 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
         startedAt: sessionData.startedAt,
         endedAt: sessionData.endedAt,
         userId: sessionData.userId,
-        // 1. Supprimer les exercices existants (et donc les sets en cascade)
         exercises: {
           deleteMany: {},
           create: session.exercises.map((exercise) => ({
