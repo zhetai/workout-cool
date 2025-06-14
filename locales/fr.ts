@@ -323,7 +323,7 @@ export default {
     consent_banner: "Nous utilisons des cookies pour améliorer votre expérience. En cliquant sur Accepter, vous acceptez nos cookies.",
     about: "À propos",
     profile: "Profil",
-    donate: "Faire un don",
+    donate: "Faire un don ❤️",
     my_account: "Mon compte",
     dashboard: "Tableau de bord",
     home: "Accueil",

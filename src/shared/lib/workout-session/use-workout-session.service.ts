@@ -10,11 +10,6 @@ import type { WorkoutSession } from "./types/workout-session";
 // This is an abstraction layer to handle the local storage and/or the API calls.
 // He's the orchestrator.
 
-// TODO: replace with auth context
-function isUserLoggedIn(): boolean {
-  return !!localStorage.getItem("userToken");
-}
-
 export const useWorkoutSessionService = () => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
@@ -79,35 +74,33 @@ export const useWorkoutSessionService = () => {
   };
 
   const update = async (id: string, data: Partial<WorkoutSession>) => {
-    if (userId) {
-      // TODO: Créer une action updateWorkoutSessionAction
-      const result = await updateWorkoutSessionAction({ id, data });
-      if (result.serverError) throw new Error(result.serverError);
-    }
-    return workoutSessionLocal.update(id, data);
+    // if (userId) {
+    //   // TODO: Créer une action updateWorkoutSessionAction
+    //   const result = await updateWorkoutSessionAction({ id, data });
+    //   if (result.serverError) throw new Error(result.serverError);
+    // }
+    // return workoutSessionLocal.update(id, data);
   };
 
   const complete = async (id: string) => {
-    const data = {
-      status: "completed" as const,
-      endedAt: new Date().toISOString(),
-    };
-
-    if (isUserLoggedIn()) {
-      const result = await completeWorkoutSessionAction({ id });
-      if (result.serverError) throw new Error(result.serverError);
-    }
-
-    return workoutSessionLocal.update(id, data);
+    // const data = {
+    //   status: "completed" as const,
+    //   endedAt: new Date().toISOString(),
+    // };
+    // if (isUserLoggedIn()) {
+    //   const result = await completeWorkoutSessionAction({ id });
+    //   if (result.serverError) throw new Error(result.serverError);
+    // }
+    // return workoutSessionLocal.update(id, data);
   };
 
   const remove = async (id: string) => {
-    if (isUserLoggedIn()) {
-      // TODO: Créer une action deleteWorkoutSessionAction
-      const result = await deleteWorkoutSessionAction({ id });
-      if (result.serverError) throw new Error(result.serverError);
-    }
-    workoutSessionLocal.remove(id);
+    // if (isUserLoggedIn()) {
+    //   // TODO: Créer une action deleteWorkoutSessionAction
+    //   const result = await deleteWorkoutSessionAction({ id });
+    //   if (result.serverError) throw new Error(result.serverError);
+    // }
+    // workoutSessionLocal.remove(id);
   };
 
   return { getAll, add, update, complete, remove };
