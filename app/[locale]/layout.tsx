@@ -141,7 +141,7 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
 
         <body
           className={cn(
-            "flex flex-col justify-between items-center p-8 min-h-screen max-sm:p-0 max-sm:min-h-full text-sm/[22px] font-normal text-base-content bg-base-200 dark:bg-[#18181b] dark:text-gray-200 antialiased",
+            "flex items-center justify-center min-h-screen w-full p-8 max-sm:p-0 max-sm:min-h-full bg-base-200 dark:bg-[#18181b] dark:text-gray-200 antialiased",
             "bg-hero-light dark:bg-hero-dark",
             GeistMono.variable,
             GeistSans.variable,
@@ -156,11 +156,9 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
             <NextTopLoader color="#FF5722" delay={100} showSpinner={false} />
 
             {/* Main Card Container */}
-            <div className="card bg-white dark:bg-[#232324] shadow-xl w-full max-w-3xl max-sm:rounded-none max-sm:h-full border border-base-200 dark:border-gray-800">
-              <div className="card-body p-0">
-                <Header />
-                <div className="px-2 sm:px-6 pb-6">{children}</div>
-              </div>
+            <div className="card w-full max-w-3xl min-h-[500px] max-h-[90vh] h-[80vh] bg-white dark:bg-[#232324] shadow-xl border border-base-200 dark:border-gray-800 flex flex-col justify-between overflow-hidden max-sm:rounded-none max-sm:h-full">
+              <Header />
+              <div className="flex-1 overflow-auto px-2 sm:px-6 pb-6 flex flex-col">{children}</div>
               <Footer />
             </div>
 
