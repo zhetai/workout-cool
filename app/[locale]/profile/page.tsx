@@ -18,6 +18,7 @@ export default function ProfilePage() {
   const [sessions, setSessions] = useState<WorkoutSession[]>([]);
   const { getAll } = useWorkoutSessionService();
   const { data: session } = useSession();
+
   useEffect(() => {
     const loadSessions = async () => {
       const loadedSessions = await getAll();

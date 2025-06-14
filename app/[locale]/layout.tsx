@@ -7,6 +7,7 @@ import { cn } from "@/shared/lib/utils";
 import { getServerUrl } from "@/shared/lib/server-url";
 import { FB_PIXEL_ID } from "@/shared/lib/facebook/fb-pixel";
 import { SiteConfig } from "@/shared/config/site-config";
+import { WorkoutSessionsSynchronizer } from "@/features/workout-session/ui/workout-sessions-synchronizer";
 import { ThemeSynchronizer } from "@/features/theme/ui/ThemeSynchronizer";
 import { Header } from "@/features/layout/Header";
 import { Footer } from "@/features/layout/Footer";
@@ -150,6 +151,7 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
           suppressHydrationWarning
         >
           <Providers locale={locale}>
+            <WorkoutSessionsSynchronizer />
             <ThemeSynchronizer />
             <NextTopLoader color="#FF5722" delay={100} showSpinner={false} />
 

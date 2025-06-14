@@ -35,7 +35,7 @@ export const ProviderButton = (props: ProviderButtonProps) => {
     mutationFn: async () => {
       await authClient.signIn.social({
         provider: "google",
-        callbackURL: searchParams.get("callbackUrl") ?? `${getServerUrl()}/`,
+        callbackURL: searchParams.get("callbackUrl") ?? `${getServerUrl()}/?signin=true`,
       });
     },
   });

@@ -31,7 +31,7 @@ export const useSignUp = () => {
     },
 
     onSuccess: (res) => {
-      router.push(`/${paths.verifyEmail}`);
+      router.push(`/${paths.verifyEmail}?signin=true`);
 
       event(LogEvents.Registered.facebookNativeName, {
         email: res?.data?.user.email || "",

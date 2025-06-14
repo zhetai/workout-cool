@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import { workoutSessionLocal } from "@/shared/lib/workout-session/workout-session.local";
 import { useSession } from "@/features/auth/lib/auth-client";
-import { brandedToast } from "@/components/ui/toast";
 
 import { syncWorkoutSessionAction } from "../actions/sync-workout-sessions.action";
 
@@ -66,23 +65,12 @@ export function useSyncWorkoutSessions() {
         isSyncing: false,
         lastSyncAt: new Date(),
       }));
-
-      brandedToast({
-        title: "Synchronisation réussie",
-        subtitle: `${localSessions.length} sessions synchronisées`,
-      });
     } catch (error) {
       setSyncState((prev) => ({
         ...prev,
         isSyncing: false,
         error: error as Error,
       }));
-
-      brandedToast({
-        title: "Erreur de synchronisation",
-        subtitle: "Certaines sessions n'ont pas pu être synchronisées",
-        variant: "error",
-      });
     }
   };
 
