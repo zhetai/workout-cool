@@ -7,7 +7,6 @@ import { cn } from "@/shared/lib/utils";
 import { getServerUrl } from "@/shared/lib/server-url";
 import { FB_PIXEL_ID } from "@/shared/lib/facebook/fb-pixel";
 import { SiteConfig } from "@/shared/config/site-config";
-import { WorkoutSessionsSynchronizer } from "@/features/workout-session/ui/workout-sessions-synchronizer";
 import { Header } from "@/features/layout/Header";
 import { Footer } from "@/features/layout/Footer";
 import { TailwindIndicator } from "@/components/utils/TailwindIndicator";
@@ -102,7 +101,7 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
 
         <body
           className={cn(
-            "flex flex-col justify-between items-center p-8 min-h-screen max-sm:p-0 max-sm:min-h-full text-sm/[22px] font-normal text-black antialiased dark:text-gray-500",
+            "flex flex-col justify-between items-center p-8 min-h-screen max-sm:p-0 max-sm:min-h-full text-sm/[22px] font-normal text-base-content bg-base-200 dark:bg-[#18181b] dark:text-gray-200 antialiased",
             GeistMono.variable,
             GeistSans.variable,
             inter.variable,
@@ -115,11 +114,11 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
           suppressHydrationWarning
         >
           <Providers locale={locale}>
-            <WorkoutSessionsSynchronizer />
+            {/* <WorkoutSessionsSynchronizer /> */}
             <NextTopLoader color="#FF5722" delay={100} showSpinner={false} />
 
             {/* Main Card Container */}
-            <div className="card bg-base-100 shadow-xl w-full max-w-3xl max-sm:rounded-none max-sm:h-full">
+            <div className="card bg-base-100 dark:bg-[#232324] shadow-xl w-full max-w-3xl max-sm:rounded-none max-sm:h-full border border-base-200 dark:border-gray-800">
               <div className="card-body p-0">
                 <Header />
                 <div className="px-2 sm:px-6 pb-6">{children}</div>

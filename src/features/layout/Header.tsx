@@ -24,10 +24,13 @@ export const Header = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 dark:bg-black dark:text-gray-200 px-4">
+    <div className="navbar bg-base-100 dark:bg-black dark:text-gray-200 px-4 rounded-lg">
       {/* Logo and Title */}
       <div className="navbar-start flex items-center gap-2">
-        <Link className="group flex items-center space-x-3 rounded-xl bg-gradient-to-r px-4 py-2 transition-all duration-200 " href="/">
+        <Link
+          className="group flex items-center space-x-3 rounded-xl bg-gradient-to-r px-4 py-2 transition-all duration-200 dark:text-gray-200 dark:bg-gray-800"
+          href="/"
+        >
           <div className="relative">
             <Image
               alt="workout cool logo"
