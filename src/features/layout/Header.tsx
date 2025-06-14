@@ -100,7 +100,7 @@ export const Header = () => {
             ) : (
               <li>
                 <button
-                  className="flex items-center gap-2 text-base text-gray-700 dark:text-gray-300 hover:bg-slate-100  rounded-lg px-3 py-2 transition-colors"
+                  className="flex items-center gap-2 text-base text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-gray-800 rounded-lg px-3 py-2 transition-colors"
                   onClick={handleSignOut}
                 >
                   <LogOut className="w-4 h-4" />

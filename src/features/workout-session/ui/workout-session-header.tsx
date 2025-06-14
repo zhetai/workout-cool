@@ -53,7 +53,7 @@ export function WorkoutSessionHeader({
   return (
     <>
       <div className="w-full mb-8">
-        <div className="rounded-xl p-3 bg-slate-50">
+        <div className="rounded-xl p-3 bg-slate-50 dark:bg-slate-900/80">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
@@ -64,7 +64,7 @@ export function WorkoutSessionHeader({
             </div>
 
             <Button
-              className="border-red-500/30 text-red-400 hover:bg-red-500/10 hover:border-red-500 px-2 py-1 text-xs"
+              className="border-red-500/30 text-red-400 hover:bg-red-500/10 hover:border-red-500 px-2 py-1 text-xs dark:border-red-700/40 dark:text-red-300 dark:hover:bg-red-700/10"
               onClick={handleQuitClick}
               variant="outline"
             >
@@ -128,18 +128,18 @@ export function WorkoutSessionHeader({
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-bold text-slate-900 dark:text-white">{exercisesCompleted}</span>
-                  <span className="text-slate-400">/ {totalExercises}</span>
+                  <span className="text-slate-400 dark:text-slate-400">/ {totalExercises}</span>
                 </div>
 
                 <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
                   <div
                     className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500 ease-out"
-                    style={{ width: `${((currentExerciseIndex + 1) / totalExercises) * 100}%` }}
+                    style={{ width: `${(exercisesCompleted / totalExercises) * 100}%` }}
                   />
                 </div>
 
                 <div className="text-center">
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-slate-400 dark:text-slate-400">
                     {Math.round((exercisesCompleted / totalExercises) * 100)}% {t("workout_builder.session.complete")}
                   </span>
                 </div>
