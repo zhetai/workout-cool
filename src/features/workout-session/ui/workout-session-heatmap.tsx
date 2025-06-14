@@ -183,7 +183,7 @@ export const WorkoutSessionHeatmap: React.FC<Props> = ({
     <div
       style={{
         position: "fixed",
-        left: hovered.mouseX + 12,
+        left: hovered.mouseX - 100,
         top: hovered.mouseY - 8,
         pointerEvents: "none",
         zIndex: 9999,
