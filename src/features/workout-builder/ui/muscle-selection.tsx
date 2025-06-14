@@ -19,8 +19,6 @@ import { BicepsGroup } from "@/features/workout-builder/ui/muscles/biceps-group"
 import { BackGroup } from "@/features/workout-builder/ui/muscles/back-group";
 import { AbdominalsGroup } from "@/features/workout-builder/ui/muscles/abdominals-group";
 
-import styles from "./muscles.module.css";
-
 interface MuscleSelectionProps {
   onToggleMuscle: (muscle: ExerciseAttributeValueEnum) => void;
   selectedMuscles: ExerciseAttributeValueEnum[];
@@ -41,14 +39,7 @@ const MuscleIllustration = ({
   };
 
   return (
-    <svg
-      className={styles.illustration}
-      height="5.13333in"
-      id="muscle-illustration"
-      viewBox="0 0 535 462"
-      width="5.94444in"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg className="h-auto w-full" id="muscle-illustration" viewBox="0 0 535 462" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M 440.43,458.85
            C 437.78,458.84 435.54,458.42 433.79,457.57

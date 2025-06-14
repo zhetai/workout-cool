@@ -25,11 +25,9 @@ export default function ProfilePage() {
       : new Date().toISOString().slice(0, 10);
 
   return (
-    <div>
+    <div className="px-2 sm:px-6">
       {!sessions.length && <LocalAlert className="my-4" />}
-      <div className="px-2 sm:px-6 mt-4">
-        <WorkoutSessionHeatmap until={until} values={values} />
-      </div>
+      <WorkoutSessionHeatmap until={until} values={values} />
       <WorkoutSessionList />
       <div className="mt-8 flex justify-center">
         <Button onClick={() => router.push("/")} size="large">

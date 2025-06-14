@@ -36,7 +36,7 @@ export function WorkoutSessionSets({
 
   if (showCongrats) {
     return (
-      <div className="flex flex-col items-center justify-center py-16">
+      <div className="flex flex-col items-center justify-center py-16 h-full">
         <Image alt={t("workout_builder.session.complete") + " trophy"} className="w-56 h-56" src={TrophyImg} />
         <h2 className="text-2xl font-bold mb-2">{t("workout_builder.session.complete") + " ! 🎉"}</h2>
         <p className="text-lg text-slate-600 mb-6">{t("workout_builder.session.workout_in_progress")}</p>
