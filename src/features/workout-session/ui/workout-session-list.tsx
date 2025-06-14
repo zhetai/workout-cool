@@ -7,12 +7,12 @@ import { useWorkoutBuilderStore } from "@/features/workout-builder/model/workout
 import { Button } from "@/components/ui/button";
 
 const BADGE_COLORS = [
-  "bg-blue-100 text-blue-700 border-blue-300",
-  "bg-green-100 text-green-700 border-green-300",
-  "bg-red-100 text-red-700 border-red-300",
-  "bg-purple-100 text-purple-700 border-purple-300",
-  "bg-orange-100 text-orange-700 border-orange-300",
-  "bg-pink-100 text-pink-700 border-pink-300",
+  "bg-blue-100 text-blue-700 border-blue-300 dark:bg-blue-900 dark:text-blue-100 dark:border-blue-800",
+  "bg-green-100 text-green-700 border-green-300 dark:bg-green-900 dark:text-green-100 dark:border-green-800",
+  "bg-red-100 text-red-700 border-red-300 dark:bg-red-900 dark:text-red-300 dark:border-red-700",
+  "bg-purple-100 text-purple-700 border-purple-300 dark:bg-purple-900 dark:text-purple-100 dark:border-purple-800",
+  "bg-orange-100 text-orange-700 border-orange-300 dark:bg-orange-900 dark:text-orange-100 dark:border-orange-800",
+  "bg-pink-100 text-pink-700 border-pink-300 dark:bg-pink-900 dark:text-pink-100 dark:border-pink-800",
 ];
 
 export function WorkoutSessionList() {
@@ -78,24 +78,28 @@ export function WorkoutSessionList() {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold mt-5 mb-2">{t("workout_builder.session.history", { count: sessions.length })}</h2>
-      {sessions.length === 0 && <div className="text-slate-500">{t("workout_builder.session.no_workout_yet")}</div>}
-      <ul className="divide-y divide-slate-200">
+      <h2 className="text-xl font-bold mt-5 mb-2 text-slate-900 dark:text-slate-100">
+        {t("workout_builder.session.history", { count: sessions.length })}
+      </h2>
+      {sessions.length === 0 && <div className="text-slate-500 dark:text-slate-400">{t("workout_builder.session.no_workout_yet")}</div>}
+      <ul className="divide-y divide-slate-200 dark:divide-slate-700/50">
         {sessions.map((session) => {
           return (
             <li
-              className="flex flex-col sm:flex-row items-start sm:items-center justify-between py-4 gap-2 sm:gap-0 hover:bg-slate-50 rounded-lg space-x-4"
+              className="px-2 flex flex-col sm:flex-row items-start sm:items-center justify-between py-4 gap-2 sm:gap-0 hover:bg-slate-50 dark:hover:bg-slate-800/70 rounded-lg space-x-4"
               key={session.id}
             >
               <div className="flex items-center flex-col">
-                <span className="font-bold text-base tabular-nums">{new Date(session.startedAt).toLocaleDateString(locale)}</span>
-                <span className="text-xs text-slate-700 tabular-nums">
+                <span className="font-bold text-base tabular-nums text-slate-900 dark:text-slate-100">
+                  {new Date(session.startedAt).toLocaleDateString(locale)}
+                </span>
+                <span className="text-xs text-slate-700 dark:text-slate-300 tabular-nums">
                   {t("workout_builder.session.start") || "start"}
                   {" : "}
                   {new Date(session.startedAt).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}
                 </span>
                 {session.endedAt && (
-                  <span className="text-xs text-slate-500 tabular-nums">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 tabular-nums">
                     {t("workout_builder.session.end") || "end"}
                     {" : "}
                     {new Date(session.endedAt).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}
@@ -124,7 +128,7 @@ export function WorkoutSessionList() {
                     size="icon"
                     variant="ghost"
                   >
-                    <Repeat2 className="w-7 h-7 text-blue-500" />
+                    <Repeat2 className="w-7 h-7 text-blue-500 dark:text-blue-400" />
                   </Button>
                 </div>
                 <div className="tooltip" data-tip={t("workout_builder.session.delete")}>
@@ -134,7 +138,7 @@ export function WorkoutSessionList() {
                     size="icon"
                     variant="ghost"
                   >
-                    <Trash2 className="w-7 h-7 text-red-500" />
+                    <Trash2 className="w-7 h-7 text-red-500 dark:text-red-400" />
                   </Button>
                 </div>
               </div>

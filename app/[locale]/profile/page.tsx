@@ -38,7 +38,7 @@ export default function ProfilePage() {
 
   return (
     <div>
-      {!session && <LocalAlert />}
+      {!session && <LocalAlert className="my-4" />}
       <WorkoutSessionHeatmap until={until} values={values} />
       <WorkoutSessionList />
       <div className="mt-8 flex justify-center">
