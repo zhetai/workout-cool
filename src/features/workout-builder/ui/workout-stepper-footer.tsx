@@ -10,6 +10,7 @@ export function WorkoutBuilderFooter({
   canContinue,
   onPrevious,
   onNext,
+  onStartWorkout,
   selectedEquipment,
   selectedMuscles,
 }: {
@@ -18,6 +19,7 @@ export function WorkoutBuilderFooter({
   canContinue: boolean;
   onPrevious: VoidFunction;
   onNext: VoidFunction;
+  onStartWorkout?: VoidFunction;
   selectedEquipment: any[];
   selectedMuscles: any[];
 }) {
@@ -28,12 +30,12 @@ export function WorkoutBuilderFooter({
   return (
     <div className="w-full sticky bottom-0 z-10">
       {/* Mobile layout - vertical stack */}
-      <div className="flex flex-col gap-4 ">
+      <div className="flex flex-col gap-4 px-2 sm:px-6 pb-2">
         {/* Center stats on top for mobile */}
         <div className="flex items-center justify-center"></div>
 
         {/* Navigation buttons */}
-        <div className="flex items-center justify-between gap-3 bg-white w-full rounded-sm p-2">
+        <div className="min-h-12 flex items-center justify-between gap-3 bg-white w-full p-0.5 border border-slate-400 dark:border-slate-700 rounded-full">
           {/* Previous button */}
           <Button className="flex-1 rounded-full" disabled={isFirstStep} onClick={onPrevious} size="default" variant="ghost">
             <div className="flex items-center gap-2">
@@ -42,25 +44,21 @@ export function WorkoutBuilderFooter({
             </div>
           </Button>
 
-          {/* Next/Complete button */}
+          {/* Next/Start Workout button */}
           <Button
-            className="flex-1 rounded-full"
+            className="flex-1 rounded-full bg-blue-600 hover:bg-blue-700 min-h-12"
             disabled={!canContinue}
-            onClick={isFinalStep ? () => console.log("Complete workout!") : onNext}
+            onClick={isFinalStep ? () => onStartWorkout?.() : onNext}
             size="default"
             variant="default"
           >
             <div className="flex items-center justify-center gap-2">
-              <span className="font-semibold">
-                {isFinalStep ? t("workout_builder.navigation.complete") : t("workout_builder.navigation.continue")}
-              </span>
+              <span className="font-semibold">{isFinalStep ? "Commencer la séance" : t("workout_builder.navigation.continue")}</span>
               <ArrowRight className="h-4 w-4" />
             </div>
           </Button>
         </div>
       </div>
-
-      {/* Desktop layout - horizontal */}
     </div>
   );
 }

@@ -4,8 +4,6 @@ import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-ki
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors, DragEndEvent } from "@dnd-kit/core";
 
-import { Button } from "@/components/ui/button";
-
 import { useWorkoutStepper } from "../model/use-workout-stepper";
 import { ExerciseListItem } from "./exercise-list-item";
 
@@ -117,16 +115,6 @@ export const ExercisesSelection = ({
               </div>
             </SortableContext>
           </DndContext>
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <Button
-              className="px-8 bg-blue-600 hover:bg-blue-700"
-              disabled={flatExercises.length === 0}
-              onClick={handleStartWorkout}
-              size="large"
-            >
-              Start Workout
-            </Button>
-          </div>
         </div>
       ) : error ? (
         <div className="text-center py-20">
