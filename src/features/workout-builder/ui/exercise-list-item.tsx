@@ -80,7 +80,7 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
 
           {/* Image de l'exercice */}
           {exercise.fullVideoImageUrl && (
-            <div className="relative w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-slate-100 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700/50">
+            <div className="relative w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-slate-200 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700/50">
               <Image
                 alt={exerciseName ?? ""}
                 className="w-full h-full object-cover scale-[1.5]"
@@ -116,7 +116,7 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
           {/* Nom de l'exercice avec indicateurs */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-3 mb-1">
-              <h3 className="font-semibold text-slate-900 dark:text-slate-100 truncate text-sm">{exerciseName}</h3>
+              <h3 className="font-semibold text-slate-900 dark:text-slate-200 truncate text-sm">{exerciseName}</h3>
             </div>
           </div>
         </div>

@@ -75,7 +75,7 @@ export function WorkoutSessionHeader({
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {/* Card 1: elapsed time */}
-            <div className="bg-white dark:bg-gradient-to-br dark:from-slate-800/80 dark:to-slate-700/80 rounded-lg p-3 border border-slate-100 dark:border-slate-600/30">
+            <div className="bg-white dark:bg-gradient-to-br dark:from-slate-800/80 dark:to-slate-700/80 rounded-lg p-3 border border-slate-200 dark:border-slate-600/30">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
                   <Clock className="h-4 w-4 text-blue-400" />
@@ -102,7 +102,7 @@ export function WorkoutSessionHeader({
                   </Button>
 
                   <Button
-                    className="w-8 h-8 rounded-full p-0 border-slate-200 text-slate-400 hover:bg-slate-100 dark:border-slate-600 hover:dark:bg-slate-700"
+                    className="w-8 h-8 rounded-full p-0 border-slate-200 text-slate-400 hover:bg-slate-200 dark:border-slate-600 hover:dark:bg-slate-700"
                     onClick={handleReset}
                     variant="outline"
                   >
@@ -113,7 +113,7 @@ export function WorkoutSessionHeader({
             </div>
 
             {/* Card 2: progress */}
-            <div className="bg-white dark:bg-gradient-to-br dark:from-slate-800/80 dark:to-slate-700/80 rounded-lg p-3 border border-slate-100 dark:border-slate-600/30">
+            <div className="bg-white dark:bg-gradient-to-br dark:from-slate-800/80 dark:to-slate-700/80 rounded-lg p-3 border border-slate-200 dark:border-slate-600/30">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
                   <Target className="h-4 w-4 text-purple-400" />

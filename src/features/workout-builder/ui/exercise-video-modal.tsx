@@ -90,7 +90,7 @@ export function ExerciseVideoModal({ open, onOpenChange, exercise }: ExerciseVid
         {/* Instructions (description) */}
         {description && (
           <div
-            className="px-6 pt-4 pb-6 text-slate-700 dark:text-slate-200 text-sm md:text-base prose dark:prose-invert max-w-none border-t border-slate-100 dark:border-slate-800 mt-2"
+            className="px-6 pt-4 pb-6 text-slate-700 dark:text-slate-200 text-sm md:text-base prose dark:prose-invert max-w-none border-t border-slate-200 dark:border-slate-800 mt-2"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         )}

@@ -39,7 +39,7 @@ export const Footer = async () => {
           {SOCIAL_LINKS.map(({ href, icon: Icon, label }) => (
             <a
               aria-label={label}
-              className="btn btn-ghost btn-sm btn-circle text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-gray-800"
+              className="btn btn-ghost btn-sm btn-circle text-gray-700 dark:text-gray-300 hover:bg-slate-200 dark:hover:bg-gray-800"
               href={href}
               key={label}
               rel="noopener noreferrer"

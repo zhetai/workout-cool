@@ -52,7 +52,7 @@ export const Header = () => {
       <div className="navbar-end">
         <Link
           aria-label={t("commons.home")}
-          className="hover:bg-slate-100 dark:hover:bg-gray-800 rounded-full p-2 transition flex"
+          className="hover:bg-slate-200 dark:hover:bg-gray-800 rounded-full p-2 transition flex"
           href="/"
         >
           <div className="tooltip" data-tip={t("commons.home")}>
@@ -73,7 +73,7 @@ export const Header = () => {
           </div>
 
           <ul
-            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 dark:bg-black dark:text-gray-200 rounded-box w-52 border border-slate-100 dark:border-gray-800"
+            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 dark:bg-black dark:text-gray-200 rounded-box w-52 border border-slate-200 dark:border-gray-800"
             tabIndex={0}
           >
             <li>
@@ -82,7 +82,7 @@ export const Header = () => {
               </Link>
             </li>
 
-            <hr className="my-1 border-slate-100 dark:border-gray-800" />
+            <hr className="my-1 border-slate-200 dark:border-gray-800" />
 
             {!session.data ? (
               <>
@@ -102,7 +102,7 @@ export const Header = () => {
             ) : (
               <li>
                 <button
-                  className="flex items-center gap-2 text-base text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-gray-800 rounded-lg px-3 py-2 transition-colors"
+                  className="flex items-center gap-2 text-base text-gray-700 dark:text-gray-300 hover:bg-slate-200 dark:hover:bg-gray-800 rounded-lg px-3 py-2 transition-colors"
                   onClick={handleSignOut}
                 >
                   <LogOut className="w-4 h-4" />

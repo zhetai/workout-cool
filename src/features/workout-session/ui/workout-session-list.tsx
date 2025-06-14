@@ -78,7 +78,7 @@ export function WorkoutSessionList() {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold mt-5 mb-2 text-slate-900 dark:text-slate-100">
+      <h2 className="text-xl font-bold mt-5 mb-2 text-slate-900 dark:text-slate-200">
         {t("workout_builder.session.history", { count: sessions.length })}
       </h2>
       {sessions.length === 0 && <div className="text-slate-500 dark:text-slate-400">{t("workout_builder.session.no_workout_yet")}</div>}
@@ -90,7 +90,7 @@ export function WorkoutSessionList() {
               key={session.id}
             >
               <div className="flex items-center flex-col">
-                <span className="font-bold text-base tabular-nums text-slate-900 dark:text-slate-100">
+                <span className="font-bold text-base tabular-nums text-slate-900 dark:text-slate-200">
                   {new Date(session.startedAt).toLocaleDateString(locale)}
                 </span>
                 <span className="text-xs text-slate-700 dark:text-slate-300 tabular-nums">

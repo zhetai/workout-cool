@@ -15,7 +15,7 @@ export function ThemeToggle() {
 
   return (
     <Button
-      className="hover:bg-slate-100 rounded-full p-2 pr-2"
+      className="hover:bg-slate-200 rounded-full p-2 pr-2"
       onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
       variant="ghost"
     >

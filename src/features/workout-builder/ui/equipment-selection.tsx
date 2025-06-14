@@ -51,7 +51,7 @@ function EquipmentCard({ equipment, isSelected, onToggle }: EquipmentCardProps) 
       className={cn(
         // Base styles - Chess.com inspiration
         "group relative overflow-hidden cursor-pointer",
-        "bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900",
+        "bg-gradient-to-br from-slate-50 to-slate-200 dark:from-slate-800 dark:to-slate-900",
         "border-2 border-slate-200 dark:border-slate-700",
         "rounded-xl shadow-sm hover:shadow-xl",
         // Transitions smooth
@@ -112,7 +112,7 @@ function EquipmentCard({ equipment, isSelected, onToggle }: EquipmentCardProps) 
               "tracking-wide leading-tight",
               isSelected
                 ? "text-emerald-700 dark:text-emerald-300"
-                : "text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-slate-100",
+                : "text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-slate-200",
             )}
           >
             {translation.label}

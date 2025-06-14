@@ -44,7 +44,7 @@ export function ExerciseCard({ exercise, muscle, onShuffle, onPick, onDelete }: 
       <Card className="group relative overflow-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-200 hover:border-blue-200 dark:hover:border-blue-800">
         <CardHeader className="relative p-0">
           {/* Image/Vidéo thumbnail */}
-          <div className="relative h-48 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800">
+          <div className="relative h-48 bg-gradient-to-br from-slate-200 to-slate-200 dark:from-slate-700 dark:to-slate-800">
             {exercise.fullVideoImageUrl && !imageError ? (
               <>
                 <Image
@@ -103,7 +103,7 @@ export function ExerciseCard({ exercise, muscle, onShuffle, onPick, onDelete }: 
         <CardContent className="p-4">
           {/* Titre de l'exercice */}
           <div className="flex items-start justify-between mb-3">
-            <h4 className="font-semibold text-slate-900 dark:text-slate-100 text-sm leading-tight line-clamp-2">{exercise.name}</h4>
+            <h4 className="font-semibold text-slate-900 dark:text-slate-200 text-sm leading-tight line-clamp-2">{exercise.name}</h4>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button className="h-8 w-8 ml-2 flex-shrink-0" size="small" variant="ghost">

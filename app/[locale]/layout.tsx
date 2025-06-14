@@ -154,7 +154,7 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
             <NextTopLoader color="#FF5722" delay={100} showSpinner={false} />
 
             {/* Main Card Container */}
-            <div className="card bg-base-100 dark:bg-[#232324] shadow-xl w-full max-w-3xl max-sm:rounded-none max-sm:h-full border border-base-200 dark:border-gray-800">
+            <div className="card bg-white dark:bg-[#232324] shadow-xl w-full max-w-3xl max-sm:rounded-none max-sm:h-full border border-base-200 dark:border-gray-800">
               <div className="card-body p-0">
                 <Header />
                 <div className="px-2 sm:px-6 pb-6">{children}</div>
