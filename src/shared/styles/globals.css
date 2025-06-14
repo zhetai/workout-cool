@@ -284,17 +284,18 @@
 
 .bg-hero-dark {
   background-image:
-    radial-gradient(circle at 82% 60%, rgba(80, 80, 120, 0.1) 0%, rgba(80, 80, 120, 0.1) 69%, transparent 69%, transparent 100%),
-    radial-gradient(circle at 36% 0%, rgba(40, 40, 60, 0.1) 0%, rgba(40, 40, 60, 0.1) 59%, transparent 59%, transparent 100%),
-    radial-gradient(circle at 58% 82%, rgba(60, 60, 100, 0.1) 0%, rgba(60, 60, 100, 0.1) 17%, transparent 17%, transparent 100%),
-    radial-gradient(circle at 71% 32%, rgba(19, 19, 40, 0.1) 0%, rgba(19, 19, 40, 0.1) 40%, transparent 40%, transparent 100%),
-    radial-gradient(circle at 77% 5%, rgba(31, 31, 60, 0.1) 0%, rgba(31, 31, 60, 0.1) 52%, transparent 52%, transparent 100%),
-    radial-gradient(circle at 96% 80%, rgba(11, 11, 30, 0.1) 0%, rgba(11, 11, 30, 0.1) 73%, transparent 73%, transparent 100%),
-    radial-gradient(circle at 91% 59%, rgba(80, 80, 120, 0.1) 0%, rgba(80, 80, 120, 0.1) 44%, transparent 44%, transparent 100%),
-    radial-gradient(circle at 52% 82%, rgba(60, 60, 100, 0.1) 0%, rgba(60, 60, 100, 0.1) 87%, transparent 87%, transparent 100%),
-    radial-gradient(circle at 84% 89%, rgba(80, 80, 120, 0.1) 0%, rgba(80, 80, 120, 0.1) 57%, transparent 57%, transparent 100%),
-    linear-gradient(90deg, #232324, #18181b);
+    radial-gradient(circle at 82% 60%, rgba(200, 200, 200, 0.04) 0%, rgba(200, 200, 200, 0.04) 69%, transparent 69%, transparent 100%),
+    radial-gradient(circle at 36% 0%, rgba(150, 150, 150, 0.04) 0%, rgba(150, 150, 150, 0.04) 59%, transparent 59%, transparent 100%),
+    radial-gradient(circle at 58% 82%, rgba(130, 130, 130, 0.04) 0%, rgba(130, 130, 130, 0.04) 17%, transparent 17%, transparent 100%),
+    radial-gradient(circle at 71% 32%, rgba(90, 90, 90, 0.05) 0%, rgba(90, 90, 90, 0.05) 40%, transparent 40%, transparent 100%),
+    radial-gradient(circle at 77% 5%, rgba(70, 70, 70, 0.05) 0%, rgba(70, 70, 70, 0.05) 52%, transparent 52%, transparent 100%),
+    radial-gradient(circle at 96% 80%, rgba(50, 50, 50, 0.05) 0%, rgba(50, 50, 50, 0.05) 73%, transparent 73%, transparent 100%),
+    radial-gradient(circle at 91% 59%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.03) 44%, transparent 44%, transparent 100%),
+    radial-gradient(circle at 52% 82%, rgba(180, 180, 180, 0.03) 0%, rgba(180, 180, 180, 0.03) 87%, transparent 87%, transparent 100%),
+    radial-gradient(circle at 84% 89%, rgba(160, 160, 160, 0.03) 0%, rgba(160, 160, 160, 0.03) 57%, transparent 57%, transparent 100%),
+    linear-gradient(90deg, rgb(22, 22, 26), rgb(18, 24, 38));
 }
+
 
 @keyframes fade-in-up {
   from {
