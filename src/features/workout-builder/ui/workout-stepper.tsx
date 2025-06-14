@@ -48,7 +48,6 @@ export function WorkoutStepper() {
     loadSessionFromLocal();
   }, []);
 
-  // dnd-kit et flatExercises doivent être avant tout return/condition
   const [flatExercises, setFlatExercises] = useState<{ id: string; muscle: string; exercise: ExerciseWithAttributes }[]>([]);
 
   useEffect(() => {
@@ -63,8 +62,7 @@ export function WorkoutStepper() {
       setFlatExercises(flat);
     }
   }, [exercisesByMuscle]);
-
-  // Fetch exercises quand on arrive à l'étape 3
+  // FIXME : when i go back to step 2, the exercises are not fetched anymore
   useEffect(() => {
     if (currentStep === 3 && exercisesByMuscle.length === 0) {
       fetchExercises();
@@ -85,24 +83,24 @@ export function WorkoutStepper() {
 
   const canContinue = currentStep === 1 ? canProceedToStep2 : currentStep === 2 ? canProceedToStep3 : exercisesByMuscle.length > 0;
 
-  // Actions pour les exercices
   const handleShuffleExercise = (exerciseId: string, muscle: string) => {
-    // TODO: Implémenter la logique pour remplacer l'exercice par un autre
+    alert("TODO : Shuffle exercise");
     console.log("Shuffle exercise:", exerciseId, "for muscle:", muscle);
   };
 
   const handlePickExercise = (exerciseId: string) => {
     // later
+    alert("TODO : Pick exercise");
     console.log("Pick exercise:", exerciseId);
   };
 
   const handleDeleteExercise = (exerciseId: string, muscle: string) => {
-    // TODO: Implémenter la logique pour supprimer l'exercice
+    alert("TODO : Delete exercise");
     console.log("Delete exercise:", exerciseId, "for muscle:", muscle);
   };
 
   const handleAddExercise = () => {
-    // TODO: Implémenter la logique pour ajouter un exercice
+    alert("TODO : Add exercise");
     console.log("Add exercise");
   };
 
@@ -121,16 +119,21 @@ export function WorkoutStepper() {
 
   const [showCongrats, setShowCongrats] = useState(false);
 
+  const goToProfile = () => {
+    router.push("/profile");
+  };
+
   if (showCongrats && !isWorkoutActive) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
         <Image alt="Trophée" className="w-56 h-56" src={Trophy} />
         <h2 className="text-2xl font-bold mb-2">{t("workout_builder.session.congrats")}</h2>
         <p className="text-lg text-slate-600 mb-6">{t("workout_builder.session.congrats_subtitle")}</p>
-        <Button onClick={() => router.push("/profile")}>{t("commons.go_to_profile")}</Button>
+        <Button onClick={goToProfile}>{t("commons.go_to_profile")}</Button>
       </div>
     );
   }
+
   if (isWorkoutActive && session) {
     return (
       <div className="w-full max-w-6xl mx-auto">
@@ -197,8 +200,6 @@ export function WorkoutStepper() {
             onDelete={handleDeleteExercise}
             onPick={handlePickExercise}
             onShuffle={handleShuffleExercise}
-            onStartWorkout={handleStartWorkout}
-            t={t}
           />
         );
       default:

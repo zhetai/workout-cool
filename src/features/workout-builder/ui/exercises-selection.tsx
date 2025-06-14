@@ -4,11 +4,12 @@ import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-ki
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors, DragEndEvent } from "@dnd-kit/core";
 
+import { useI18n } from "locales/client";
+
 import { useWorkoutStepper } from "../model/use-workout-stepper";
 import { ExerciseListItem } from "./exercise-list-item";
 
 import type { ExerciseWithAttributes } from "../types";
-import type { TFunction } from "../../../../locales/client";
 
 interface ExercisesSelectionProps {
   isLoading: boolean;
@@ -18,8 +19,6 @@ interface ExercisesSelectionProps {
   onPick: (exerciseId: string) => void;
   onDelete: (exerciseId: string, muscle: string) => void;
   onAdd: () => void;
-  onStartWorkout: (exercises: ExerciseWithAttributes[]) => void;
-  t: TFunction;
 }
 
 export const ExercisesSelection = ({
@@ -30,9 +29,8 @@ export const ExercisesSelection = ({
   onPick,
   onDelete,
   onAdd,
-  onStartWorkout,
-  t,
 }: ExercisesSelectionProps) => {
+  const t = useI18n();
   const [flatExercises, setFlatExercises] = useState<{ id: string; muscle: string; exercise: ExerciseWithAttributes }[]>([]);
   const { setExercisesOrder } = useWorkoutStepper();
   const sensors = useSensors(
