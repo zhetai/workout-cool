@@ -16,8 +16,8 @@ const DEFAULT_PANEL_COLORS = [
   "var(--color-base-300)", // 0: empty
   "var(--color-success)", // 1: low activity
   "var(--color-success-content)", // 2: medium activity
-  "var(--color-primary)", // 3: high activity
-  "var(--color-primary-content)", // 4: max activity
+  "var(--color-success-content)", // 3: high activity
+  "var(--color-success-content)", // 4: max activity
 ];
 const DEFAULT_DATE_FORMAT = "YYYY-MM-DD";
 
