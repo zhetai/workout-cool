@@ -1,11 +1,10 @@
 "use client";
 
 import { useAction } from "next-safe-action/hooks";
+import { Languages } from "lucide-react";
 
-import { useCurrentLocale, useChangeLocale, languages } from "locales/client";
+import { useChangeLocale, languages, useI18n } from "locales/client";
 import { updateUserAction } from "@/entities/user/model/update-user.action";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 
 const languageFlags: Record<string, string> = {
   en: "🇬🇧",
@@ -15,7 +14,8 @@ const languageFlags: Record<string, string> = {
 export function LanguageSelector() {
   const action = useAction(updateUserAction);
   const changeLocale = useChangeLocale();
-  const locale = useCurrentLocale();
+
+  const t = useI18n();
 
   const handleLanguageChange = async (newLocale: string) => {
     await action.execute({ locale: newLocale });
@@ -23,20 +23,32 @@ export function LanguageSelector() {
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button className="h-8 w-8 p-0 text-xl" size="small" variant="outline">
-          {languageFlags[locale] || "🌐"}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[100px]">
+    <div className="dropdown dropdown-end">
+      <div className="tooltip" data-tip={t("commons.change_language")}>
+        <div
+          className="btn btn-ghost btn-circle h-8 w-8 p-0 text-xl flex items-center justify-center hover:bg-slate-100 border-none dark:hover:bg-gray-800 rounded-full"
+          role="button"
+          tabIndex={0}
+        >
+          <Languages className="w-5 h-5 text-blue-500 dark:text-blue-400" />
+        </div>
+      </div>
+      <ul
+        className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 dark:bg-black dark:text-gray-200 rounded-box  border border-slate-100 dark:border-gray-800"
+        tabIndex={0}
+      >
         {languages.map((language) => (
-          <DropdownMenuItem className="cursor-pointer" key={language} onClick={() => handleLanguageChange(language)}>
-            <span className="mr-2">{languageFlags[language]}</span>
-            {language === "en" ? "English" : "Français"}
-          </DropdownMenuItem>
+          <li className="" key={language}>
+            <button
+              className="flex items-center gap-2 text-base hover:bg-slate-100 dark:hover:bg-gray-800 rounded-lg px-3 py-2 transition-colors"
+              onClick={() => handleLanguageChange(language)}
+            >
+              <span className="text-lg">{languageFlags[language]}</span>
+              <span className="text-base">{language === "en" ? "English" : "Français"}</span>
+            </button>
+          </li>
         ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </ul>
+    </div>
   );
 }

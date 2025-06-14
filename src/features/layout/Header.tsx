@@ -5,6 +5,7 @@ import { Home, LogIn, UserPlus, LogOut, User } from "lucide-react";
 
 import { useI18n } from "locales/client";
 import Logo from "@public/logo.png";
+import { LanguageSelector } from "@/widgets/language-selector/language-selector";
 import { ThemeToggle } from "@/features/theme/ThemeToggle";
 import { ReleaseNotesDialog } from "@/features/release-notes";
 import { useLogout } from "@/features/auth/model/useLogout";
@@ -62,6 +63,7 @@ export const Header = () => {
         <ReleaseNotesDialog />
 
         <ThemeToggle />
+        <LanguageSelector />
 
         <div className="dropdown dropdown-end ml-1">
           <div className="btn btn-ghost btn-circle avatar" role="button" tabIndex={0}>

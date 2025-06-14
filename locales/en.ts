@@ -344,5 +344,6 @@ export default {
     neutral: "Neutral",
     satisfied: "Satisfied",
     support: "Support",
+    change_language: "Change language",
   },
 } as const;
