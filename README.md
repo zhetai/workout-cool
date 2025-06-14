@@ -12,8 +12,25 @@
 <a href="https://ko-fi.com/workoutcool">
    <img src="https://img.shields.io/badge/sponsor%20on-ko--fi-ff5f5f?logo=ko-fi&logoColor=white&style=flat-square">
 </a>
+<a href="LICENSE">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License">
+</a>
 </p>
 </div>
+
+## Table of Contents
+
+- [About](#about)
+- [Project Origin & Motivation](#-project-origin--motivation)
+- [Quick Start](#quick-start)
+- [Exercise Database Import](#exercise-database-import)
+- [Project Architecture](#project-architecture)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [Deployment](#deployment)
+- [Resources](#resources)
+- [License](#license)
+- [Sponsor This Project](#-sponsor-this-project)
 
 ## Contributors
 
@@ -210,6 +227,21 @@ features/
 └── api/ # Server actions or API calls
 ```
 
+## Roadmap
+
+Here are the next steps and goals for Workout.cool:
+
+- [ ] 🏋️‍♂️ Add new exercises and videos
+- [ ] 📱 Mobile app (React Native)
+- [ ] 🏆 Badges and gamification system
+- [ ] 📊 Advanced progress statistics
+- [ ] 🤝 Integration with wearables (watches, trackers)
+- [ ] 🌍 Multilingual support
+- [ ] 🔒 OAuth authentication (Google, Apple, etc.)
+- [ ] 💬 Built-in community forum
+
+Feel free to suggest your ideas via [issues](https://github.com/Snouzy/workout-cool/issues)!
+
 ## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
@@ -265,9 +297,9 @@ pnpm start
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ## 🤝 Join the Rescue Mission
 
