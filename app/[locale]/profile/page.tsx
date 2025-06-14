@@ -5,6 +5,7 @@ import { useI18n } from "locales/client";
 import { WorkoutSessionList } from "@/features/workout-session/ui/workout-session-list";
 import { WorkoutSessionHeatmap } from "@/features/workout-session/ui/workout-session-heatmap";
 import { useWorkoutSessions } from "@/features/workout-session/model/use-workout-sessions";
+import { useCurrentSession } from "@/entities/user/model/useCurrentSession";
 import { LocalAlert } from "@/components/ui/local-alert";
 import { Button } from "@/components/ui/button";
 
@@ -12,6 +13,7 @@ export default function ProfilePage() {
   const router = useRouter();
   const t = useI18n();
   const { data: sessions = [] } = useWorkoutSessions();
+  const session = useCurrentSession();
 
   const values: Record<string, number> = {};
   sessions.forEach((session) => {
@@ -26,7 +28,7 @@ export default function ProfilePage() {
 
   return (
     <div className="px-2 sm:px-6">
-      {!sessions.length && <LocalAlert className="my-4" />}
+      {!session && <LocalAlert className="my-4" />}
       <div className="mt-4">
         <WorkoutSessionHeatmap until={until} values={values} />
       </div>
