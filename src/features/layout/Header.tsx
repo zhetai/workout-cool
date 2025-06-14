@@ -24,7 +24,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 px-4">
+    <div className="navbar bg-base-100 dark:bg-black dark:text-gray-200 px-4">
       {/* Logo and Title */}
       <div className="navbar-start flex items-center gap-2">
         <Link className="group flex items-center space-x-3 rounded-xl bg-gradient-to-r px-4 py-2 transition-all duration-200 " href="/">
@@ -46,9 +46,13 @@ export const Header = () => {
 
       {/* User Menu */}
       <div className="navbar-end">
-        <Link aria-label={t("commons.home")} className="hover:bg-slate-100 rounded-full p-2 transition flex" href="/">
+        <Link
+          aria-label={t("commons.home")}
+          className="hover:bg-slate-100 dark:hover:bg-gray-800 rounded-full p-2 transition flex"
+          href="/"
+        >
           <div className="tooltip" data-tip={t("commons.home")}>
-            <Home className="w-6 h-6 text-blue-500" />
+            <Home className="w-6 h-6 text-blue-500 dark:text-blue-400" />
           </div>
         </Link>
 
@@ -63,33 +67,39 @@ export const Header = () => {
             </div>
           </div>
 
-          <ul className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52" tabIndex={0}>
+          <ul
+            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 dark:bg-black dark:text-gray-200 rounded-box w-52 border border-slate-100 dark:border-gray-800"
+            tabIndex={0}
+          >
             <li>
               <Link className="!no-underline" href="/profile" size="base" variant="nav">
                 {t("commons.profile")}
               </Link>
             </li>
 
-            <hr className="my-1" />
+            <hr className="my-1 border-slate-100 dark:border-gray-800" />
 
             {!session.data ? (
               <>
                 <li>
                   <Link className="!no-underline" href="/auth/signin" size="base" variant="nav">
-                    <LogIn className="w-4 h-4" />
+                    <LogIn className="w-4 h-4 text-gray-700 dark:text-gray-300" />
                     {t("commons.login")}
                   </Link>
                 </li>
                 <li>
                   <Link className="!no-underline" href="/auth/signup" size="base" variant="nav">
-                    <UserPlus className="w-4 h-4" />
+                    <UserPlus className="w-4 h-4 text-gray-700 dark:text-gray-300" />
                     {t("commons.register")}
                   </Link>
                 </li>
               </>
             ) : (
               <li>
-                <button className="flex items-center gap-2 text-base" onClick={handleSignOut}>
+                <button
+                  className="flex items-center gap-2 text-base text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-gray-800 rounded-lg px-3 py-2 transition-colors"
+                  onClick={handleSignOut}
+                >
                   <LogOut className="w-4 h-4" />
                   {t("commons.logout")}
                 </button>
