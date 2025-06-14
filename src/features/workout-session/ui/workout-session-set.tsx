@@ -80,6 +80,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
               disabled={set.completed}
               min={0}
               onChange={handleValueIntChange(columnIndex)}
+              pattern="[0-9]*"
               placeholder="min"
               type="number"
               value={valuesInt[columnIndex] ?? ""}
@@ -90,6 +91,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
               max={59}
               min={0}
               onChange={handleValueSecChange(columnIndex)}
+              pattern="[0-9]*"
               placeholder="sec"
               type="number"
               value={valuesSec[columnIndex] ?? ""}
@@ -104,6 +106,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
               disabled={set.completed}
               min={0}
               onChange={handleValueIntChange(columnIndex)}
+              pattern="[0-9]*"
               placeholder=""
               type="number"
               value={valuesInt[columnIndex] ?? ""}
@@ -126,6 +129,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
             disabled={set.completed}
             min={0}
             onChange={handleValueIntChange(columnIndex)}
+            pattern="[0-9]*"
             placeholder=""
             type="number"
             value={valuesInt[columnIndex] ?? ""}
