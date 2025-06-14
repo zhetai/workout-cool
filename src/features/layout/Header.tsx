@@ -63,7 +63,7 @@ export const Header = () => {
 
         <ThemeToggle />
 
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-end ml-1">
           <div className="btn btn-ghost btn-circle avatar" role="button" tabIndex={0}>
             <div className="w-8 rounded-full bg-primary text-primary-content !flex items-center justify-center text-sm font-medium">
               {userAvatar || <User className="w-4 h-4" />}
@@ -100,7 +100,7 @@ export const Header = () => {
             ) : (
               <li>
                 <button
-                  className="flex items-center gap-2 text-base text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-gray-800 rounded-lg px-3 py-2 transition-colors"
+                  className="flex items-center gap-2 text-base text-gray-700 dark:text-gray-300 hover:bg-slate-100  rounded-lg px-3 py-2 transition-colors"
                   onClick={handleSignOut}
                 >
                   <LogOut className="w-4 h-4" />

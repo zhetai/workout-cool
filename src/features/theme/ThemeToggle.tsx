@@ -14,9 +14,17 @@ export function ThemeToggle() {
   }, [resolvedTheme]);
 
   return (
-    <Button className="rounded-full p-2 pr-2" onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")} variant="ghost">
+    <Button
+      className="hover:bg-slate-100 rounded-full p-2 pr-2"
+      onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
+      variant="ghost"
+    >
       <div className="tooltip" data-tip={resolvedTheme === "light" ? "Dark mode" : "Light mode"}>
-        {resolvedTheme === "light" ? <MoonIcon /> : <SunIcon />}
+        {resolvedTheme === "light" ? (
+          <MoonIcon className="text-blue-500 dark:text-blue-400" />
+        ) : (
+          <SunIcon className="text-blue-500 dark:text-blue-400" />
+        )}
       </div>
     </Button>
   );

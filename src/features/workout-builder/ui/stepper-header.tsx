@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTheme } from "next-themes";
 import { Check } from "lucide-react";
 
 import { cn } from "@/shared/lib/utils";
@@ -88,8 +89,9 @@ function StepperStep({ description, isActive, isCompleted, stepNumber, title }: 
 }
 
 export function StepperHeader({ steps }: StepperHeaderProps) {
+  const { resolvedTheme } = useTheme();
   return (
-    <div className="w-full mb-8">
+    <div className={cn("w-full", resolvedTheme === "dark" ? "my-8" : "mb-8")}>
       {/* Layout mobile - vertical */}
       <div className="flex flex-col space-y-6 md:hidden">
         {steps.map((step, index) => (
