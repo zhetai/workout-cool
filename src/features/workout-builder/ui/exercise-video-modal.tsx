@@ -1,7 +1,6 @@
-"use client";
-
 import { useI18n } from "locales/client";
 import { getYouTubeEmbedUrl } from "@/shared/lib/youtube";
+import { getAttributeValueLabel } from "@/shared/lib/attribute-value-translation";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 import type { ExerciseWithAttributes } from "../types";
@@ -13,7 +12,6 @@ interface ExerciseVideoModalProps {
 }
 
 export function ExerciseVideoModal({ open, onOpenChange, exercise }: ExerciseVideoModalProps) {
-  console.log("exercise:", exercise);
   const t = useI18n();
   const locale = typeof window !== "undefined" && window.navigator.language.startsWith("fr") ? "fr" : "en";
   const title = locale === "fr" ? exercise.name : exercise.nameEn || exercise.name;
@@ -45,20 +43,30 @@ export function ExerciseVideoModal({ open, onOpenChange, exercise }: ExerciseVid
           <DialogTitle className="text-lg md:text-xl font-bold flex flex-col gap-2">
             {title}
             <div className="flex flex-wrap gap-2 mt-2">
-              {type && <span className={`px-2 py-0.5 rounded text-xs font-medium ${badgeColors.TYPE}`}>{type}</span>}
+              {type && (
+                <span className={`px-2 py-0.5 rounded text-xs font-medium ${badgeColors.TYPE}`}>{getAttributeValueLabel(type, t)}</span>
+              )}
               {primaryMuscle && (
-                <span className={`px-2 py-0.5 rounded text-xs font-medium ${badgeColors.PRIMARY_MUSCLE}`}>{primaryMuscle}</span>
+                <span className={`px-2 py-0.5 rounded text-xs font-medium ${badgeColors.PRIMARY_MUSCLE}`}>
+                  {getAttributeValueLabel(primaryMuscle, t)}
+                </span>
               )}
               {secondaryMuscle && (
-                <span className={`px-2 py-0.5 rounded text-xs font-medium ${badgeColors.SECONDARY_MUSCLE}`}>{secondaryMuscle}</span>
+                <span className={`px-2 py-0.5 rounded text-xs font-medium ${badgeColors.SECONDARY_MUSCLE}`}>
+                  {getAttributeValueLabel(secondaryMuscle, t)}
+                </span>
               )}
               {equipment.length > 0 &&
                 equipment.map((eq) => (
                   <span className={`px-2 py-0.5 rounded text-xs font-medium ${badgeColors.EQUIPMENT}`} key={eq}>
-                    {eq}
+                    {getAttributeValueLabel(eq, t)}
                   </span>
                 ))}
-              {mechanics && <span className={`px-2 py-0.5 rounded text-xs font-medium ${badgeColors.MECHANICS_TYPE}`}>{mechanics}</span>}
+              {mechanics && (
+                <span className={`px-2 py-0.5 rounded text-xs font-medium ${badgeColors.MECHANICS_TYPE}`}>
+                  {getAttributeValueLabel(mechanics, t)}
+                </span>
+              )}
             </div>
           </DialogTitle>
         </DialogHeader>
