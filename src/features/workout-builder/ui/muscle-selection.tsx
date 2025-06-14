@@ -39,7 +39,7 @@ const MuscleIllustration = ({
       "cursor-pointer transition-colors",
       isSelected ? "fill-primary" : "fill-[#757575]",
       "md:group-hover:fill-primary/80 group-active:fill-primary/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary",
-      "group-active:scale-[0.99]",
+      "group-active:scale-[1.005]",
     );
   };
 
