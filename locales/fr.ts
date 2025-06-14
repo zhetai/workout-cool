@@ -231,7 +231,7 @@ export default {
       progress: "Progression",
       quit_warning: "Êtes-vous sûr de vouloir quitter ? Vous pouvez sauvegarder votre progression ou la perdre complètement.",
       save_and_quit: "Sauvegarder & Quitter",
-      quit_without_save: "Quitter Sans Sauvegarder",
+      quit_without_save: "Quitter sans sauvegarder",
       continue_workout: "Continuer l'entraînement",
       history: "Historique des séances [{count}]",
       no_workout_yet: "Aucune séance enregistrée.",

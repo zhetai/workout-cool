@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -24,7 +25,7 @@ const config: Config = {
       sans: ["var(--font-sans)"],
       "permanent-marker": ["var(--font-permanent-marker)"],
     },
-    extend: {   
+    extend: {
       backgroundImage: {
         "hero-light": `
           radial-gradient(circle at 82% 60%, rgba(59, 59, 59, 0.06) 0%, rgba(59, 59, 59, 0.06) 69%, transparent 69%, transparent 100%),

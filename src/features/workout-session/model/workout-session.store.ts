@@ -79,6 +79,7 @@ export const useWorkoutSessionStore = create<WorkoutSessionState>((set, get) => 
         },
       ],
     }));
+
     const newSession: WorkoutSession = {
       id: Date.now().toString(),
       userId: "local",
@@ -86,14 +87,15 @@ export const useWorkoutSessionStore = create<WorkoutSessionState>((set, get) => 
       exercises: sessionExercises,
       status: "active",
     };
+
     workoutSessionLocal.add(newSession);
     workoutSessionLocal.setCurrent(newSession.id);
+
     set({
       session: newSession,
       elapsedTime: 0,
       isTimerRunning: false,
       isWorkoutActive: true,
-      currentExerciseIndex: 0,
       currentExercise: sessionExercises[0],
     });
   },
