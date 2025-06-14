@@ -31,17 +31,17 @@ export const Header = () => {
           className="group flex items-center space-x-3 rounded-xl bg-gradient-to-r px-4 py-2 transition-all duration-200 dark:text-gray-200 dark:bg-gray-800"
           href="/"
         >
-          <div className="relative">
+          <div className="relative flex-none">
             <Image
               alt="workout cool logo"
-              className="h-8 w-8 transition-transform duration-200 group-hover:rotate-[20deg] group-hover:scale-110"
+              className="h-6 w-6 sm:h-8 sm:w-8 transition-transform duration-200 group-hover:rotate-[20deg] group-hover:scale-110"
               height={32}
               src={Logo}
               width={32}
             />
             <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-emerald-400 opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex-col hidden sm:flex">
             <span className="font-bold transition-colors duration-200 group-hover:text-blue-400">Workout.cool</span>
           </div>
         </Link>

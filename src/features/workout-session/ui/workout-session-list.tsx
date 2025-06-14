@@ -25,10 +25,10 @@ export function WorkoutSessionList() {
   //   workoutSessionLocal.getAll().sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()),
   // );
 
-  const { data: sessions = [], isLoading } = useWorkoutSessions();
+  const { data: sessions = [] } = useWorkoutSessions();
   console.log("sessions:", sessions);
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (_id: string) => {
     // TODO: delete by service
     // workoutSessionLocal.remove(id);
   };
