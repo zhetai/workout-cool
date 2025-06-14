@@ -49,12 +49,19 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
         ...sessionData,
         exercises: {
           create: session.exercises.map((exercise) => ({
-            id: exercise.id,
             order: exercise.order,
             exercise: { connect: { id: exercise.id } },
             sets: {
               create: exercise.sets.map((set) => ({
-                ...set,
+                setIndex: set.setIndex,
+                types: set.types,
+                valueInt: set.valueInt,
+                valuesInt: set.valuesInt,
+                valueSec: set.valueSec,
+                valuesSec: set.valuesSec,
+                unit: set.unit,
+                units: set.units,
+                completed: set.completed,
                 type: set.types && set.types.length > 0 ? set.types[0] : "NA",
               })),
             },
@@ -62,16 +69,26 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
         },
       },
       update: {
-        ...sessionData,
+        startedAt: sessionData.startedAt,
+        endedAt: sessionData.endedAt,
+        userId: sessionData.userId,
+        // 1. Supprimer les exercices existants (et donc les sets en cascade)
         exercises: {
           deleteMany: {},
           create: session.exercises.map((exercise) => ({
-            id: exercise.id,
             order: exercise.order,
             exercise: { connect: { id: exercise.id } },
             sets: {
               create: exercise.sets.map((set) => ({
-                ...set,
+                setIndex: set.setIndex,
+                types: set.types,
+                valueInt: set.valueInt,
+                valuesInt: set.valuesInt,
+                valueSec: set.valueSec,
+                valuesSec: set.valuesSec,
+                unit: set.unit,
+                units: set.units,
+                completed: set.completed,
                 type: set.types && set.types.length > 0 ? set.types[0] : "NA",
               })),
             },
