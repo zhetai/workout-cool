@@ -74,7 +74,7 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
     >
       <div className="relative flex items-center justify-between py-2 px-2">
         {/* Section gauche - Infos principales */}
-        <div className="flex items-center gap-4 flex-1 min-w-0">
+        <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
           {/* Drag handle */}
           <GripVertical className="h-5 w-5 text-slate-400 dark:text-slate-500 cursor-grab active:cursor-grabbing" />
 
@@ -122,18 +122,16 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
         </div>
 
         {/* Section droite - Actions */}
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
           {/* Bouton shuffle */}
-          <Button onClick={() => onShuffle(exercise.id, muscle)} size="small" variant="outline">
+          <Button className="p-1 sm:p-2" onClick={() => onShuffle(exercise.id, muscle)} size="small" variant="outline">
             <Shuffle className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">{t("workout_builder.exercise.shuffle")}</span>
           </Button>
 
           {/* Bouton pick */}
           <Button
-            className={
-              "bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-950 text-blue-600 dark:text-blue-400 border-2 border-blue-200 dark:border-blue-800"
-            }
+            className="p-1 sm:p-2 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-950 text-blue-600 dark:text-blue-400 border-2 border-blue-200 dark:border-blue-800"
             onClick={() => onPick(exercise.id)}
             size="small"
           >
@@ -143,7 +141,7 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
 
           {/* Bouton delete */}
           <Button
-            className="h-9 w-9 bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-950 text-red-600 dark:text-red-400 border-0 rounded-lg  group-hover:opacity-100 transition-all duration-200 hover:scale-110"
+            className="p-1 sm:p-2 bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-950 text-red-600 dark:text-red-400 border-0 rounded-lg  group-hover:opacity-100 transition-all duration-200 hover:scale-110"
             onClick={() => onDelete(exercise.id, muscle)}
             size="small"
             variant="ghost"

@@ -207,16 +207,17 @@ export function WorkoutStepper() {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
+    <div className="w-full max-w-6xl mx-auto h-full">
       <StepperHeader steps={steps} />
 
-      <div className="min-h-[400px] mb-8">{renderStepContent()}</div>
+      <div className="px-2 sm:px-6">{renderStepContent()}</div>
 
       <WorkoutBuilderFooter
         canContinue={canContinue}
         currentStep={currentStep}
         onNext={nextStep}
         onPrevious={prevStep}
+        onStartWorkout={handleStartWorkout}
         selectedEquipment={selectedEquipment}
         selectedMuscles={selectedMuscles}
         totalSteps={STEPPER_STEPS.length}

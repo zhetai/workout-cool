@@ -52,8 +52,8 @@ export function WorkoutSessionHeader({
 
   return (
     <>
-      <div className="w-full mb-8">
-        <div className="rounded-xl p-3 bg-slate-50 dark:bg-slate-900/80">
+      <div className="w-full mt-4 mb-8 px-2 sm:px-6">
+        <div className="rounded-xl p-3 bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>

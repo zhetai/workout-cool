@@ -84,7 +84,7 @@ export function WorkoutSessionSets({
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto pb-8">
+    <div className="w-full max-w-3xl mx-auto pb-8 px-3 sm:px-6">
       <ol className="relative border-l-2 ml-2 border-slate-200 dark:border-slate-700">
         {session.exercises.map((ex, idx) => {
           const allSetsCompleted = ex.sets.length > 0 && ex.sets.every((set) => set.completed);

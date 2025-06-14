@@ -25,17 +25,17 @@ export const Header = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 dark:bg-black dark:text-gray-200 px-4 rounded-lg">
+    <div className="navbar bg-base-100 dark:bg-black dark:text-gray-200 px-4 rounded-tl-lg rounded-tr-lg">
       {/* Logo and Title */}
       <div className="navbar-start flex items-center gap-2">
         <Link
-          className="group flex items-center space-x-3 rounded-xl bg-gradient-to-r px-4 py-2 transition-all duration-200 dark:text-gray-200 dark:bg-gray-800"
+          className="group flex items-center space-x-3 rounded-xl bg-gradient-to-r px-2 sm:px-4 py-2 transition-all duration-200 dark:text-gray-200 dark:bg-gray-800"
           href="/"
         >
           <div className="relative flex-none">
             <Image
               alt="workout cool logo"
-              className="h-6 w-6 sm:h-8 sm:w-8 transition-transform duration-200 group-hover:rotate-[20deg] group-hover:scale-110"
+              className="h-10 w-10 sm:h-8 sm:w-8 transition-transform duration-200 group-hover:rotate-[20deg] group-hover:scale-110"
               height={32}
               src={Logo}
               width={32}
@@ -55,7 +55,7 @@ export const Header = () => {
           className="hover:bg-slate-200 dark:hover:bg-gray-800 rounded-full p-2 transition flex"
           href="/"
         >
-          <div className="tooltip" data-tip={t("commons.home")}>
+          <div className="tooltip tooltip-bottom" data-tip={t("commons.home")}>
             <Home className="w-6 h-6 text-blue-500 dark:text-blue-400" />
           </div>
         </Link>

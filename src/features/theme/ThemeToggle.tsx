@@ -19,7 +19,7 @@ export function ThemeToggle() {
       onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
       variant="ghost"
     >
-      <div className="tooltip" data-tip={resolvedTheme === "light" ? "Dark mode" : "Light mode"}>
+      <div className="tooltip tooltip-bottom" data-tip={resolvedTheme === "light" ? "Dark mode" : "Light mode"}>
         {resolvedTheme === "light" ? (
           <MoonIcon className="text-blue-500 dark:text-blue-400" />
         ) : (

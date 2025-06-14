@@ -91,7 +91,7 @@ function StepperStep({ description, isActive, isCompleted, stepNumber, title }: 
 export function StepperHeader({ steps }: StepperHeaderProps) {
   const { resolvedTheme } = useTheme();
   return (
-    <div className={cn("w-full", resolvedTheme === "dark" ? "my-8" : "mb-8")}>
+    <div className={cn("w-full my-8 px-2 sm:px-6")}>
       {/* Layout mobile - vertical */}
       <div className="flex flex-col space-y-6 md:hidden">
         {steps.map((step, index) => (
