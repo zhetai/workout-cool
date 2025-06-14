@@ -21,9 +21,69 @@ import type { Metadata } from "next";
 import "@/shared/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: SiteConfig.title,
+  title: {
+    default: SiteConfig.title,
+    template: `%s | ${SiteConfig.title}`,
+  },
   description: SiteConfig.description,
   metadataBase: new URL(getServerUrl()),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    title: SiteConfig.title,
+    description: SiteConfig.description,
+    url: getServerUrl(),
+    siteName: SiteConfig.title,
+    images: [
+      {
+        url: `${getServerUrl()}/images/default-og-image_fr.png`,
+        width: 1200,
+        height: 630,
+        alt: SiteConfig.title,
+      },
+      {
+        url: `${getServerUrl()}/images/default-og-image_en.png`,
+        width: 1200,
+        height: 630,
+        alt: SiteConfig.title,
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@workout_cool",
+    title: SiteConfig.title,
+    description: SiteConfig.description,
+    images: [`${getServerUrl()}/images/default-og-image_fr.png`],
+  },
+  alternates: {
+    canonical: "https://www.workout.cool",
+    languages: {
+      fr: "https://www.workout.cool/fr",
+      en: "https://www.workout.cool/en",
+    },
+  },
+  authors: [{ name: "Workout Cool", url: "https://www.workout.cool" }],
+  icons: {
+    icon: [
+      { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/images/favicon.ico", type: "image/x-icon" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
 };
 
 const inter = Inter({
@@ -54,40 +114,19 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
       <html className="h-full" dir="ltr" lang={locale} suppressHydrationWarning>
         <head>
           <meta charSet="UTF-8" />
-          <meta content="width=device-width, initial-scale=1" name="viewport" />
+          <meta content="#f3f4f6" media="(prefers-color-scheme: light)" name="theme-color" />
+          <meta content="#18181b" media="(prefers-color-scheme: dark)" name="theme-color" />
+          <meta content="width=device-width, initial-scale=1, maximum-scale=1 viewport-fit=cover" name="viewport" />
+          <link href="/site.webmanifest" rel="manifest" />
 
-          {/* SEO */}
-          <meta content="index, follow" name="robots" />
-          <meta content="Workout Cool" name="author" />
+          {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+          <link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="preload" />
 
-          {/* Favicon */}
-          <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
-          <link href="/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
-          <link href="/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
-          <link href="/images/favicon.ico" rel="shortcut icon" />
+          {/* Alternate hreflang for i18n */}
+          <link href="https://www.workout.cool/fr" hrefLang="fr" rel="alternate" />
+          <link href="https://www.workout.cool/en" hrefLang="en" rel="alternate" />
 
-          {/* Open Graph */}
-          <meta content={SiteConfig.title} property="og:title" />
-          <meta content={SiteConfig.description} property="og:description" />
-          <meta content={"https://www.workout.cool"} property="og:url" />
-          <meta content="website" property="og:type" />
-          <meta content={`${getServerUrl()}/images/default-og-image_${locale}.png`} property="og:image" />
-
-          {/* Twitter */}
-          <meta content="summary_large_image" name="twitter:card" />
-          <meta content="@workout_cool" name="twitter:site" />
-          <meta content={SiteConfig.title} name="twitter:title" />
-          <meta content={SiteConfig.description} name="twitter:description" />
-          <meta content={`${getServerUrl()}/images/default-og-image_${locale}.png`} name="twitter:image" />
-
-          {/* Canonical */}
-          <link href="https://www.workout.cool" rel="canonical" />
-
-          {/* Open Graph Locale */}
-          <meta content={locale === "fr" ? "fr_FR" : "en_US"} property="og:locale" />
-          <meta content="fr_FR" property="og:locale:alternate" />
-          <meta content="en_US" property="og:locale:alternate" />
-
+          {/* TODO: maybe add some ads ? */}
           <noscript>
             <Image
               alt="Facebook Pixel"
