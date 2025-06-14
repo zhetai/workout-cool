@@ -13,9 +13,9 @@ interface LinkProps extends ComponentProps<typeof NextLink> {
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   ({ className, variant = "default", size = "base", children, ...props }, ref) => {
     const variants = {
-      default: "link link-hover text-base-content hover:text-primary transition-colors",
-      nav: "link link-hover text-base-content/80 hover:text-base-content transition-colors",
-      footer: "link link-hover text-base-content/70 hover:text-base-content transition-colors",
+      default: "link link-hover text-base-content hover:text-primary transition-colors dark:text-gray-200 dark:hover:text-primary",
+      nav: "link link-hover text-base-content/80 hover:text-base-content transition-colors dark:text-gray-200 dark:hover:text-primary",
+      footer: "link link-hover text-base-content/70 hover:text-base-content transition-colors dark:text-gray-200 dark:hover:text-primary",
       button: "btn btn-link no-underline hover:underline",
     };
 

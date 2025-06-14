@@ -10,6 +10,7 @@ import { useCurrentLocale, useI18n } from "locales/client";
 import TrophyImg from "@public/images/trophy.png";
 import { cn } from "@/shared/lib/utils";
 import { useWorkoutSession } from "@/features/workout-session/model/use-workout-session";
+import { useSyncWorkoutSessions } from "@/features/workout-session/model/use-sync-workout-sessions";
 import { ExerciseVideoModal } from "@/features/workout-builder/ui/exercise-video-modal";
 import { Button } from "@/components/ui/button";
 
@@ -31,6 +32,7 @@ export function WorkoutSessionSets({
     useWorkoutSession();
   const exerciseDetailsMap = Object.fromEntries(session?.exercises.map((ex) => [ex.id, ex]) || []);
   const [videoModal, setVideoModal] = useState<{ open: boolean; exerciseId?: string }>({ open: false });
+  const { syncSessions } = useSyncWorkoutSessions();
 
   if (showCongrats) {
     return (
@@ -76,6 +78,7 @@ export function WorkoutSessionSets({
 
   const handleFinishSession = () => {
     completeWorkout();
+    syncSessions();
     onCongrats();
     confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
   };
@@ -160,7 +163,7 @@ export function WorkoutSessionSets({
               )}
               {/* Si exercice courant, afficher le détail */}
               {idx === currentExerciseIndex && (
-                <div className="bg-white dark:bg-slate-900 rounded-xl my-10">
+                <div className="bg-white dark:bg-transparent rounded-xl my-10">
                   {/* Liste des sets */}
                   <div className="space-y-10 mb-8">
                     {ex.sets.map((set, setIdx) => (

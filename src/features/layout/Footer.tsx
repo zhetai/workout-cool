@@ -16,7 +16,7 @@ const SOCIAL_LINKS = [
     label: "Twitter/X",
   },
   {
-    href: "mailto:info@workout.cool",
+    href: "mailto:coolworkout6@gmail.com",
     icon: Mail,
     label: "Email",
   },
@@ -32,14 +32,14 @@ export const Footer = async () => {
   const t = await getI18n();
 
   return (
-    <footer className="border-t border-base-300 bg-base-100 px-6 py-4">
+    <footer className="border-t border-base-300 dark:border-gray-800 bg-base-100 dark:bg-black px-6 py-4 rounded-b-lg">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         {/* Social Icons */}
         <div className="flex gap-2">
           {SOCIAL_LINKS.map(({ href, icon: Icon, label }) => (
             <a
               aria-label={label}
-              className="btn btn-ghost btn-sm btn-circle text-gray-700"
+              className="btn btn-ghost btn-sm btn-circle text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-gray-800"
               href={href}
               key={label}
               rel="noopener noreferrer"
@@ -51,9 +51,10 @@ export const Footer = async () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-center text-gray-700">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-center text-gray-700 dark:text-gray-300">
           {NAVIGATION(t).map(({ name, href }) => (
             <Link
+              className="hover:underline hover:text-blue-500 dark:hover:text-blue-400"
               href={href}
               key={name}
               size="sm"

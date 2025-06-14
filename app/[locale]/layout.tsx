@@ -101,23 +101,21 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
 
         <body
           className={cn(
-            "flex flex-col justify-between items-center p-8 min-h-screen max-sm:p-0 max-sm:min-h-full text-sm/[22px] font-normal text-black antialiased dark:text-gray-500",
+            "flex flex-col justify-between items-center p-8 min-h-screen max-sm:p-0 max-sm:min-h-full text-sm/[22px] font-normal text-base-content bg-base-200 dark:bg-[#18181b] dark:text-gray-200 antialiased",
+            "bg-hero-light dark:bg-hero-dark",
             GeistMono.variable,
             GeistSans.variable,
             inter.variable,
             permanentMarker.variable,
           )}
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 82% 60%, rgba(59, 59, 59,0.06) 0%, rgba(59, 59, 59,0.06) 69%,transparent 69%, transparent 100%),radial-gradient(circle at 36% 0%, rgba(185, 185, 185,0.06) 0%, rgba(185, 185, 185,0.06) 59%,transparent 59%, transparent 100%),radial-gradient(circle at 58% 82%, rgba(183, 183, 183,0.06) 0%, rgba(183, 183, 183,0.06) 17%,transparent 17%, transparent 100%),radial-gradient(circle at 71% 32%, rgba(19, 19, 19,0.06) 0%, rgba(19, 19, 19,0.06) 40%,transparent 40%, transparent 100%),radial-gradient(circle at 77% 5%, rgba(31, 31, 31,0.06) 0%, rgba(31, 31, 31,0.06) 52%,transparent 52%, transparent 100%),radial-gradient(circle at 96% 80%, rgba(11, 11, 11,0.06) 0%, rgba(11, 11, 11,0.06) 73%,transparent 73%, transparent 100%),radial-gradient(circle at 91% 59%, rgba(252, 252, 252,0.06) 0%, rgba(252, 252, 252,0.06) 44%,transparent 44%, transparent 100%),radial-gradient(circle at 52% 82%, rgba(223, 223, 223,0.06) 0%, rgba(223, 223, 223,0.06) 87%,transparent 87%, transparent 100%),radial-gradient(circle at 84% 89%, rgba(160, 160, 160,0.06) 0%, rgba(160, 160, 160,0.06) 57%,transparent 57%, transparent 100%),linear-gradient(90deg, rgb(254,242,164),rgb(166, 255, 237))",
-          }}
           suppressHydrationWarning
         >
           <Providers locale={locale}>
+            {/* <WorkoutSessionsSynchronizer /> */}
             <NextTopLoader color="#FF5722" delay={100} showSpinner={false} />
 
             {/* Main Card Container */}
-            <div className="card bg-base-100 shadow-xl w-full max-w-3xl max-sm:rounded-none max-sm:h-full">
+            <div className="card bg-base-100 dark:bg-[#232324] shadow-xl w-full max-w-3xl max-sm:rounded-none max-sm:h-full border border-base-200 dark:border-gray-800">
               <div className="card-body p-0">
                 <Header />
                 <div className="px-2 sm:px-6 pb-6">{children}</div>

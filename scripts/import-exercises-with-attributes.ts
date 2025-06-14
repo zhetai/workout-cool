@@ -76,6 +76,15 @@ async function ensureAttributeNameExists(name: ExerciseAttributeNameEnum) {
   return attributeName;
 }
 
+function normalizeAttributeValue(value: string): ExerciseAttributeValueEnum {
+  const cleaned = value.trim().toUpperCase();
+  if (["N/A", "NA", "NONE", "NULL", ""].includes(cleaned)) return "NA";
+  if ((Object.values(ExerciseAttributeValueEnum) as string[]).includes(cleaned)) {
+    return cleaned as ExerciseAttributeValueEnum;
+  }
+  throw new Error(`Unknown attribute value: ${value}`);
+}
+
 async function ensureAttributeValueExists(attributeNameId: string, value: ExerciseAttributeValueEnum) {
   let attributeValue = await prisma.exerciseAttributeValue.findFirst({
     where: {
@@ -156,7 +165,7 @@ async function importExercisesFromCSV(filePath: string) {
               for (const attr of exercise.attributes) {
                 try {
                   const attributeName = await ensureAttributeNameExists(attr.attributeName);
-                  const attributeValue = await ensureAttributeValueExists(attributeName.id, attr.attributeValue);
+                  const attributeValue = await ensureAttributeValueExists(attributeName.id, normalizeAttributeValue(attr.attributeValue));
 
                   await prisma.exerciseAttribute.create({
                     data: {

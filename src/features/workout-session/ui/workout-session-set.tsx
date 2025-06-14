@@ -67,16 +67,16 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
   };
 
   const renderInputForType = (type: WorkoutSetType, columnIndex: number) => {
-    const valuesInt = Array.isArray(set.valuesInt) ? set.valuesInt : [set.valueInt];
-    const valuesSec = Array.isArray(set.valuesSec) ? set.valuesSec : [set.valueSec];
-    const units = Array.isArray(set.units) ? set.units : [set.unit];
+    const valuesInt = set.valuesInt || [];
+    const valuesSec = set.valuesSec || [];
+    const units = set.units || [];
 
     switch (type) {
       case "TIME":
         return (
           <div className="flex gap-1 w-full">
             <input
-              className="border border-black rounded px-1 py-1 w-1/2 text-sm text-center font-bold"
+              className="border border-black rounded px-1 py-1 w-1/2 text-sm text-center font-bold dark:bg-slate-800 dark:placeholder:text-slate-500"
               disabled={set.completed}
               min={0}
               onChange={handleValueIntChange(columnIndex)}
@@ -85,7 +85,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
               value={valuesInt[columnIndex] ?? ""}
             />
             <input
-              className="border border-black rounded px-1 py-1 w-1/2 text-sm text-center font-bold"
+              className="border border-black rounded px-1 py-1 w-1/2 text-sm text-center font-bold dark:bg-slate-800 dark:placeholder:text-slate-500"
               disabled={set.completed}
               max={59}
               min={0}
@@ -100,7 +100,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
         return (
           <div className="flex gap-1 w-full items-center">
             <input
-              className="border border-black rounded px-1 py-1 w-1/2 text-sm text-center font-bold"
+              className="border border-black rounded px-1 py-1 w-1/2 text-sm text-center font-bold dark:bg-slate-800"
               disabled={set.completed}
               min={0}
               onChange={handleValueIntChange(columnIndex)}
@@ -109,7 +109,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
               value={valuesInt[columnIndex] ?? ""}
             />
             <select
-              className="border border-black rounded px-1 py-1 w-1/2 text-sm font-bold bg-white"
+              className="border border-black rounded px-1 py-1 w-1/2 text-sm font-bold bg-white dark:bg-slate-800 dark:text-gray-200"
               disabled={set.completed}
               onChange={handleUnitChange(columnIndex)}
               value={units[columnIndex] ?? "kg"}
@@ -122,7 +122,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
       case "REPS":
         return (
           <input
-            className="border border-black rounded px-1 py-1 w-full text-sm text-center font-bold"
+            className="border border-black rounded px-1 py-1 w-full text-sm text-center font-bold dark:bg-slate-800"
             disabled={set.completed}
             min={0}
             onChange={handleValueIntChange(columnIndex)}
@@ -134,7 +134,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
       case "BODYWEIGHT":
         return (
           <input
-            className="border border-black rounded px-1 py-1 w-full text-sm text-center font-bold"
+            className="border border-black rounded px-1 py-1 w-full text-sm text-center font-bold dark:bg-slate-800"
             disabled={set.completed}
             placeholder=""
             readOnly
@@ -147,12 +147,14 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
   };
 
   return (
-    <div className="w-full py-4 flex flex-col gap-2 bg-slate-50 border border-slate-200 rounded-xl shadow-sm mb-3 relative px-2 sm:px-4">
+    <div className="w-full py-4 flex flex-col gap-2 bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/50 rounded-xl shadow-sm mb-3 relative px-2 sm:px-4">
       <div className="flex items-center justify-between mb-2">
-        <div className="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">SET {setIndex + 1}</div>
+        <div className="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow dark:bg-blue-900 dark:text-blue-300">
+          SET {setIndex + 1}
+        </div>
         <Button
           aria-label="Supprimer la série"
-          className="bg-red-100 hover:bg-red-200 text-red-600 rounded-full p-1 h-8 w-8 flex items-center justify-center shadow transition"
+          className="bg-red-100 hover:bg-red-200 dark:bg-red-900/30 dark:hover:bg-red-900/60 text-red-600 dark:text-red-300 rounded-full p-1 h-8 w-8 flex items-center justify-center shadow transition"
           disabled={set.completed}
           onClick={onRemove}
           type="button"
@@ -167,7 +169,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
           <div className="flex flex-col w-full md:w-auto" key={columnIndex}>
             <div className="flex items-center w-full gap-1 mb-1">
               <select
-                className="border border-black rounded font-bold px-1 py-1 text-sm w-full bg-white min-w-0"
+                className="border border-black dark:border-slate-700 rounded font-bold px-1 py-1 text-sm w-full bg-white dark:bg-slate-800 dark:text-gray-200 min-w-0"
                 disabled={set.completed}
                 onChange={handleTypeChange(columnIndex)}
                 value={type}
@@ -179,7 +181,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
               </select>
               {types.length > 1 && (
                 <Button
-                  className="p-1 h-auto bg-red-500 hover:bg-red-600 flex-shrink-0"
+                  className="p-1 h-auto bg-red-500 hover:bg-red-600 dark:bg-red-900 dark:hover:bg-red-800 flex-shrink-0"
                   onClick={() => removeColumn(columnIndex)}
                   size="small"
                   variant="destructive"

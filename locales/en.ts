@@ -168,7 +168,6 @@ export default {
       previous: "Previous",
       continue: "Continue",
       complete: "Complete",
-      complete_workout: "Complete Workout",
     },
     stats: {
       "muscle_selected#zero": "0 muscle selected",

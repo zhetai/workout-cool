@@ -1,14 +1,10 @@
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Repeat2, Trash2 } from "lucide-react";
 
 import { useCurrentLocale, useI18n } from "locales/client";
-import { workoutSessionLocal } from "@/shared/lib/workout-session/workout-session.local";
+import { useWorkoutSessions } from "@/features/workout-session/model/use-workout-sessions";
 import { useWorkoutBuilderStore } from "@/features/workout-builder/model/workout-builder.store";
-import { InlineTooltip } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
-
-import type { WorkoutSession } from "@/shared/lib/workout-session/types/workout-session";
 
 const BADGE_COLORS = [
   "bg-blue-100 text-blue-700 border-blue-300",
@@ -25,13 +21,16 @@ export function WorkoutSessionList() {
   const router = useRouter();
   const loadFromSession = useWorkoutBuilderStore((s) => s.loadFromSession);
 
-  const [sessions, setSessions] = useState<WorkoutSession[]>(() =>
-    workoutSessionLocal.getAll().sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()),
-  );
+  // const [sessions, setSessions] = useState<WorkoutSession[]>(() =>
+  //   workoutSessionLocal.getAll().sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()),
+  // );
 
-  const handleDelete = (id: string) => {
-    workoutSessionLocal.remove(id);
-    setSessions(workoutSessionLocal.getAll().sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()));
+  const { data: sessions = [] } = useWorkoutSessions();
+  console.log("sessions:", sessions);
+
+  const handleDelete = (_id: string) => {
+    // TODO: delete by service
+    // workoutSessionLocal.remove(id);
   };
 
   const handleRepeat = (id: string) => {
@@ -117,7 +116,7 @@ export function WorkoutSessionList() {
                 })}
               </div>
               <div className="flex gap-2 items-center mt-2 sm:mt-0">
-                <InlineTooltip title={t("workout_builder.session.repeat")}>
+                <div className="tooltip" data-tip={t("workout_builder.session.repeat")}>
                   <Button
                     aria-label={t("workout_builder.session.repeat")}
                     className="w-12 h-12"
@@ -127,8 +126,8 @@ export function WorkoutSessionList() {
                   >
                     <Repeat2 className="w-7 h-7 text-blue-500" />
                   </Button>
-                </InlineTooltip>
-                <InlineTooltip title={t("workout_builder.session.delete")}>
+                </div>
+                <div className="tooltip" data-tip={t("workout_builder.session.delete")}>
                   <Button
                     aria-label={t("workout_builder.session.delete")}
                     onClick={() => handleDelete(session.id)}
@@ -137,7 +136,7 @@ export function WorkoutSessionList() {
                   >
                     <Trash2 className="w-7 h-7 text-red-500" />
                   </Button>
-                </InlineTooltip>
+                </div>
               </div>
             </li>
           );
