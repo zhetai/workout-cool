@@ -53,7 +53,7 @@ export function WorkoutBuilderFooter({
             variant="default"
           >
             <div className="flex items-center justify-center gap-2">
-              <span className="font-semibold">{isFinalStep ? "Commencer la séance" : t("workout_builder.navigation.continue")}</span>
+              <span className="font-semibold">{t("workout_builder.navigation.continue")}</span>
               <ArrowRight className="h-4 w-4" />
             </div>
           </Button>
