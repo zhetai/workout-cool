@@ -101,7 +101,7 @@ export const AuthenticatedHeader = () => {
   const user = useCurrentUser();
   const { data: sessionData, isPending: isSessionLoading } = useSession();
   const { toggleSidebar } = useSidebarToggle();
-  const logout = useLogout();
+  const logout = useLogout(paths.root);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -212,7 +212,7 @@ export const AuthenticatedHeader = () => {
                 <DropdownMenuItem className="p-0">
                   <Button
                     className={`flex items-center gap-1.5 rounded-lg px-3 py-2 ${pathName === "/login" && "!bg-gray-400 !text-black dark:!bg-white/5 dark:!text-white"}`}
-                    onClick={() => logout.mutateAsync()}
+                    onClick={() => logout.mutate()}
                     variant={null}
                   >
                     <LogOut className="size-[18px] shrink-0" />

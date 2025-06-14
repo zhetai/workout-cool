@@ -1,10 +1,7 @@
 import { redirect } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
 import { headers } from "next/headers";
 
 import { getI18n } from "locales/server";
-import Logo from "@public/logo.png";
 import { paths } from "@/shared/constants/paths";
 import { auth } from "@/features/auth/lib/better-auth";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -27,12 +24,6 @@ export default async function AuthLayout(props: LayoutParams<{}>) {
   return (
     <>
       <div>
-        <div className="flex justify-center gap-2">
-          <Link className="flex items-center gap-2 font-medium" href={`/${paths.root}`}>
-            <Image alt="workout cool logo" className="w-16" height={64} src={Logo} width={64} />
-          </Link>
-        </div>
-
         {searchParams.error && (
           <Alert className="mb-4" variant="error">
             <AlertTitle>{translatedError}</AlertTitle>
