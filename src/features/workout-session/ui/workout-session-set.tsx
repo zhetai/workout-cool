@@ -112,7 +112,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
               value={valuesInt[columnIndex] ?? ""}
             />
             <select
-              className="border border-black rounded px-1 py-2 w-1/2 text-sm font-bold bg-white dark:bg-slate-800 dark:text-gray-200"
+              className="border border-black rounded px-1 py-2 w-1/2 text-sm font-bold bg-white dark:bg-slate-800 dark:text-gray-200 h-10 "
               disabled={set.completed}
               onChange={handleUnitChange(columnIndex)}
               value={units[columnIndex] ?? "kg"}
@@ -168,12 +168,12 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
       </div>
 
       {/* Columns of types, stack vertical on mobile, horizontal on md+ */}
-      <div className="flex flex-col md:flex-row gap-2 w-full">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-2 w-full">
         {types.map((type, columnIndex) => (
           <div className="flex flex-col w-full md:w-auto" key={columnIndex}>
             <div className="flex items-center w-full gap-1 mb-1">
               <select
-                className="border border-black dark:border-slate-700 rounded font-bold px-1 py-2 text-sm w-full bg-white dark:bg-slate-800 dark:text-gray-200 min-w-0"
+                className="border border-black dark:border-slate-700 rounded font-bold px-1 py-2 text-sm w-full bg-white dark:bg-slate-800 dark:text-gray-200 min-w-0 h-10 "
                 disabled={set.completed}
                 onChange={handleTypeChange(columnIndex)}
                 value={type}
