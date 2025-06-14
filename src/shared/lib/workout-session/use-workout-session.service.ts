@@ -1,3 +1,4 @@
+import { nullToUndefined } from "@/shared/lib/format";
 import { syncWorkoutSessionAction } from "@/features/workout-session/actions/sync-workout-sessions.action";
 import { getWorkoutSessionsAction } from "@/features/workout-session/actions/get-workout-sessions.action";
 import { useSession } from "@/features/auth/lib/auth-client";
@@ -32,17 +33,16 @@ export const useWorkoutSessionService = () => {
             : typeof session.endedAt === "string"
               ? session.endedAt
               : undefined,
-        duration: session.duration === null ? undefined : session.duration,
+        duration: nullToUndefined(session.duration),
         exercises: session.exercises.map(({ exercise, order, sets }) => ({
           ...exercise,
           order,
-          sets: sets.map((set) => ({
-            ...set,
-            valueInt: set.valueInt === null ? undefined : set.valueInt,
-            valueSec: set.valueSec === null ? undefined : set.valueSec,
-            unit: set.unit === null ? undefined : set.unit,
-            units: set.units === null ? undefined : set.units,
-          })),
+          sets: sets.map((set) => {
+            return {
+              ...set,
+              units: nullToUndefined(set.units),
+            };
+          }),
         })),
       }));
       const localSessions = workoutSessionLocal.getAll().filter((s) => s.status !== "synced");
