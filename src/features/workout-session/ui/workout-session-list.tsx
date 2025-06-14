@@ -4,7 +4,6 @@ import { Repeat2, Trash2 } from "lucide-react";
 import { useCurrentLocale, useI18n } from "locales/client";
 import { useWorkoutSessions } from "@/features/workout-session/model/use-workout-sessions";
 import { useWorkoutBuilderStore } from "@/features/workout-builder/model/workout-builder.store";
-import { InlineTooltip } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 
 const BADGE_COLORS = [
@@ -117,7 +116,7 @@ export function WorkoutSessionList() {
                 })}
               </div>
               <div className="flex gap-2 items-center mt-2 sm:mt-0">
-                <InlineTooltip title={t("workout_builder.session.repeat")}>
+                <div className="tooltip" data-tip={t("workout_builder.session.repeat")}>
                   <Button
                     aria-label={t("workout_builder.session.repeat")}
                     className="w-12 h-12"
@@ -127,8 +126,8 @@ export function WorkoutSessionList() {
                   >
                     <Repeat2 className="w-7 h-7 text-blue-500" />
                   </Button>
-                </InlineTooltip>
-                <InlineTooltip title={t("workout_builder.session.delete")}>
+                </div>
+                <div className="tooltip" data-tip={t("workout_builder.session.delete")}>
                   <Button
                     aria-label={t("workout_builder.session.delete")}
                     onClick={() => handleDelete(session.id)}
@@ -137,7 +136,7 @@ export function WorkoutSessionList() {
                   >
                     <Trash2 className="w-7 h-7 text-red-500" />
                   </Button>
-                </InlineTooltip>
+                </div>
               </div>
             </li>
           );

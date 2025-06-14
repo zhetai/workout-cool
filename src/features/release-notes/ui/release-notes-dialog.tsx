@@ -5,7 +5,6 @@ import { Bell } from "lucide-react";
 
 import { useCurrentLocale, useI18n } from "locales/client";
 import { formatDate } from "@/shared/lib/date";
-import { InlineTooltip } from "@/components/ui/tooltip";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
@@ -19,9 +18,9 @@ export function ReleaseNotesDialog() {
     <Dialog>
       <DialogTrigger asChild>
         <Button aria-label={t("release_notes.release_notes")} className="rounded-full hover:bg-slate-100" size="small" variant="ghost">
-          <InlineTooltip title={t("commons.changelog")}>
+          <div className="tooltip" data-tip={t("commons.changelog")}>
             <Bell className="text-blue-500 h-6 w-6" />
-          </InlineTooltip>
+          </div>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-md">

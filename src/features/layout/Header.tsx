@@ -8,7 +8,6 @@ import Logo from "@public/logo.png";
 import { ReleaseNotesDialog } from "@/features/release-notes";
 import { useLogout } from "@/features/auth/model/useLogout";
 import { useSession } from "@/features/auth/lib/auth-client";
-import { InlineTooltip } from "@/components/ui/tooltip";
 import { Link } from "@/components/ui/link";
 
 export const Header = () => {
@@ -46,10 +45,10 @@ export const Header = () => {
 
       {/* User Menu */}
       <div className="navbar-end">
-        <Link aria-label={t("commons.home")} className="hover:bg-slate-100 rounded-full p-2 transition" href="/">
-          <InlineTooltip title={t("commons.home")}>
+        <Link aria-label={t("commons.home")} className="hover:bg-slate-100 rounded-full p-2 transition flex" href="/">
+          <div className="tooltip" data-tip={t("commons.home")}>
             <Home className="w-6 h-6 text-blue-500" />
-          </InlineTooltip>
+          </div>
         </Link>
 
         <ReleaseNotesDialog />
