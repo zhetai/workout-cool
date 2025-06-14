@@ -125,7 +125,7 @@ export function WorkoutStepper() {
 
   if (showCongrats && !isWorkoutActive) {
     return (
-      <div className="flex flex-col items-center justify-center py-16">
+      <div className="flex flex-col items-center justify-center py-16 h-full">
         <Image alt="Trophée" className="w-56 h-56" src={Trophy} />
         <h2 className="text-2xl font-bold mb-2">{t("workout_builder.session.congrats")}</h2>
         <p className="text-lg text-slate-600 mb-6">{t("workout_builder.session.congrats_subtitle")}</p>

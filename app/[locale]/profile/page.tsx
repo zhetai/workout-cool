@@ -27,7 +27,9 @@ export default function ProfilePage() {
   return (
     <div className="px-2 sm:px-6">
       {!sessions.length && <LocalAlert className="my-4" />}
-      <WorkoutSessionHeatmap until={until} values={values} />
+      <div className="mt-4">
+        <WorkoutSessionHeatmap until={until} values={values} />
+      </div>
       <WorkoutSessionList />
       <div className="mt-8 flex justify-center">
         <Button onClick={() => router.push("/")} size="large">

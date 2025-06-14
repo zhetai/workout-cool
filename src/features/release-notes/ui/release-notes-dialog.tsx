@@ -17,11 +17,11 @@ export function ReleaseNotesDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button aria-label={t("release_notes.release_notes")} className="rounded-full hover:bg-slate-200" size="small" variant="ghost">
-          <div className="tooltip tooltip-bottom" data-tip={t("commons.changelog")}>
+        <div className="tooltip tooltip-bottom z-10" data-tip={t("commons.changelog")}>
+          <Button aria-label={t("release_notes.release_notes")} className="rounded-full hover:bg-slate-200" size="small" variant="ghost">
             <Bell className="text-blue-500 dark:text-blue-400 h-6 w-6" />
-          </div>
-        </Button>
+          </Button>
+        </div>
       </DialogTrigger>
       <DialogContent className="max-w-md">
         <DialogHeader>

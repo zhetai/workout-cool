@@ -50,15 +50,15 @@ export const Header = () => {
 
       {/* User Menu */}
       <div className="navbar-end">
-        <Link
-          aria-label={t("commons.home")}
-          className="hover:bg-slate-200 dark:hover:bg-gray-800 rounded-full p-2 transition flex"
-          href="/"
-        >
-          <div className="tooltip tooltip-bottom" data-tip={t("commons.home")}>
+        <div className="tooltip tooltip-bottom" data-tip={t("commons.home")}>
+          <Link
+            aria-label={t("commons.home")}
+            className="hover:bg-slate-200 dark:hover:bg-gray-800 rounded-full p-2 transition flex"
+            href="/"
+          >
             <Home className="w-6 h-6 text-blue-500 dark:text-blue-400" />
-          </div>
-        </Link>
+          </Link>
+        </div>
 
         <ReleaseNotesDialog />
 

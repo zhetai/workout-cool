@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Check, Hourglass, Play, ArrowRight, Trophy as TrophyIcon, Plus } from "lucide-react";
+import { Check, Play, ArrowRight, Trophy as TrophyIcon, Plus, Hourglass } from "lucide-react";
 import confetti from "canvas-confetti";
 
 import { useCurrentLocale, useI18n } from "locales/client";
@@ -60,10 +60,14 @@ export function WorkoutSessionSets({
       return <Check aria-label="Exercice terminé" className="w-4 h-4 text-white" />;
     }
     if (idx === currentExerciseIndex) {
-      return <Hourglass aria-label="Exercice en cours" className="w-4 h-4 text-white" />;
+      return (
+        <svg aria-label="Exercice en cours" className="w-8 h-8 animate-ping text-emerald-500" fill="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="12" />
+        </svg>
+      );
     }
 
-    return null;
+    return <Hourglass aria-label="Exercice en cours" className="w-4 h-4 text-gray-600 dark:text-slate-900" />;
   };
 
   const renderStepBackground = (idx: number, allSetsCompleted: boolean) => {
@@ -71,7 +75,7 @@ export function WorkoutSessionSets({
       return "bg-green-500 border-green-500";
     }
     if (idx === currentExerciseIndex) {
-      return "bg-blue-500 border-blue-500";
+      return "bg-gray-300 border-gray-400 dark:bg-slate-500 dark:border-slate-500";
     }
     return "bg-slate-200 border-slate-200";
   };
