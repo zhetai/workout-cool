@@ -210,6 +210,7 @@ export default {
       next_exercise: "Exercice suivant",
       add_set: "Ajouter une série",
       add_column: "Ajouter une colonne",
+      add_row: "Ajouter une ligne d'attributs",
       remove_column: "Supprimer une colonne",
       set_number: "Série {number}",
       set_number_plural: "Séries {number}",

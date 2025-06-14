@@ -210,6 +210,7 @@ export default {
       next_exercise: "Next Exercise",
       add_set: "Add set",
       add_column: "Add column",
+      add_row: "Add row",
       remove_column: "Remove column",
       set_number: "Set {number}",
       set_number_plural: "Sets {number}",

@@ -209,7 +209,8 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
             variant="outline"
           >
             <Plus className="h-4 w-4" />
-            {t("workout_builder.session.add_column")}
+            <span className="block md:hidden">{t("workout_builder.session.add_row")}</span>
+            <span className="hidden md:block">{t("workout_builder.session.add_column")}</span>
           </Button>
         </div>
       )}
