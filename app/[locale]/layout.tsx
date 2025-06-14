@@ -7,6 +7,7 @@ import { cn } from "@/shared/lib/utils";
 import { getServerUrl } from "@/shared/lib/server-url";
 import { FB_PIXEL_ID } from "@/shared/lib/facebook/fb-pixel";
 import { SiteConfig } from "@/shared/config/site-config";
+import { ThemeSynchronizer } from "@/features/theme/ui/ThemeSynchronizer";
 import { Header } from "@/features/layout/Header";
 import { Footer } from "@/features/layout/Footer";
 import { TailwindIndicator } from "@/components/utils/TailwindIndicator";
@@ -83,7 +84,6 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
-  manifest: "/site.webmanifest",
 };
 
 const inter = Inter({
@@ -114,10 +114,7 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
       <html className="h-full" dir="ltr" lang={locale} suppressHydrationWarning>
         <head>
           <meta charSet="UTF-8" />
-          <meta content="#f3f4f6" media="(prefers-color-scheme: light)" name="theme-color" />
-          <meta content="#18181b" media="(prefers-color-scheme: dark)" name="theme-color" />
           <meta content="width=device-width, initial-scale=1, maximum-scale=1 viewport-fit=cover" name="viewport" />
-          <link href="/site.webmanifest" rel="manifest" />
 
           {/* eslint-disable-next-line @next/next/no-page-custom-font */}
           <link as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="preload" />
@@ -125,6 +122,9 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
           {/* Alternate hreflang for i18n */}
           <link href="https://www.workout.cool/fr" hrefLang="fr" rel="alternate" />
           <link href="https://www.workout.cool/en" hrefLang="en" rel="alternate" />
+
+          {/* Balise theme-color unique, synchronisée dynamiquement */}
+          <meta content="#f3f4f6" name="theme-color" />
 
           {/* TODO: maybe add some ads ? */}
           <noscript>
@@ -150,7 +150,7 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
           suppressHydrationWarning
         >
           <Providers locale={locale}>
-            {/* <WorkoutSessionsSynchronizer /> */}
+            <ThemeSynchronizer />
             <NextTopLoader color="#FF5722" delay={100} showSpinner={false} />
 
             {/* Main Card Container */}
