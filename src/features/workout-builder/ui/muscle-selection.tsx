@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { ExerciseAttributeValueEnum } from "@prisma/client";
 
@@ -1212,7 +1210,11 @@ export function MuscleSelection({ onToggleMuscle, selectedMuscles }: MuscleSelec
   return (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <p className="text-slate-600 dark:text-slate-300 text-sm italic">{t("workout_builder.selection.muscle_selection_description")}</p>
+        <p className="text-slate-600 dark:text-slate-300 text-sm italic">
+          {selectedMuscles.length > 0
+            ? t("workout_builder.stats.muscle_selected", { count: selectedMuscles.length })
+            : t("workout_builder.selection.muscle_selection_description")}
+        </p>
       </div>
 
       <div className="flex justify-center">
