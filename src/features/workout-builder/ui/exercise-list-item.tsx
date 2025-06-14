@@ -58,10 +58,6 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
 
   return (
     <div
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
       className={`
         group relative overflow-hidden transition-all duration-300 ease-out
         bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/70
@@ -71,14 +67,18 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
       `}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      ref={setNodeRef}
+      style={style}
     >
       <div className="relative flex items-center justify-between py-2 px-2">
-        {/* Section gauche - Infos principales */}
         <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
           {/* Drag handle */}
-          <GripVertical className="h-5 w-5 text-slate-400 dark:text-slate-500 cursor-grab active:cursor-grabbing" />
+          <GripVertical
+            className="h-5 w-5 text-slate-400 dark:text-slate-500 cursor-grab active:cursor-grabbing"
+            {...attributes}
+            {...listeners}
+          />
 
-          {/* Image de l'exercice */}
           {exercise.fullVideoImageUrl && (
             <div className="relative w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-slate-200 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700/50">
               <Image
@@ -86,13 +86,11 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
                 className="w-full h-full object-cover scale-[1.5]"
                 height={40}
                 onError={(e) => {
-                  // Fallback si l'image ne charge pas
                   e.currentTarget.style.display = "none";
                 }}
                 src={exercise.fullVideoImageUrl}
                 width={40}
               />
-              {/* Overlay play icon */}
               <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 <Play className="h-3 w-3 text-white fill-current" onClick={handleOpenVideo} />
               </div>
@@ -121,7 +119,6 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
           </div>
         </div>
 
-        {/* Section droite - Actions */}
         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
           {/* Bouton shuffle */}
           <Button className="p-1 sm:p-2" onClick={() => onShuffle(exercise.id, muscle)} size="small" variant="outline">

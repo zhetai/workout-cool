@@ -71,13 +71,6 @@ export const ExercisesSelection = ({
     }
   };
 
-  const handleStartWorkout = () => {
-    const allExercises = flatExercises.map((item) => item.exercise);
-    if (allExercises.length > 0) {
-      onStartWorkout(allExercises);
-    }
-  };
-
   return (
     <div className="space-y-6">
       {isLoading ? (
