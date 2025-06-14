@@ -1,7 +1,8 @@
 import { create } from "zustand";
 
 import { workoutSessionLocal } from "@/shared/lib/workout-session/workout-session.local";
-import { WorkoutSession, WorkoutSessionExercise, WorkoutSet } from "@/features/workout-session/types/workout-set";
+import { WorkoutSession } from "@/shared/lib/workout-session/types/workout-session";
+import { WorkoutSessionExercise, WorkoutSet } from "@/features/workout-session/types/workout-set";
 import { useWorkoutBuilderStore } from "@/features/workout-builder/model/workout-builder.store";
 
 import { ExerciseWithAttributes } from "../../workout-builder/types";

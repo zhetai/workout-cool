@@ -22,11 +22,31 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
   try {
     const { session } = parsedInput;
 
-    // Créer ou mettre à jour la session
     const result = await prisma.workoutSession.upsert({
       where: { id: session.id },
-      create: session,
-      update: session,
+      create: {
+        ...session,
+        exercises: {
+          create: session.exercises.map((exercise) => ({
+            ...exercise,
+            sets: {
+              create: exercise.sets,
+            },
+          })),
+        },
+      },
+      update: {
+        ...session,
+        exercises: {
+          deleteMany: {},
+          create: session.exercises.map((exercise) => ({
+            ...exercise,
+            sets: {
+              create: exercise.sets,
+            },
+          })),
+        },
+      },
     });
 
     return { data: result };
