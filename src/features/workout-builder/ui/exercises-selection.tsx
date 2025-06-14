@@ -109,7 +109,7 @@ export const ExercisesSelection = ({
                     <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center">
                       <Plus className="h-4 w-4 text-white" />
                     </div>
-                    <span className="font-medium">Add</span>
+                    <span className="font-medium">{t("commons.add")}</span>
                   </button>
                 </div>
               </div>
