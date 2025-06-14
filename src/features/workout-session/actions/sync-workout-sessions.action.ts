@@ -41,15 +41,16 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
   try {
     const { session } = parsedInput;
 
+    const { status, ...sessionData } = session;
+
     const result = await prisma.workoutSession.upsert({
       where: { id: session.id },
       create: {
-        ...session,
+        ...sessionData,
         exercises: {
           create: session.exercises.map((exercise) => ({
             id: exercise.id,
             order: exercise.order,
-            exerciseId: exercise.id,
             exercise: { connect: { id: exercise.id } },
             sets: {
               create: exercise.sets.map((set) => ({
@@ -61,12 +62,12 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
         },
       },
       update: {
-        ...session,
+        ...sessionData,
         exercises: {
+          deleteMany: {},
           create: session.exercises.map((exercise) => ({
             id: exercise.id,
             order: exercise.order,
-            exerciseId: exercise.id,
             exercise: { connect: { id: exercise.id } },
             sets: {
               create: exercise.sets.map((set) => ({
