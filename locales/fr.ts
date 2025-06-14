@@ -47,6 +47,12 @@ export default {
 
   profile: {
     new_workout: "Nouvelle séance",
+    alert: {
+      title: "Votre progression est stockée dans votre navigateur.",
+      create_account: "Créer un compte",
+      log_in: "Se connecter",
+      to_ensure_it_is_not_getting_lost: "pour la sauvegarder.",
+    },
   },
 
   // Release Notes

@@ -47,6 +47,12 @@ export default {
 
   profile: {
     new_workout: "New Workout",
+    alert: {
+      title: "Your progress is stored in your browser.",
+      create_account: "Create an account",
+      log_in: "Log in",
+      to_ensure_it_is_not_getting_lost: "to ensure it is not getting lost.",
+    },
   },
 
   // Release Notes
