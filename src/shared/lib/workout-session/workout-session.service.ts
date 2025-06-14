@@ -3,6 +3,9 @@ import { workoutSessionApi } from "./workout-session.api";
 
 import type { WorkoutSession } from "./types/workout-session";
 
+// This is an abstraction layer to handle the local storage and/or the API calls.
+// He's the orchestrator.
+
 // TODO: replace with auth context
 function isUserLoggedIn(): boolean {
   return !!localStorage.getItem("userToken");
