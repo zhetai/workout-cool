@@ -25,52 +25,51 @@ export function useWorkoutStepper() {
     isShuffling,
   } = useWorkoutBuilderStore();
 
-  // Validation des étapes
   const canProceedToStep2 = selectedEquipment.length > 0;
   const canProceedToStep3 = selectedMuscles.length > 0;
 
   return {
-    // État
+    // state
     currentStep,
     selectedEquipment,
     selectedMuscles,
 
-    // Exercices
+    // exercises
     exercisesByMuscle,
     isLoadingExercises,
     exercisesError,
 
-    // Navigation
+    // navigation
     goToStep: setStep,
     nextStep,
     prevStep,
 
-    // Équipements
+    // equipment
     toggleEquipment,
     clearEquipment,
 
-    // Muscles
+    // muscles
     toggleMuscle,
     clearMuscles,
 
-    // Validation
+    // validation
     canProceedToStep2,
     canProceedToStep3,
 
-    // Fetch
+    // fetch
     fetchExercises,
 
-    // Order
+    // order
     exercisesOrder,
     setExercisesOrder,
 
-    // Shuffle
+    // shuffle
     shuffleExercise,
 
-    // Additional
+    // additional
     isShuffling,
 
-    // Pick
+    // pick
     pickExercise,
   };
 }

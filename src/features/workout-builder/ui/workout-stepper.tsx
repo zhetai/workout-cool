@@ -21,7 +21,7 @@ import { MuscleSelection } from "./muscle-selection";
 import { ExercisesSelection } from "./exercises-selection";
 import { EquipmentSelection } from "./equipment-selection";
 
-import type { ExerciseWithAttributes } from "../types";
+import type { ExerciseWithAttributes, WorkoutBuilderStep } from "../types";
 
 export function WorkoutStepper() {
   const { loadSessionFromLocal } = useWorkoutSession();
@@ -48,6 +48,7 @@ export function WorkoutStepper() {
     shuffleExercise,
     pickExercise,
     isShuffling,
+    goToStep,
   } = useWorkoutStepper();
 
   useEffect(() => {
@@ -146,6 +147,12 @@ export function WorkoutStepper() {
     if (fromSession) setFromSession(null);
   };
 
+  const handleStepClick = (stepNumber: number) => {
+    if (stepNumber < currentStep) {
+      goToStep(stepNumber as WorkoutBuilderStep);
+    }
+  };
+
   if (showCongrats && !isWorkoutActive) {
     return (
       <div className="flex flex-col items-center justify-center py-16 h-full">
@@ -238,7 +245,7 @@ export function WorkoutStepper() {
 
   return (
     <div className="w-full max-w-6xl mx-auto h-full">
-      <StepperHeader steps={steps} />
+      <StepperHeader currentStep={currentStep} onStepClick={handleStepClick} steps={steps} />
 
       <div className="px-2 sm:px-6">{renderStepContent()}</div>
 
