@@ -21,6 +21,7 @@ export function useWorkoutStepper() {
     exercisesOrder,
     setExercisesOrder,
     shuffleExercise,
+    pickExercise,
     isShuffling,
   } = useWorkoutBuilderStore();
 
@@ -68,5 +69,8 @@ export function useWorkoutStepper() {
 
     // Additional
     isShuffling,
+
+    // Pick
+    pickExercise,
   };
 }

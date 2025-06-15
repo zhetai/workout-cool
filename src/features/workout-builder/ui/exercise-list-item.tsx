@@ -9,6 +9,7 @@ import { InlineTooltip } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 
 import { ExerciseVideoModal } from "./exercise-video-modal";
+import { ExercisePickModal } from "./exercise-pick-modal";
 
 import type { ExerciseWithAttributes } from "../types";
 
@@ -27,6 +28,7 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
   const locale = useCurrentLocale();
   const exerciseName = locale === "fr" ? exercise.name : exercise.nameEn;
   const [showVideo, setShowVideo] = useState(false);
+  const [showPickModal, setShowPickModal] = useState(false);
 
   // dnd-kit sortable
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: exercise.id });
@@ -40,6 +42,18 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
 
   const handleOpenVideo = () => {
     setShowVideo(true);
+  };
+
+  const handleOpenPickModal = () => {
+    setShowPickModal(true);
+  };
+
+  const handleClosePickModal = () => {
+    setShowPickModal(false);
+  };
+
+  const handleConfirmPick = () => {
+    onPick(exercise.id);
   };
 
   // Déterminer la couleur du muscle
@@ -136,7 +150,7 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
           {/* Bouton pick */}
           <Button
             className="p-1 sm:p-2 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-950 text-blue-600 dark:text-blue-400 border-2 border-blue-200 dark:border-blue-800"
-            onClick={() => onPick(exercise.id)}
+            onClick={handleOpenPickModal}
             size="small"
           >
             <Star className="h-3.5 w-3.5" />
@@ -157,6 +171,15 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
 
       {/* Video Modal */}
       {exercise.fullVideoUrl && <ExerciseVideoModal exercise={exercise} onOpenChange={setShowVideo} open={showVideo} />}
+
+      {/* Pick Modal */}
+      <ExercisePickModal
+        exercise={exercise}
+        isOpen={showPickModal}
+        muscle={muscle}
+        onClose={handleClosePickModal}
+        onConfirmPick={handleConfirmPick}
+      />
     </div>
   );
 }

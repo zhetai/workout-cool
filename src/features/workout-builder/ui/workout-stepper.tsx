@@ -32,20 +32,23 @@ export function WorkoutStepper() {
   const {
     currentStep,
     selectedEquipment,
+    selectedMuscles,
+    exercisesByMuscle,
+    isLoadingExercises,
+    exercisesError,
+    goToStep,
     nextStep,
     prevStep,
     toggleEquipment,
     clearEquipment,
-    selectedMuscles,
     toggleMuscle,
     canProceedToStep2,
     canProceedToStep3,
-    isLoadingExercises,
-    exercisesByMuscle,
-    exercisesError,
     fetchExercises,
     exercisesOrder,
+    setExercisesOrder,
     shuffleExercise,
+    pickExercise,
     isShuffling,
   } = useWorkoutStepper();
 
@@ -99,10 +102,15 @@ export function WorkoutStepper() {
     }
   };
 
-  const handlePickExercise = (exerciseId: string) => {
-    // later
-    alert("TODO : Pick exercise");
-    console.log("Pick exercise:", exerciseId);
+  const handlePickExercise = async (exerciseId: string) => {
+    try {
+      await pickExercise(exerciseId);
+      // Optionnel: afficher un toast de succès
+      console.log("Exercise picked successfully!");
+    } catch (error) {
+      console.error("Error picking exercise:", error);
+      alert("Error picking exercise. Please try again.");
+    }
   };
 
   const handleDeleteExercise = (exerciseId: string, muscle: string) => {
