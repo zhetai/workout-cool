@@ -65,21 +65,20 @@ export function WorkoutSessionList() {
           );
     console.log("allMuscles:", allMuscles);
 
-    // Pour répéter exactement la même séance, on garde tous les exercices dans l'ordre exact
-    const exercisesByMuscle = [
-      {
-        muscle: allMuscles[0] || "FULL_BODY", // Utilise le premier muscle sélectionné ou FULL_BODY par défaut
-        exercises: sessionToCopy.exercises
-          .sort((a, b) => a.order - b.order) // Trie par ordre original
-          .map((ex) => ({
-            ...ex,
-            id: ex.id,
-            workoutSessionId: sessionToCopy.id,
-            exerciseId: ex.id,
-            order: ex.order,
-          })),
-      },
-    ];
+    const exercisesByMuscle = allMuscles.map((muscle) => ({
+      muscle,
+      exercises: sessionToCopy.exercises
+        .filter((ex) =>
+          ex.attributes?.some((attr) => attr.attributeName?.name === "PRIMARY_MUSCLE" && attr.attributeValue.value === muscle),
+        )
+        .map((ex) => ({
+          ...ex,
+          id: ex.id,
+          workoutSessionId: sessionToCopy.id,
+          exerciseId: ex.id,
+          order: ex.order,
+        })),
+    }));
 
     const exercisesOrder = sessionToCopy.exercises.map((ex) => ex.id);
 
