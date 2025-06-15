@@ -9,10 +9,10 @@ interface WorkoutBuilderState {
   currentStep: WorkoutBuilderStep;
   selectedEquipment: ExerciseAttributeValueEnum[];
   selectedMuscles: ExerciseAttributeValueEnum[];
-  // Exercices (groupés par muscle)
-  exercisesByMuscle: any[];
+
+  exercisesByMuscle: any[]; //TODO: type this
   isLoadingExercises: boolean;
-  exercisesError: any;
+  exercisesError: any; //TODO: type this
   exercisesOrder: string[];
   isShuffling: boolean;
 
@@ -93,11 +93,9 @@ export const useWorkoutBuilderStore = create<WorkoutBuilderState>((set, get) => 
     try {
       const { selectedEquipment, exercisesByMuscle } = get();
 
-      // Récupérer tous les IDs des exercices dans le workout actuel
       const allExerciseIds = exercisesByMuscle.flatMap((group) => group.exercises.map((ex: any) => ex.id));
 
       const result = await shuffleExerciseAction({
-        currentExerciseId: exerciseId,
         muscle: muscle,
         equipment: selectedEquipment,
         excludeExerciseIds: allExerciseIds,

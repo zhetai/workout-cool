@@ -7,14 +7,13 @@ import { prisma } from "@/shared/lib/prisma";
 import { actionClient } from "@/shared/api/safe-actions";
 
 const shuffleExerciseSchema = z.object({
-  currentExerciseId: z.string(),
   muscle: z.nativeEnum(ExerciseAttributeValueEnum),
   equipment: z.array(z.nativeEnum(ExerciseAttributeValueEnum)),
   excludeExerciseIds: z.array(z.string()),
 });
 
 export const shuffleExerciseAction = actionClient.schema(shuffleExerciseSchema).action(async ({ parsedInput }) => {
-  const { currentExerciseId, muscle, equipment, excludeExerciseIds } = parsedInput;
+  const { muscle, equipment, excludeExerciseIds } = parsedInput;
 
   try {
     const [primaryMuscleAttributeName, secondaryMuscleAttributeName, equipmentAttributeName] = await Promise.all([
