@@ -3,6 +3,7 @@ import { ExerciseAttributeValueEnum, WorkoutSessionExercise } from "@prisma/clie
 
 import { WorkoutBuilderStep } from "../types";
 import { shuffleExerciseAction } from "../actions/shuffle-exercise.action";
+import { pickExerciseAction } from "../actions/pick-exercise.action";
 import { getExercisesAction } from "./get-exercises.action";
 
 interface WorkoutBuilderState {
@@ -27,6 +28,7 @@ interface WorkoutBuilderState {
   fetchExercises: () => Promise<void>;
   setExercisesOrder: (order: string[]) => void;
   shuffleExercise: (exerciseId: string, muscle: ExerciseAttributeValueEnum) => Promise<void>;
+  pickExercise: (exerciseId: string) => Promise<void>;
   loadFromSession: (params: {
     equipment: ExerciseAttributeValueEnum[];
     muscles: ExerciseAttributeValueEnum[];
@@ -126,6 +128,28 @@ export const useWorkoutBuilderStore = create<WorkoutBuilderState>((set, get) => 
       throw error;
     } finally {
       set({ isShuffling: false });
+    }
+  },
+
+  pickExercise: async (exerciseId) => {
+    try {
+      const result = await pickExerciseAction({ exerciseId });
+
+      if (result?.serverError) {
+        throw new Error(result.serverError);
+      }
+
+      if (result?.data?.success) {
+        // Pour l'instant, on affiche juste un message de succès
+        // Plus tard, on pourra ajouter de la logique pour marquer visuellement l'exercice
+        console.log("Exercise picked successfully:", exerciseId);
+
+        // Optionnel: on pourrait ajouter une propriété "picked" aux exercices
+        // ou maintenir une liste des exercices "picked"
+      }
+    } catch (error) {
+      console.error("Error picking exercise:", error);
+      throw error;
     }
   },
 

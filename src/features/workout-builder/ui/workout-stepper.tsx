@@ -32,20 +32,21 @@ export function WorkoutStepper() {
   const {
     currentStep,
     selectedEquipment,
+    selectedMuscles,
+    exercisesByMuscle,
+    isLoadingExercises,
+    exercisesError,
     nextStep,
     prevStep,
     toggleEquipment,
     clearEquipment,
-    selectedMuscles,
     toggleMuscle,
     canProceedToStep2,
     canProceedToStep3,
-    isLoadingExercises,
-    exercisesByMuscle,
-    exercisesError,
     fetchExercises,
     exercisesOrder,
     shuffleExercise,
+    pickExercise,
     isShuffling,
   } = useWorkoutStepper();
 
@@ -74,17 +75,8 @@ export function WorkoutStepper() {
     }
   }, [currentStep, selectedEquipment, selectedMuscles, fromSession]);
 
-  const {
-    isWorkoutActive,
-    session,
-    startWorkout,
-    currentExercise,
-    formatElapsedTime,
-    isTimerRunning,
-    toggleTimer,
-    resetTimer,
-    quitWorkout,
-  } = useWorkoutSession();
+  const { isWorkoutActive, session, startWorkout, formatElapsedTime, isTimerRunning, toggleTimer, resetTimer, quitWorkout } =
+    useWorkoutSession();
 
   const canContinue = currentStep === 1 ? canProceedToStep2 : currentStep === 2 ? canProceedToStep3 : exercisesByMuscle.length > 0;
 
@@ -99,10 +91,15 @@ export function WorkoutStepper() {
     }
   };
 
-  const handlePickExercise = (exerciseId: string) => {
-    // later
-    alert("TODO : Pick exercise");
-    console.log("Pick exercise:", exerciseId);
+  const handlePickExercise = async (exerciseId: string) => {
+    try {
+      await pickExercise(exerciseId);
+      // Optionnel: afficher un toast de succès
+      console.log("Exercise picked successfully!");
+    } catch (error) {
+      console.error("Error picking exercise:", error);
+      alert("Error picking exercise. Please try again.");
+    }
   };
 
   const handleDeleteExercise = (exerciseId: string, muscle: string) => {
@@ -111,7 +108,7 @@ export function WorkoutStepper() {
   };
 
   const handleAddExercise = () => {
-    alert("TODO : Add exercise");
+    alert("TODO : Add exercise 🥶");
     console.log("Add exercise");
   };
 
@@ -165,7 +162,6 @@ export function WorkoutStepper() {
       <div className="w-full max-w-6xl mx-auto">
         {!showCongrats && (
           <WorkoutSessionHeader
-            currentExerciseIndex={session.exercises.findIndex((exercise) => exercise.id === currentExercise?.id)}
             elapsedTime={formatElapsedTime()}
             isTimerRunning={isTimerRunning}
             onQuitWorkout={quitWorkout}
