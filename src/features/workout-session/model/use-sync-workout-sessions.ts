@@ -37,12 +37,13 @@ export function useSyncWorkoutSessions() {
           const result = await syncWorkoutSessionAction({
             session: {
               ...localSession,
-              userId: session.user.id,
+              userId: localSession.userId === "local" ? session.user.id : localSession.userId,
               status: "synced",
             },
           });
 
           if (result && result.serverError) {
+            console.log("result:", result);
             throw new Error(result.serverError);
           }
 
@@ -66,6 +67,7 @@ export function useSyncWorkoutSessions() {
         lastSyncAt: new Date(),
       }));
     } catch (error) {
+      console.log("error:", error);
       setSyncState((prev) => ({
         ...prev,
         isSyncing: false,

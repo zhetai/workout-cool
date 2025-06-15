@@ -6,6 +6,7 @@ import { ExerciseAttributeValueEnum } from "@prisma/client";
 import { workoutSessionStatuses } from "@/shared/lib/workout-session/types/workout-session";
 import { prisma } from "@/shared/lib/prisma";
 import { actionClient } from "@/shared/api/safe-actions";
+import { serverAuth } from "@/entities/user/model/get-server-session-user";
 
 // Schéma WorkoutSet
 const workoutSetSchema = z.object({
@@ -39,6 +40,12 @@ const syncWorkoutSessionSchema = z.object({
 export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSchema).action(async ({ parsedInput }) => {
   try {
     const { session } = parsedInput;
+    const user = await serverAuth();
+
+    if (!user) {
+      console.error("❌ User not authenticated");
+      return { serverError: "NOT_AUTHENTICATED" };
+    }
 
     const { status: _s, ...sessionData } = session;
 
@@ -66,9 +73,6 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
         },
       },
       update: {
-        startedAt: sessionData.startedAt,
-        endedAt: sessionData.endedAt,
-        userId: sessionData.userId,
         muscles: session.muscles,
         exercises: {
           deleteMany: {},
@@ -77,12 +81,7 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
             exercise: { connect: { id: exercise.id } },
             sets: {
               create: exercise.sets.map((set) => ({
-                setIndex: set.setIndex,
-                types: set.types,
-                valuesInt: set.valuesInt,
-                valuesSec: set.valuesSec,
-                units: set.units,
-                completed: set.completed,
+                ...set,
                 type: set.types && set.types.length > 0 ? set.types[0] : "NA",
               })),
             },
@@ -91,9 +90,10 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
       },
     });
 
+    console.log("✅ Workout session synced successfully:", result.id);
     return { data: result };
   } catch (error) {
-    console.error("Error syncing workout session:", error);
+    console.error("❌ Error syncing workout session:", error);
     return { serverError: "Failed to sync workout session" };
   }
 });
