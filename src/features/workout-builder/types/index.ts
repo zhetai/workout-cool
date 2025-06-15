@@ -35,6 +35,7 @@ export interface EquipmentItem {
 
 // Types pour les exercices avec leurs attributs
 export type ExerciseWithAttributes = Exercise & {
+  order: number;
   attributes: (ExerciseAttribute & {
     attributeName: ExerciseAttributeName;
     attributeValue: ExerciseAttributeValue;

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ExerciseAttributeValueEnum } from "@prisma/client";
+import { ExerciseAttributeValueEnum, WorkoutSessionExercise } from "@prisma/client";
 
 import { WorkoutBuilderStep } from "../types";
 import { getExercisesAction } from "./get-exercises.action";
@@ -27,7 +27,10 @@ interface WorkoutBuilderState {
   loadFromSession: (params: {
     equipment: ExerciseAttributeValueEnum[];
     muscles: ExerciseAttributeValueEnum[];
-    exercisesByMuscle: any[];
+    exercisesByMuscle: {
+      muscle: ExerciseAttributeValueEnum;
+      exercises: WorkoutSessionExercise[];
+    }[];
     exercisesOrder: string[];
   }) => void;
 }

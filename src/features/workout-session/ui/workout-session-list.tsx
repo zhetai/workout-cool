@@ -38,6 +38,7 @@ export function WorkoutSessionList() {
     const sessionToCopy = sessions.find((s) => s.id === id);
     if (!sessionToCopy) return;
     // prepare data for the builder
+    console.log("sessionToCopy.exercises:", sessionToCopy.exercises);
 
     const allEquipment = Array.from(
       new Set(
@@ -49,21 +50,36 @@ export function WorkoutSessionList() {
       ),
     );
 
-    const allMuscles = Array.from(
-      new Set(
-        sessionToCopy.exercises
-          .flatMap((ex) =>
-            ex.attributes?.filter((attr) => attr.attributeName?.name === "PRIMARY_MUSCLE").map((attr) => attr.attributeValue.value),
-          )
-          .filter(Boolean),
-      ),
-    );
-    const exercisesByMuscle = allMuscles.map((muscle) => ({
-      muscle,
-      exercises: sessionToCopy.exercises.filter((ex) =>
-        ex.attributes?.some((attr) => attr.attributeName?.name === "PRIMARY_MUSCLE" && attr.attributeValue.value === muscle),
-      ),
-    }));
+    // Utilise les muscles stockés dans la session, sinon fallback sur les muscles primaires des exercices
+    const allMuscles =
+      sessionToCopy.muscles && sessionToCopy.muscles.length > 0
+        ? sessionToCopy.muscles
+        : Array.from(
+            new Set(
+              sessionToCopy.exercises
+                .flatMap((ex) =>
+                  ex.attributes?.filter((attr) => attr.attributeName?.name === "PRIMARY_MUSCLE").map((attr) => attr.attributeValue.value),
+                )
+                .filter(Boolean),
+            ),
+          );
+    console.log("allMuscles:", allMuscles);
+
+    // Pour répéter exactement la même séance, on garde tous les exercices dans l'ordre exact
+    const exercisesByMuscle = [
+      {
+        muscle: allMuscles[0] || "FULL_BODY", // Utilise le premier muscle sélectionné ou FULL_BODY par défaut
+        exercises: sessionToCopy.exercises
+          .sort((a, b) => a.order - b.order) // Trie par ordre original
+          .map((ex) => ({
+            ...ex,
+            id: ex.id,
+            workoutSessionId: sessionToCopy.id,
+            exerciseId: ex.id,
+            order: ex.order,
+          })),
+      },
+    ];
 
     const exercisesOrder = sessionToCopy.exercises.map((ex) => ex.id);
 
@@ -74,7 +90,7 @@ export function WorkoutSessionList() {
       exercisesByMuscle,
       exercisesOrder,
     });
-    router.push("/");
+    router.push("/?fromSession=1");
   };
 
   return (
@@ -106,6 +122,19 @@ export function WorkoutSessionList() {
                     {" : "}
                     {new Date(session.endedAt).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}
                   </span>
+                )}
+                {session.muscles && session.muscles.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mt-1 justify-center">
+                    {session.muscles.map((muscle, idx) => (
+                      <span
+                        // eslint-disable-next-line max-len
+                        className={`inline-block border rounded-full px-2 py-0.5 text-xs font-semibold ${BADGE_COLORS[idx % BADGE_COLORS.length]}`}
+                        key={muscle}
+                      >
+                        {t(("workout_builder.muscles." + muscle.toLowerCase()) as keyof typeof t)}
+                      </span>
+                    ))}
+                  </div>
                 )}
                 {session.status === "active" && (
                   <div className="relative mt-1">

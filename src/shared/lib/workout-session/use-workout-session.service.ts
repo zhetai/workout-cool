@@ -54,11 +54,10 @@ export const useWorkoutSessionService = () => {
 
   const add = async (session: WorkoutSession) => {
     if (userId) {
-      // Utiliser l'action de synchronisation
       const result = await syncWorkoutSessionAction({
         session: {
           ...session,
-          userId: "current-user-id", // TODO: passer le vrai userId
+          userId,
           status: "synced",
         },
       });

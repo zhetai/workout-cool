@@ -267,13 +267,14 @@ enum ExerciseAttributeValueEnum {
 }
 
 model WorkoutSession {
-  id        String                   @id @default(cuid())
+  id        String                       @id @default(cuid())
   userId    String
-  user      User                     @relation(fields: [userId], references: [id])
+  user      User                         @relation(fields: [userId], references: [id])
   startedAt DateTime
   endedAt   DateTime?
   duration  Int? // en secondes
   exercises WorkoutSessionExercise[]
+  muscles   ExerciseAttributeValueEnum[] @default([])
 
   @@map("workout_sessions")
 }

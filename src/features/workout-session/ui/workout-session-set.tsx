@@ -227,7 +227,7 @@ export function WorkoutSessionSet({ set, setIndex, onChange, onFinish, onRemove 
         </Button>
         {set.completed && (
           <Button
-            className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-4 py-2 text-sm rounded flex-1 border border-gray-300"
+            className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-4 py-2 text-sm rounded-xl flex-1 border border-gray-300"
             onClick={handleEdit}
             variant="outline"
           >

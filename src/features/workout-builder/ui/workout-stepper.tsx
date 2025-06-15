@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useQueryState } from "nuqs";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { ExerciseAttributeValueEnum } from "@prisma/client";
 
 import { useI18n } from "locales/client";
 import Trophy from "@public/images/trophy.png";
@@ -26,6 +28,7 @@ export function WorkoutStepper() {
 
   const t = useI18n();
   const router = useRouter();
+  const [fromSession, setFromSession] = useQueryState("fromSession");
   const {
     currentStep,
     selectedEquipment,
@@ -62,12 +65,12 @@ export function WorkoutStepper() {
       setFlatExercises(flat);
     }
   }, [exercisesByMuscle]);
-  // FIXME : when i go back to step 2, the exercises are not fetched anymore
+
   useEffect(() => {
-    if (currentStep === 3 && exercisesByMuscle.length === 0) {
+    if (currentStep === 3 && !fromSession) {
       fetchExercises();
     }
-  }, [currentStep, selectedEquipment, selectedMuscles, exercisesByMuscle.length]);
+  }, [currentStep, selectedEquipment, selectedMuscles, fromSession]);
 
   const {
     isWorkoutActive,
@@ -121,6 +124,21 @@ export function WorkoutStepper() {
 
   const goToProfile = () => {
     router.push("/profile");
+  };
+
+  const handleToggleEquipment = (equipment: ExerciseAttributeValueEnum) => {
+    toggleEquipment(equipment);
+    if (fromSession) setFromSession(null);
+  };
+
+  const handleClearEquipment = () => {
+    clearEquipment();
+    if (fromSession) setFromSession(null);
+  };
+
+  const handleToggleMuscle = (muscle: ExerciseAttributeValueEnum) => {
+    toggleMuscle(muscle);
+    if (fromSession) setFromSession(null);
   };
 
   if (showCongrats && !isWorkoutActive) {
@@ -186,10 +204,16 @@ export function WorkoutStepper() {
     switch (currentStep) {
       case 1:
         return (
-          <EquipmentSelection onClearEquipment={clearEquipment} onToggleEquipment={toggleEquipment} selectedEquipment={selectedEquipment} />
+          <EquipmentSelection
+            onClearEquipment={handleClearEquipment}
+            onToggleEquipment={handleToggleEquipment}
+            selectedEquipment={selectedEquipment}
+          />
         );
       case 2:
-        return <MuscleSelection onToggleMuscle={toggleMuscle} selectedEquipment={selectedEquipment} selectedMuscles={selectedMuscles} />;
+        return (
+          <MuscleSelection onToggleMuscle={handleToggleMuscle} selectedEquipment={selectedEquipment} selectedMuscles={selectedMuscles} />
+        );
       case 3:
         return (
           <ExercisesSelection

@@ -108,8 +108,8 @@ export default {
       },
     },
     muscles: {
-      abdominals: "Abdominals",
       back: "Back",
+      abdominals: "Abdominals",
       biceps: "Biceps",
       triceps: "Triceps",
       chest: "Chest",

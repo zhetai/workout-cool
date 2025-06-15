@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+import { ExerciseAttributeValueEnum } from "@prisma/client";
 
 import { workoutSessionStatuses } from "@/shared/lib/workout-session/types/workout-session";
 import { prisma } from "@/shared/lib/prisma";
@@ -31,6 +32,7 @@ const syncWorkoutSessionSchema = z.object({
     endedAt: z.string().optional(),
     exercises: z.array(workoutSessionExerciseSchema),
     status: z.enum(workoutSessionStatuses),
+    muscles: z.array(z.nativeEnum(ExerciseAttributeValueEnum)),
   }),
 });
 
@@ -44,6 +46,7 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
       where: { id: session.id },
       create: {
         ...sessionData,
+        muscles: session.muscles,
         exercises: {
           create: session.exercises.map((exercise) => ({
             order: exercise.order,
@@ -66,6 +69,7 @@ export const syncWorkoutSessionAction = actionClient.schema(syncWorkoutSessionSc
         startedAt: sessionData.startedAt,
         endedAt: sessionData.endedAt,
         userId: sessionData.userId,
+        muscles: session.muscles,
         exercises: {
           deleteMany: {},
           create: session.exercises.map((exercise) => ({

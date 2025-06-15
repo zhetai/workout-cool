@@ -69,14 +69,21 @@ export const ExercisesSelection = ({
     }
   };
 
-  return (
-    <div className="space-y-6">
-      {isLoading ? (
+  if (isLoading) {
+    return (
+      <div className="space-y-6">
         <div className="text-center">
           <Loader2 className="h-8 w-8 animate-spin mx-auto text-blue-600" />
           <p className="mt-4 text-slate-600 dark:text-slate-400">{t("workout_builder.loading.exercises")}</p>
         </div>
-      ) : flatExercises.length > 0 ? (
+      </div>
+    );
+  }
+  console.log("flatExercises:", flatExercises);
+
+  return (
+    <div className="space-y-6">
+      {flatExercises.length > 0 ? (
         <div className="max-w-4xl mx-auto">
           {/* Liste des exercices drag and drop */}
           <DndContext collisionDetection={closestCenter} modifiers={[restrictToVerticalAxis]} onDragEnd={handleDragEnd} sensors={sensors}>
@@ -85,7 +92,7 @@ export const ExercisesSelection = ({
                 {flatExercises.map((item) => (
                   <ExerciseListItem
                     exercise={item.exercise}
-                    key={item.id}
+                    key={`${item.id}-${item.exercise.order}`}
                     muscle={item.muscle}
                     onDelete={onDelete}
                     onPick={onPick}

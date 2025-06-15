@@ -23,7 +23,7 @@ export default async function AuthLayout(props: LayoutParams<{}>) {
 
   return (
     <>
-      <div>
+      <div className="h-full flex">
         {searchParams.error && (
           <Alert className="mb-4" variant="error">
             <AlertTitle>{translatedError}</AlertTitle>

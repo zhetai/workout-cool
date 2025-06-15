@@ -63,7 +63,7 @@ export const useWorkoutSessionStore = create<WorkoutSessionState>((set, get) => 
   totalExercises: 0,
   progressPercent: 0,
 
-  startWorkout: (exercises, _equipment, _muscles) => {
+  startWorkout: (exercises, _equipment, muscles) => {
     const sessionExercises: WorkoutSessionExercise[] = exercises.map((ex, idx) => ({
       ...ex,
       order: idx,
@@ -86,6 +86,7 @@ export const useWorkoutSessionStore = create<WorkoutSessionState>((set, get) => 
       startedAt: new Date().toISOString(),
       exercises: sessionExercises,
       status: "active",
+      muscles,
     };
 
     workoutSessionLocal.add(newSession);
