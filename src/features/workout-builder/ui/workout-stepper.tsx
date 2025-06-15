@@ -36,7 +36,6 @@ export function WorkoutStepper() {
     exercisesByMuscle,
     isLoadingExercises,
     exercisesError,
-    goToStep,
     nextStep,
     prevStep,
     toggleEquipment,
@@ -46,7 +45,6 @@ export function WorkoutStepper() {
     canProceedToStep3,
     fetchExercises,
     exercisesOrder,
-    setExercisesOrder,
     shuffleExercise,
     pickExercise,
     isShuffling,
@@ -77,17 +75,8 @@ export function WorkoutStepper() {
     }
   }, [currentStep, selectedEquipment, selectedMuscles, fromSession]);
 
-  const {
-    isWorkoutActive,
-    session,
-    startWorkout,
-    currentExercise,
-    formatElapsedTime,
-    isTimerRunning,
-    toggleTimer,
-    resetTimer,
-    quitWorkout,
-  } = useWorkoutSession();
+  const { isWorkoutActive, session, startWorkout, formatElapsedTime, isTimerRunning, toggleTimer, resetTimer, quitWorkout } =
+    useWorkoutSession();
 
   const canContinue = currentStep === 1 ? canProceedToStep2 : currentStep === 2 ? canProceedToStep3 : exercisesByMuscle.length > 0;
 
@@ -173,7 +162,6 @@ export function WorkoutStepper() {
       <div className="w-full max-w-6xl mx-auto">
         {!showCongrats && (
           <WorkoutSessionHeader
-            currentExerciseIndex={session.exercises.findIndex((exercise) => exercise.id === currentExercise?.id)}
             elapsedTime={formatElapsedTime()}
             isTimerRunning={isTimerRunning}
             onQuitWorkout={quitWorkout}

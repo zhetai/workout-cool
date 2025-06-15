@@ -18,7 +18,6 @@ interface WorkoutSessionHeaderProps {
   onToggleTimer: VoidFunction;
   onResetTimer: VoidFunction;
   onQuitWorkout: VoidFunction;
-  currentExerciseIndex: number;
 }
 
 export function WorkoutSessionHeader({
@@ -27,14 +26,13 @@ export function WorkoutSessionHeader({
   onToggleTimer,
   onResetTimer,
   onQuitWorkout,
-  currentExerciseIndex,
 }: WorkoutSessionHeaderProps) {
   const t = useI18n();
   const [showQuitDialog, setShowQuitDialog] = useState(false);
   const [resetCount, setResetCount] = useState(0);
   const [volumeUnit, setVolumeUnit] = useState<WeightUnit>("kg");
   const locale = useCurrentLocale();
-  const { getExercisesCompleted, getTotalExercises, session, getTotalVolume, getTotalVolumeInUnit } = useWorkoutSession();
+  const { getExercisesCompleted, getTotalExercises, session, getTotalVolumeInUnit } = useWorkoutSession();
   const exercisesCompleted = getExercisesCompleted();
   const totalExercises = getTotalExercises();
   const totalVolume = getTotalVolumeInUnit(volumeUnit);
