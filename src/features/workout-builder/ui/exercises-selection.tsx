@@ -19,6 +19,7 @@ interface ExercisesSelectionProps {
   onPick: (exerciseId: string) => void;
   onDelete: (exerciseId: string, muscle: string) => void;
   onAdd: () => void;
+  isShuffling?: boolean;
 }
 
 export const ExercisesSelection = ({
@@ -29,10 +30,11 @@ export const ExercisesSelection = ({
   onPick,
   onDelete,
   onAdd,
+  isShuffling,
 }: ExercisesSelectionProps) => {
   const t = useI18n();
   const [flatExercises, setFlatExercises] = useState<{ id: string; muscle: string; exercise: ExerciseWithAttributes }[]>([]);
-  const { setExercisesOrder } = useWorkoutStepper();
+  const { setExercisesOrder, exercisesOrder } = useWorkoutStepper();
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -50,11 +52,22 @@ export const ExercisesSelection = ({
           exercise,
         })),
       );
-      setFlatExercises(flat);
+
+      // if exerciseOrder is not empty, we need to order the exercises
+      if (exercisesOrder.length > 0) {
+        const orderedFlat = exercisesOrder.map((id) => flat.find((item) => item.id === id)).filter(Boolean) as typeof flat;
+
+        // add new exercises that are not in exercisesOrder
+        const newExercises = flat.filter((item) => !exercisesOrder.includes(item.id));
+
+        setFlatExercises([...orderedFlat, ...newExercises]);
+      } else {
+        setFlatExercises(flat);
+      }
     } else {
       setFlatExercises([]);
     }
-  }, [exercisesByMuscle]);
+  }, [exercisesByMuscle, exercisesOrder]);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -89,10 +102,11 @@ export const ExercisesSelection = ({
           <DndContext collisionDetection={closestCenter} modifiers={[restrictToVerticalAxis]} onDragEnd={handleDragEnd} sensors={sensors}>
             <SortableContext items={flatExercises.map((item) => item.id)} strategy={verticalListSortingStrategy}>
               <div className="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden">
-                {flatExercises.map((item) => (
+                {flatExercises.map((item, index) => (
                   <ExerciseListItem
                     exercise={item.exercise}
-                    key={`${item.id}-${item.exercise.order}`}
+                    isShuffling={isShuffling}
+                    key={`${item.id}-${index}`}
                     muscle={item.muscle}
                     onDelete={onDelete}
                     onPick={onPick}

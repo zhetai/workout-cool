@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import { Play, Repeat2, Trash2 } from "lucide-react";
 
 import { useCurrentLocale, useI18n } from "locales/client";
+import { useWorkoutSessionService } from "@/shared/lib/workout-session/use-workout-session.service";
 import { useWorkoutSessions } from "@/features/workout-session/model/use-workout-sessions";
 import { useWorkoutBuilderStore } from "@/features/workout-builder/model/workout-builder.store";
 import { Link } from "@/components/ui/link";
@@ -21,24 +22,28 @@ export function WorkoutSessionList() {
   const t = useI18n();
   const router = useRouter();
   const loadFromSession = useWorkoutBuilderStore((s) => s.loadFromSession);
+  const { remove } = useWorkoutSessionService();
 
-  // const [sessions, setSessions] = useState<WorkoutSession[]>(() =>
-  //   workoutSessionLocal.getAll().sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()),
-  // );
-
-  const { data: sessions = [] } = useWorkoutSessions();
+  const { data: sessions = [], refetch } = useWorkoutSessions();
   const activeSession = sessions.find((s) => s.status === "active");
 
-  const handleDelete = (_id: string) => {
-    // TODO: delete by service
-    // workoutSessionLocal.remove(id);
+  const handleDelete = async (id: string) => {
+    const confirmed = window.confirm(t("workout_builder.confirm_delete"));
+
+    if (!confirmed) return;
+
+    try {
+      await remove(id);
+      refetch();
+    } catch (error) {
+      console.error("Error deleting session:", error);
+      alert("Error deleting session");
+    }
   };
 
   const handleRepeat = (id: string) => {
     const sessionToCopy = sessions.find((s) => s.id === id);
     if (!sessionToCopy) return;
-    // prepare data for the builder
-    console.log("sessionToCopy.exercises:", sessionToCopy.exercises);
 
     const allEquipment = Array.from(
       new Set(

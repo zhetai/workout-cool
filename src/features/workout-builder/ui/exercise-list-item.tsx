@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import { Play, Shuffle, Star, Trash2, GripVertical } from "lucide-react";
+import { Play, Shuffle, Star, Trash2, GripVertical, Loader2 } from "lucide-react";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 
@@ -18,9 +18,10 @@ interface ExerciseListItemProps {
   onShuffle: (exerciseId: string, muscle: string) => void;
   onPick: (exerciseId: string) => void;
   onDelete: (exerciseId: string, muscle: string) => void;
+  isShuffling?: boolean;
 }
 
-export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete }: ExerciseListItemProps) {
+export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete, isShuffling }: ExerciseListItemProps) {
   const t = useI18n();
   const [isHovered, setIsHovered] = useState(false);
   const locale = useCurrentLocale();
@@ -121,8 +122,14 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
 
         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
           {/* Bouton shuffle */}
-          <Button className="p-1 sm:p-2" onClick={() => onShuffle(exercise.id, muscle)} size="small" variant="outline">
-            <Shuffle className="h-3.5 w-3.5" />
+          <Button
+            className="p-1 sm:p-2"
+            disabled={isShuffling}
+            onClick={() => onShuffle(exercise.id, muscle)}
+            size="small"
+            variant="outline"
+          >
+            {isShuffling ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Shuffle className="h-3.5 w-3.5" />}
             <span className="hidden sm:inline">{t("workout_builder.exercise.shuffle")}</span>
           </Button>
 

@@ -10,7 +10,6 @@ export class AuthError extends Error {
 
 export const serverAuth = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
-  console.log("session:", session);
 
   if (session && session.user) {
     return session.user;

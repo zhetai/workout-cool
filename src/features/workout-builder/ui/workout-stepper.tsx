@@ -45,6 +45,8 @@ export function WorkoutStepper() {
     exercisesError,
     fetchExercises,
     exercisesOrder,
+    shuffleExercise,
+    isShuffling,
   } = useWorkoutStepper();
 
   useEffect(() => {
@@ -86,9 +88,15 @@ export function WorkoutStepper() {
 
   const canContinue = currentStep === 1 ? canProceedToStep2 : currentStep === 2 ? canProceedToStep3 : exercisesByMuscle.length > 0;
 
-  const handleShuffleExercise = (exerciseId: string, muscle: string) => {
-    alert("TODO : Shuffle exercise");
-    console.log("Shuffle exercise:", exerciseId, "for muscle:", muscle);
+  const handleShuffleExercise = async (exerciseId: string, muscle: string) => {
+    try {
+      // Convertir le muscle string vers enum
+      const muscleEnum = muscle as ExerciseAttributeValueEnum;
+      await shuffleExercise(exerciseId, muscleEnum);
+    } catch (error) {
+      console.error("Error shuffling exercise:", error);
+      alert("Error shuffling exercise. Please try again.");
+    }
   };
 
   const handlePickExercise = (exerciseId: string) => {
@@ -220,6 +228,7 @@ export function WorkoutStepper() {
             error={exercisesError}
             exercisesByMuscle={exercisesByMuscle}
             isLoading={isLoadingExercises}
+            isShuffling={isShuffling}
             onAdd={handleAddExercise}
             onDelete={handleDeleteExercise}
             onPick={handlePickExercise}

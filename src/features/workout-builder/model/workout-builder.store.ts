@@ -2,17 +2,19 @@ import { create } from "zustand";
 import { ExerciseAttributeValueEnum, WorkoutSessionExercise } from "@prisma/client";
 
 import { WorkoutBuilderStep } from "../types";
+import { shuffleExerciseAction } from "../actions/shuffle-exercise.action";
 import { getExercisesAction } from "./get-exercises.action";
 
 interface WorkoutBuilderState {
   currentStep: WorkoutBuilderStep;
   selectedEquipment: ExerciseAttributeValueEnum[];
   selectedMuscles: ExerciseAttributeValueEnum[];
-  // Exercices (groupés par muscle)
-  exercisesByMuscle: any[];
+
+  exercisesByMuscle: any[]; //TODO: type this
   isLoadingExercises: boolean;
-  exercisesError: any;
+  exercisesError: any; //TODO: type this
   exercisesOrder: string[];
+  isShuffling: boolean;
 
   // Actions
   setStep: (step: WorkoutBuilderStep) => void;
@@ -24,6 +26,7 @@ interface WorkoutBuilderState {
   clearMuscles: () => void;
   fetchExercises: () => Promise<void>;
   setExercisesOrder: (order: string[]) => void;
+  shuffleExercise: (exerciseId: string, muscle: ExerciseAttributeValueEnum) => Promise<void>;
   loadFromSession: (params: {
     equipment: ExerciseAttributeValueEnum[];
     muscles: ExerciseAttributeValueEnum[];
@@ -43,6 +46,7 @@ export const useWorkoutBuilderStore = create<WorkoutBuilderState>((set, get) => 
   isLoadingExercises: false,
   exercisesError: null,
   exercisesOrder: [],
+  isShuffling: false,
 
   setStep: (step) => set({ currentStep: step }),
   nextStep: () => set((state) => ({ currentStep: Math.min(state.currentStep + 1, 3) as WorkoutBuilderStep })),
@@ -83,6 +87,47 @@ export const useWorkoutBuilderStore = create<WorkoutBuilderState>((set, get) => 
   },
 
   setExercisesOrder: (order) => set({ exercisesOrder: order }),
+
+  shuffleExercise: async (exerciseId, muscle) => {
+    set({ isShuffling: true });
+    try {
+      const { selectedEquipment, exercisesByMuscle } = get();
+
+      const allExerciseIds = exercisesByMuscle.flatMap((group) => group.exercises.map((ex: any) => ex.id));
+
+      const result = await shuffleExerciseAction({
+        muscle: muscle,
+        equipment: selectedEquipment,
+        excludeExerciseIds: allExerciseIds,
+      });
+
+      if (result?.serverError) {
+        throw new Error(result.serverError);
+      }
+
+      if (result?.data?.exercise) {
+        const newExercise = result.data.exercise;
+
+        set((state) => ({
+          exercisesByMuscle: state.exercisesByMuscle.map((group) => {
+            if (group.muscle === muscle) {
+              return {
+                ...group,
+                exercises: group.exercises.map((ex: any) => (ex.id === exerciseId ? { ...newExercise, order: ex.order } : ex)),
+              };
+            }
+            return group;
+          }),
+          exercisesOrder: state.exercisesOrder.map((id) => (id === exerciseId ? newExercise.id : id)),
+        }));
+      }
+    } catch (error) {
+      console.error("Error shuffling exercise:", error);
+      throw error;
+    } finally {
+      set({ isShuffling: false });
+    }
+  },
 
   loadFromSession: ({ equipment, muscles, exercisesByMuscle, exercisesOrder }) => {
     set({
