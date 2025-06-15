@@ -34,7 +34,7 @@ export const ExercisesSelection = ({
 }: ExercisesSelectionProps) => {
   const t = useI18n();
   const [flatExercises, setFlatExercises] = useState<{ id: string; muscle: string; exercise: ExerciseWithAttributes }[]>([]);
-  const { setExercisesOrder } = useWorkoutStepper();
+  const { setExercisesOrder, exercisesOrder } = useWorkoutStepper();
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -52,11 +52,22 @@ export const ExercisesSelection = ({
           exercise,
         })),
       );
-      setFlatExercises(flat);
+
+      // if exerciseOrder is not empty, we need to order the exercises
+      if (exercisesOrder.length > 0) {
+        const orderedFlat = exercisesOrder.map((id) => flat.find((item) => item.id === id)).filter(Boolean) as typeof flat;
+
+        // add new exercises that are not in exercisesOrder
+        const newExercises = flat.filter((item) => !exercisesOrder.includes(item.id));
+
+        setFlatExercises([...orderedFlat, ...newExercises]);
+      } else {
+        setFlatExercises(flat);
+      }
     } else {
       setFlatExercises([]);
     }
-  }, [exercisesByMuscle]);
+  }, [exercisesByMuscle, exercisesOrder]);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;

@@ -120,9 +120,6 @@ export const useWorkoutBuilderStore = create<WorkoutBuilderState>((set, get) => 
             }
             return group;
           }),
-        }));
-
-        set((state) => ({
           exercisesOrder: state.exercisesOrder.map((id) => (id === exerciseId ? newExercise.id : id)),
         }));
       }
