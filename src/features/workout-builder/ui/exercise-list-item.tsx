@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import { Play, Shuffle, Star, Trash2, GripVertical, Loader2 } from "lucide-react";
+import { Play, Shuffle, Trash2, GripVertical, Loader2 } from "lucide-react";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 
@@ -127,11 +127,13 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
           </InlineTooltip>
 
           {/* Nom de l'exercice avec indicateurs */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 mb-1">
-              <h3 className="font-semibold text-slate-900 dark:text-slate-200 truncate text-sm">{exerciseName}</h3>
+          <InlineTooltip className="tooltip tooltip-bottom z-50 max-w-[300px]" title={exerciseName || ""}>
+            <div className="flex-1 min-w-0 ">
+              <div className="flex items-center gap-3 mb-1">
+                <h3 className="font-semibold text-slate-900 dark:text-slate-200 md:truncate text-sm">{exerciseName}</h3>
+              </div>
             </div>
-          </div>
+          </InlineTooltip>
         </div>
 
         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
@@ -148,14 +150,15 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
           </Button>
 
           {/* Bouton pick */}
-          <Button
+          {/* TODO: V2 */}
+          {/* <Button
             className="p-1 sm:p-2 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-950 text-blue-600 dark:text-blue-400 border-2 border-blue-200 dark:border-blue-800"
             onClick={handleOpenPickModal}
             size="small"
           >
             <Star className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">{t("workout_builder.exercise.pick")}</span>
-          </Button>
+          </Button> */}
 
           {/* Bouton delete */}
           <Button
