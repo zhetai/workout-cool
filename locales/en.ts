@@ -223,6 +223,7 @@ export default {
       elapsed_time: "Elapsed Time",
       chronometer: "Chronometer",
       exercise_progress: "Exercise Progress",
+      total_volume: "Total Volume",
       current_exercise: "Current Exercise",
       complete: "Complete",
       active: "Active",

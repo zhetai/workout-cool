@@ -224,6 +224,7 @@ export default {
       chronometer: "Chronomètre",
       total_workout_time: "Temps total d'entraînement",
       exercise_progress: "Progression",
+      total_volume: "Volume Total",
       current_exercise: "Exercice actuel",
       complete: "Terminé",
       active: "Actif",

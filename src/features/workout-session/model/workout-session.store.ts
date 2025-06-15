@@ -48,6 +48,7 @@ interface WorkoutSessionState {
   formatElapsedTime: () => string;
   getExercisesCompleted: () => number;
   getTotalExercises: () => number;
+  getTotalVolume: () => number;
   loadSessionFromLocal: () => void;
 }
 
@@ -294,6 +295,36 @@ export const useWorkoutSessionStore = create<WorkoutSessionState>((set, get) => 
     const { session } = get();
     if (!session) return 0;
     return session.exercises.length;
+  },
+
+  getTotalVolume: () => {
+    const { session } = get();
+    if (!session) return 0;
+
+    let totalVolume = 0;
+
+    session.exercises.forEach((exercise) => {
+      exercise.sets.forEach((set) => {
+        // Vérifier si le set est complété et contient REPS et WEIGHT
+        if (set.completed && set.types.includes("REPS") && set.types.includes("WEIGHT") && set.valuesInt) {
+          const repsIndex = set.types.indexOf("REPS");
+          const weightIndex = set.types.indexOf("WEIGHT");
+
+          const reps = set.valuesInt[repsIndex] || 0;
+          const weight = set.valuesInt[weightIndex] || 0;
+
+          // Convertir les livres en kg si nécessaire
+          const weightInKg =
+            set.units && set.units[weightIndex] === "lbs"
+              ? weight * 0.453592 // 1 lb = 0.453592 kg
+              : weight;
+
+          totalVolume += reps * weightInKg;
+        }
+      });
+    });
+
+    return Math.round(totalVolume);
   },
 
   formatElapsedTime: () => {
