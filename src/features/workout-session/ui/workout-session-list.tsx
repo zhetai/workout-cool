@@ -98,7 +98,7 @@ export function WorkoutSessionList() {
   };
 
   return (
-    <div className="space-y-4 px-2 sm:px-6">
+    <div className="space-y-4 mt-10">
       <h2 className="text-xl font-bold mt-5 mb-2 text-slate-900 dark:text-slate-200">
         {t("workout_builder.session.history", { count: sessions.length })}
       </h2>
