@@ -20,6 +20,8 @@ export function useWorkoutStepper() {
     fetchExercises,
     exercisesOrder,
     setExercisesOrder,
+    shuffleExercise,
+    isShuffling,
   } = useWorkoutBuilderStore();
 
   // Validation des étapes
@@ -60,5 +62,11 @@ export function useWorkoutStepper() {
     // Order
     exercisesOrder,
     setExercisesOrder,
+
+    // Shuffle
+    shuffleExercise,
+
+    // Additional
+    isShuffling,
   };
 }

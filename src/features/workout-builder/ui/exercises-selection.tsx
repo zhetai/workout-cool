@@ -19,6 +19,7 @@ interface ExercisesSelectionProps {
   onPick: (exerciseId: string) => void;
   onDelete: (exerciseId: string, muscle: string) => void;
   onAdd: () => void;
+  isShuffling?: boolean;
 }
 
 export const ExercisesSelection = ({
@@ -29,6 +30,7 @@ export const ExercisesSelection = ({
   onPick,
   onDelete,
   onAdd,
+  isShuffling,
 }: ExercisesSelectionProps) => {
   const t = useI18n();
   const [flatExercises, setFlatExercises] = useState<{ id: string; muscle: string; exercise: ExerciseWithAttributes }[]>([]);
@@ -89,10 +91,11 @@ export const ExercisesSelection = ({
           <DndContext collisionDetection={closestCenter} modifiers={[restrictToVerticalAxis]} onDragEnd={handleDragEnd} sensors={sensors}>
             <SortableContext items={flatExercises.map((item) => item.id)} strategy={verticalListSortingStrategy}>
               <div className="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden">
-                {flatExercises.map((item) => (
+                {flatExercises.map((item, index) => (
                   <ExerciseListItem
                     exercise={item.exercise}
-                    key={`${item.id}-${item.exercise.order}`}
+                    isShuffling={isShuffling}
+                    key={`${item.id}-${index}`}
                     muscle={item.muscle}
                     onDelete={onDelete}
                     onPick={onPick}
