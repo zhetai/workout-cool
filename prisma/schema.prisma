@@ -284,7 +284,7 @@ model WorkoutSessionExercise {
   workoutSessionId String
   exerciseId       String
   order            Int
-  workoutSession   WorkoutSession @relation(fields: [workoutSessionId], references: [id])
+  workoutSession   WorkoutSession @relation(fields: [workoutSessionId], references: [id], onDelete: Cascade)
   exercise         Exercise       @relation(fields: [exerciseId], references: [id])
   sets             WorkoutSet[]
 
@@ -301,7 +301,7 @@ model WorkoutSet {
   valuesSec                Int[]                  @default([])
   units                    WorkoutSetUnit[]       @default([])
   completed                Boolean                @default(false)
-  workoutSessionExercise   WorkoutSessionExercise @relation(fields: [workoutSessionExerciseId], references: [id])
+  workoutSessionExercise   WorkoutSessionExercise @relation(fields: [workoutSessionExerciseId], references: [id], onDelete: Cascade)
 
   @@map("workout_sets")
 }

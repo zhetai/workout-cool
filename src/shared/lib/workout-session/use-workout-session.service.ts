@@ -1,6 +1,7 @@
 import { nullToUndefined } from "@/shared/lib/format";
 import { syncWorkoutSessionAction } from "@/features/workout-session/actions/sync-workout-sessions.action";
 import { getWorkoutSessionsAction } from "@/features/workout-session/actions/get-workout-sessions.action";
+import { deleteWorkoutSessionAction } from "@/features/workout-session/actions/delete-workout-session.action";
 import { useSession } from "@/features/auth/lib/auth-client";
 
 import { workoutSessionLocal } from "./workout-session.local";
@@ -94,12 +95,12 @@ export const useWorkoutSessionService = () => {
   };
 
   const remove = async (id: string) => {
-    // if (isUserLoggedIn()) {
-    //   // TODO: Créer une action deleteWorkoutSessionAction
-    //   const result = await deleteWorkoutSessionAction({ id });
-    //   if (result.serverError) throw new Error(result.serverError);
-    // }
-    // workoutSessionLocal.remove(id);
+    if (userId) {
+      const result = await deleteWorkoutSessionAction({ id });
+      if (result?.serverError) throw new Error(result.serverError);
+    }
+
+    workoutSessionLocal.remove(id);
   };
 
   return { getAll, add, update, complete, remove };
