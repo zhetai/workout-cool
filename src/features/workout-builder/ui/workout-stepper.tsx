@@ -108,7 +108,7 @@ export function WorkoutStepper() {
   };
 
   const handleAddExercise = () => {
-    alert("TODO : Add exercise");
+    alert("TODO : Add exercise 🥶");
     console.log("Add exercise");
   };
 

@@ -1,4 +1,4 @@
-import { useI18n } from "locales/client";
+import { useCurrentLocale, useI18n } from "locales/client";
 import { getYouTubeEmbedUrl } from "@/shared/lib/youtube";
 import { getAttributeValueLabel } from "@/shared/lib/attribute-value-translation";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -12,8 +12,9 @@ interface ExerciseVideoModalProps {
 }
 
 export function ExerciseVideoModal({ open, onOpenChange, exercise }: ExerciseVideoModalProps) {
+  console.log("exercise:", exercise);
   const t = useI18n();
-  const locale = typeof window !== "undefined" && window.navigator.language.startsWith("fr") ? "fr" : "en";
+  const locale = useCurrentLocale();
   const title = locale === "fr" ? exercise.name : exercise.nameEn || exercise.name;
   const introduction = locale === "fr" ? exercise.introduction : exercise.introductionEn || exercise.introduction;
   const description = locale === "fr" ? exercise.description : exercise.descriptionEn || exercise.description;
