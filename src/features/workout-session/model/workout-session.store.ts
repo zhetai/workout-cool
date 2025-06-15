@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 import { workoutSessionLocal } from "@/shared/lib/workout-session/workout-session.local";
 import { WorkoutSession } from "@/shared/lib/workout-session/types/workout-session";
+import { convertWeight, type WeightUnit } from "@/shared/lib/weight-conversion";
 import { WorkoutSessionExercise, WorkoutSet } from "@/features/workout-session/types/workout-set";
 import { useWorkoutBuilderStore } from "@/features/workout-builder/model/workout-builder.store";
 
@@ -49,6 +50,7 @@ interface WorkoutSessionState {
   getExercisesCompleted: () => number;
   getTotalExercises: () => number;
   getTotalVolume: () => number;
+  getTotalVolumeInUnit: (unit: WeightUnit) => number;
   loadSessionFromLocal: () => void;
 }
 
@@ -325,6 +327,36 @@ export const useWorkoutSessionStore = create<WorkoutSessionState>((set, get) => 
     });
 
     return Math.round(totalVolume);
+  },
+
+  getTotalVolumeInUnit: (unit: WeightUnit) => {
+    const { session } = get();
+    if (!session) return 0;
+
+    let totalVolume = 0;
+
+    session.exercises.forEach((exercise) => {
+      exercise.sets.forEach((set) => {
+        // Vérifier si le set est complété et contient REPS et WEIGHT
+        if (set.completed && set.types.includes("REPS") && set.types.includes("WEIGHT") && set.valuesInt) {
+          const repsIndex = set.types.indexOf("REPS");
+          const weightIndex = set.types.indexOf("WEIGHT");
+
+          const reps = set.valuesInt[repsIndex] || 0;
+          const weight = set.valuesInt[weightIndex] || 0;
+
+          // Déterminer l'unité de poids originale de la série
+          const originalUnit: WeightUnit = set.units && set.units[weightIndex] === "lbs" ? "lbs" : "kg";
+
+          // Convertir vers l'unité demandée
+          const convertedWeight = convertWeight(weight, originalUnit, unit);
+
+          totalVolume += reps * convertedWeight;
+        }
+      });
+    });
+
+    return Math.round(totalVolume * 10) / 10; // Arrondir à 1 décimale
   },
 
   formatElapsedTime: () => {
