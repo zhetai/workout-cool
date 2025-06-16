@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { getI18n } from "locales/server";
+import { paths } from "@/shared/constants/paths";
 import { SignUpForm } from "@/features/auth/signup/ui/signup-form";
 
 export const metadata = {
@@ -23,13 +24,9 @@ export default async function AuthSignUpPage() {
       <div className="text-muted-foreground mt-6 text-center text-sm">
         <p>
           {t("register_terms")}{" "}
-          <Link className="font-medium text-primary underline-offset-4 hover:underline" href="/terms">
+          <Link className="font-medium text-primary underline-offset-4 hover:underline" href={paths.privacy}>
             {t("register_privacy")}
           </Link>{" "}
-          {t("register_privacy_link")}{" "}
-          <Link className="font-medium text-primary underline-offset-4 hover:underline" href="/privacy">
-            {t("register_privacy_link_2")}
-          </Link>
           .
         </p>
       </div>

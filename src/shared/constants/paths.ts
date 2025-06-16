@@ -6,4 +6,6 @@ export const paths = {
   resetPassword: "auth/reset-password",
   verifyEmail: "auth/verify-email",
   profile: "profile",
+  privacy: "/legal/privacy",
+  terms: "/legal/terms",
 } as const;

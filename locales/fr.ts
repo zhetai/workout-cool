@@ -10,7 +10,7 @@ export default {
   register_title: "Créer un compte",
   register_description: "Entrez vos informations ci-dessous pour créer votre compte",
   register_terms: "En vous inscrivant, vous acceptez nos",
-  register_privacy: "Conditions d'utilisation",
+  register_privacy: "Politique de confidentialité",
   register_privacy_link: "et notre",
   register_privacy_link_2: "Politique de confidentialité",
   password_forgot_title: "Forgot password?",

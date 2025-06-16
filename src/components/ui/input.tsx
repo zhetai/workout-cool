@@ -7,12 +7,12 @@ import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/shared/lib/utils";
 
 const inputVariants = cva(
-  "shadow-3xl relative w-full rounded-lg px-3.5 py-2.5 text-sm/[10px] font-medium text-black outline-none placeholder:font-normal placeholder:text-gray-500 focus:ring-1 focus:ring-black disabled:pointer-events-none disabled:opacity-30 ltr:text-left rtl:text-right",
+  "shadow-3xl relative w-full rounded-lg px-3.5 py-2.5 text-sm/[10px] font-medium text-black dark:text-white outline-none placeholder:font-normal placeholder:text-gray-500 focus:ring-1 focus:ring-black disabled:pointer-events-none disabled:opacity-30 ltr:text-left rtl:text-right",
   {
     variants: {
       variant: {
         default: "",
-        Search: "border border-gray-300 py-[7px] pl-8 pr-2 text-xs shadow-sm placeholder:text-black",
+        Search: "border border-gray-300 py-[7px] pl-8 pr-2 text-xs shadow-sm placeholder:text-black dark:placeholder:text-white",
         "input-form":
           "pr-9 outline-offset-0 focus:outline-[4px] focus:outline-primary/20 focus:ring-1 focus:ring-primary dark:focus:ring-primary",
       },

@@ -10,7 +10,7 @@ export default {
   register_title: "Create an account",
   register_description: "Enter your information below to create your account",
   register_terms: "By signing up, you agree to our",
-  register_privacy: "Terms of Service",
+  register_privacy: "Privacy Policy",
   register_privacy_link: "and our",
   register_privacy_link_2: "Privacy Policy",
   password_forgot_title: "Forgot password?",

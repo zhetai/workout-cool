@@ -23,8 +23,8 @@ export const VerifyEmailPage = () => {
   };
 
   return (
-    <div className="bg-background grid min-h-svh place-items-center px-4">
-      <Card className="w-full max-w-md p-4">
+    <div className="bg-background place-items-center px-4 h-full flex items-center justify-center">
+      <Card className="w-full max-w-md p-4 border-none shadow-none">
         <CardHeader className="text-center">
           <div className="mb-4 flex justify-center">
             <div className="rounded-full bg-primary/10 p-3">

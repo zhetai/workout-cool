@@ -17,5 +17,5 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     redirect(`${getServerUrl()}/${paths.root}`);
   }
 
-  return <div>{children}</div>;
+  return children;
 }

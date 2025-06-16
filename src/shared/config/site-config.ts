@@ -7,14 +7,14 @@ export const SiteConfig = {
   cdnIcon: "https://cdn.workout.cool/images/53992ead-81ad-43d9-bc89-9abe9a6ed800/public", // TODO
   company: {
     name: "Workout Cool",
-    address: "34 avenue des champ Elysée 75008 Paris, France", 
+    address: "34 avenue des champ Elysée 75008 Paris, France",
   },
   brand: {
     primary: "#007291",
   },
   email: {
-    from: "Workout Cool <workoutcool6@gmail.com>",
-    contact: "workoutcool6@gmail.com",
+    from: "Workout Cool <hello@workout.cool>",
+    contact: "hello@workout.cool",
   },
   maker: {
     image: "https://workout.cool/images/me/twitter-en.jpg",

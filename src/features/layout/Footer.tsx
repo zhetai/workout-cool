@@ -3,6 +3,7 @@ import { Github, Mail, Twitter } from "lucide-react";
 import { getI18n } from "locales/server";
 import { TFunction } from "locales/client";
 import { cn } from "@/shared/lib/utils";
+import { paths } from "@/shared/constants/paths";
 import { Link } from "@/components/ui/link";
 
 const SOCIAL_LINKS = [
@@ -26,7 +27,7 @@ const SOCIAL_LINKS = [
 const NAVIGATION = (t: TFunction) => [
   { name: t("commons.donate"), href: "https://ko-fi.com/workoutcool" },
   { name: t("commons.about"), href: "/about" },
-  { name: t("commons.privacy"), href: "/legal/privacy", hideOnMobile: true },
+  { name: t("commons.privacy"), href: paths.privacy, hideOnMobile: true },
 ];
 
 export const Footer = async () => {
