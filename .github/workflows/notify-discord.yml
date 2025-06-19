@@ -27,20 +27,20 @@ jobs:
         id: release-info
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            # Pour trigger manuel, récupère le dernier release ou utilise l'input
+            # For manual trigger, get the latest release or use the input
             if [ -n "${{ github.event.inputs.tag_name }}" ]; then
               TAG_NAME="${{ github.event.inputs.tag_name }}"
             else
               TAG_NAME=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
             fi
             
-            # Récupère les infos du release via GitHub CLI
+            # Get release info via GitHub CLI
             RELEASE_INFO=$(gh release view "$TAG_NAME" --json name,body,url,author,publishedAt,tagName)
             
             echo "tag_name=$(echo "$RELEASE_INFO" | jq -r '.tagName')" >> $GITHUB_OUTPUT
             echo "name=$(echo "$RELEASE_INFO" | jq -r '.name')" >> $GITHUB_OUTPUT
             
-            # Utilise EOF pour le body qui peut contenir des caractères spéciaux
+            # Use EOF for the body which may contain special characters
             echo "body<<EOF" >> $GITHUB_OUTPUT
             echo "$RELEASE_INFO" | jq -r '.body' >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
@@ -50,11 +50,11 @@ jobs:
             echo "author_html_url=https://github.com/$(echo "$RELEASE_INFO" | jq -r '.author.login')" >> $GITHUB_OUTPUT
             echo "published_at=$(echo "$RELEASE_INFO" | jq -r '.publishedAt')" >> $GITHUB_OUTPUT
           else
-            # Pour trigger automatique, utilise les données de l'événement
+            # For automatic trigger, use event data
             echo "tag_name=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
             echo "name=${{ github.event.release.name }}" >> $GITHUB_OUTPUT
             
-            # Utilise EOF pour le body du release automatique aussi
+            # Use EOF for the automatic release body as well
             echo "body<<EOF" >> $GITHUB_OUTPUT
             echo "${{ github.event.release.body }}" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
@@ -82,7 +82,7 @@ jobs:
 
       - name: Create Discord webhook payload
         run: |
-          # Créer un fichier JSON temporaire
+          # Create a temporary JSON file
           cat > discord_payload.json << 'EOF'
           {
             "avatar_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
