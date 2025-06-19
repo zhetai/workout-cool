@@ -5,6 +5,7 @@ import { TFunction } from "locales/client";
 import { cn } from "@/shared/lib/utils";
 import { paths } from "@/shared/constants/paths";
 import { Link } from "@/components/ui/link";
+import { DiscordSvg } from "@/components/svg/DiscordSvg";
 
 const SOCIAL_LINKS = [
   {
@@ -21,6 +22,11 @@ const SOCIAL_LINKS = [
     href: "mailto:coolworkout6@gmail.com",
     icon: Mail,
     label: "Email",
+  },
+  {
+    href: "https://discord.com/invite/HfsmS7bzXh",
+    icon: DiscordSvg,
+    label: "Discord",
   },
 ];
 

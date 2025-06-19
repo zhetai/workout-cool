@@ -9,6 +9,9 @@
 <img src="https://img.shields.io/github/issues/Snouzy/workout-cool" alt="Issues">
 <img src="https://img.shields.io/github/languages/count/Snouzy/workout-cool" alt="Languages">
 <img src="https://img.shields.io/github/repo-size/Snouzy/workout-cool" alt="Repository Size">
+<a href="https://discord.com/invite/HfsmS7bzXh">
+   <img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white&style=flat-square" alt="Discord">
+</a>
 <a href="https://ko-fi.com/workoutcool">
    <img src="https://img.shields.io/badge/sponsor%20on-ko--fi-ff5f5f?logo=ko-fi&logoColor=white&style=flat-square">
 </a>
@@ -308,10 +311,17 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ### How You Can Help
 
 - 🌟 **Star this repo** to show the world our community is alive and thriving
+- 💬 **Join our Discord** to connect with other fitness enthusiasts and developers
 - 🐛 **Report issues** you find. I'm listening to every single one
 - 💡 **Share your feature requests** finally, someone who will actually implement them !
 - 🔄 **Spread the word** to fellow fitness enthusiasts who lost hope
 - 🤝 **Contribute code** if you're a developer : let's build this together
+
+<div>
+  <a href="https://discord.com/invite/HfsmS7bzXh" target="_blank">
+    <img src="https://img.shields.io/badge/Discord-Join%20Our%20Community-5865F2?logo=discord&logoColor=white&style=for-the-badge" alt="Discord">
+  </a>
+</div>
 
 ## 💖 Sponsor This Project
 
