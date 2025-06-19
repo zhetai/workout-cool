@@ -160,17 +160,9 @@ id,name,name_en,description,description_en,full_video_url,full_video_image_url,i
 157,"Fentes arrières à la barre","Barbell Reverse Lunges","<p>Stand upright...</p>","<p>Stand upright...</p>",https://youtube.com/...,https://img.youtube.com/...,slug-fr,slug-en,PRIMARY_MUSCLE,QUADRICEPS
 ```
 
-Want unlimited exercise for local development ? 
+Want unlimited exercise for local development ?
 
 Just ask chatGPT the prompt from `./scripts/import-exercises-with-attributes.prompt.md`
-
-### Available Attribute Types
-
-- **TYPE**: `STRENGTH`, `CARDIO`, `PLYOMETRICS`, `STRETCHING`, etc.
-- **PRIMARY_MUSCLE**: `QUADRICEPS`, `CHEST`, `BACK`, `SHOULDERS`, etc.
-- **SECONDARY_MUSCLE**: Secondary muscle groups targeted
-- **EQUIPMENT**: `BARBELL`, `DUMBBELL`, `BODYWEIGHT`, `MACHINE`, etc.
-- **MECHANICS_TYPE**: `COMPOUND`, `ISOLATION`
 
 ## Project Architecture
 
@@ -204,33 +196,23 @@ features/
 └── api/ # Server actions or API calls
 ```
 
-## Roadmap
-
-Here are the next steps and goals for Workout.cool:
-
-- [ ] 🏋️‍♂️ Add new exercises and videos
-- [ ] 📱 Mobile app (React Native)
-- [ ] 🏆 Badges and gamification system
-- [ ] 📊 Advanced progress statistics
-- [ ] 🤝 Integration with wearables (watches, trackers)
-- [ ] 🌍 Multilingual support
-- [ ] 🔒 OAuth authentication (Google, Apple, etc.)
-- [ ] 💬 Built-in community forum
-
-Feel free to suggest your ideas via [issues](https://github.com/Snouzy/workout-cool/issues)!
-
 ## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ### Development Workflow
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-5. Push to the branch (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
+1. **Create an issue** for the feature/bug you want to work on
+2. **Assign yourself** to the issue
+3. Fork the repository
+4. Create a feature branch (`git checkout -b feature/amazing-feature`)
+5. Make your changes following our [code standards](#code-style)
+6. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+7. Push to the branch (`git push origin feature/amazing-feature`)
+8. Open a Pull Request (one issue = one PR)
+9. Address review comments promptly
+
+**📋 For complete contribution guidelines, see our [Contributing Guide](CONTRIBUTING.md)**
 
 ### Code Style
 
