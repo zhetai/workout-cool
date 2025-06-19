@@ -110,17 +110,17 @@ jobs:
                     "name": "📁 Repository",
                     "value": "[${{ github.event.repository.name }}](${{ github.event.repository.html_url }})",
                     "inline": true
+                  },
+                  {
+                    "name": "🔗 Download",
+                    "value": "[Release Page](${{ steps.release-info.outputs.html_url }})",
+                    "inline": true
                   }
                   # {
-                  #   "name": "🔗 Download",
-                  #   "value": "[Release Page](${{ steps.release-info.outputs.html_url }})",
-                  #   "inline": true
-                  # },
-                  {
-                    "name": "📝 Files Changed",
-                    "value": "• ${{ steps.changed-files.outputs.all_changed_files }}",
-                    "inline": false
-                  }
+                  #   "name": "📝 Files Changed",
+                  #   "value": "• ${{ steps.changed-files.outputs.all_changed_files }}",
+                  #   "inline": false
+                  # }
                   # {
                   #   "name": "📝 Release Notes",
                   #   "value": "${{ steps.release-info.outputs.body }}",
