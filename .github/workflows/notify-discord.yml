@@ -9,13 +9,9 @@ jobs:
   discordNotification:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Discord message
+      - name: Send test Discord message
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
         with:
-          message: |
-            🚀 New release: **${{ github.event.release.name }}**
-            ${{ github.event.release.html_url }}
-
-            ${{ github.event.release.body }}
+          message: "✅ Test réussi depuis GitHub Actions"
