@@ -160,6 +160,8 @@ id,name,name_en,description,description_en,full_video_url,full_video_image_url,i
 157,"Fentes arrières à la barre","Barbell Reverse Lunges","<p>Stand upright...</p>","<p>Stand upright...</p>",https://youtube.com/...,https://img.youtube.com/...,slug-fr,slug-en,PRIMARY_MUSCLE,QUADRICEPS
 ```
 
+Want unlimited exercise for local development ? Just ask chatGPT the prompt from ./scripts/import-exercises-with-attributes.prompt.md
+
 ### Available Attribute Types
 
 - **TYPE**: `STRENGTH`, `CARDIO`, `PLYOMETRICS`, `STRETCHING`, etc.
@@ -317,4 +319,4 @@ Appear in the README and on the website as supporter by donating:
   Your support helps cover hosting costs, exercise database updates, and continuous improvement.<br>
   Thank you for keeping <strong>workout.cool</strong> alive and evolving 💪
 </p>
-````
+```
