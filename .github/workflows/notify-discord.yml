@@ -9,14 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     name: Discord Notifier
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Get previous release
+        id: previous-release
+        run: |
+          PREV_TAG=$(git tag --sort=-version:refname | grep -v '${{ github.event.release.tag_name }}' | head -n1)
+          echo "previous_tag=${PREV_TAG}" >> $GITHUB_OUTPUT
       - name: Get changed files since last release
         id: changed-files
-        uses: tj-actions/changed-files@v34
+        uses: tj-actions/changed-files@v44
         with:
-          base_sha: ${{ github.event.before || 'HEAD~1' }}
+          base_sha: ${{ steps.previous-release.outputs.previous_tag }}
           separator: "\n• "
       - name: Discord notification
         env:
