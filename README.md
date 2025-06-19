@@ -160,7 +160,9 @@ id,name,name_en,description,description_en,full_video_url,full_video_image_url,i
 157,"Fentes arrières à la barre","Barbell Reverse Lunges","<p>Stand upright...</p>","<p>Stand upright...</p>",https://youtube.com/...,https://img.youtube.com/...,slug-fr,slug-en,PRIMARY_MUSCLE,QUADRICEPS
 ```
 
-Want unlimited exercise for local development ? Just ask chatGPT the prompt from ./scripts/import-exercises-with-attributes.prompt.md
+Want unlimited exercise for local development ? 
+
+Just ask chatGPT the prompt from `./scripts/import-exercises-with-attributes.prompt.md`
 
 ### Available Attribute Types
 
