@@ -32,5 +32,5 @@ db-seed:
 	pnpm run import:exercises-full ./data/sample-exercises.csv
 
 # Start the dev server (with DB, migrate, seed)
-dev: up db-migrate db-seed
+dev: up db-migrate db-generate db-seed
 	pnpm dev
