@@ -85,7 +85,7 @@ jobs:
             "embeds": [
               {
                 "title": "🚀 New Release: ${{ steps.release-info.outputs.tag_name }}",
-                "description": "${{ steps.release-info.outputs.name }}\n\n${{ steps.release-info.outputs.body }}",
+                "description": "${{ steps.release-info.outputs.name }}",
                 "url": "${{ steps.release-info.outputs.html_url }}",
                 "color": 5763719,
                 "thumbnail": {
@@ -115,6 +115,11 @@ jobs:
                   {
                     "name": "📝 Files Changed",
                     "value": "• ${{ steps.changed-files.outputs.all_changed_files }}",
+                    "inline": false
+                  },
+                  {
+                    "name": "📝 Release Notes",
+                    "value": "${{ steps.release-info.outputs.body }}",
                     "inline": false
                   }
                 ],
