@@ -1,17 +1,16 @@
-name: Notify Discord on Release
+name: Discord notification
 
 on:
-  release:
-    types: [published]
-  workflow_dispatch:
+  push:
+    branches: [master]
 
 jobs:
-  discordNotification:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Send test Discord message
-        uses: Ilshidur/action-discord@master
+      - name: Discord notification
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
-        with:
-          message: "✅ Test réussi depuis GitHub Actions"
+          DISCORD_WEBHOOK: ${{secrets.DISCORD_RELEASE_WEBHOOK}}
+          DISCORD_EMBEDS:
+            '[{ "title":"${{github.event.head_commit.message}}", "footer":{"text":"Pushed by ${{github.event.head_commit.author.name}}"} }]'
+        uses: Ilshidur/action-discord@0.3.2
