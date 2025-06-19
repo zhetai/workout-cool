@@ -33,7 +33,6 @@ jobs:
           "fields": [
             { "name": "📦 Version", "value": "`${{ github.event.release.tag_name }}`", "inline": true },
             { "name": "👤 Released by", "value": "[${{ github.event.release.author.login }}](${{ github.event.release.author.html_url }})", "inline": true },
-            { "name": "🌟 Type", "value": "${{ github.event.release.prerelease && 'Pre-release' || 'Stable' }}", "inline": true },
             { "name": "📁 Repository", "value": "[${{ github.event.repository.name }}](${{ github.event.repository.html_url }})", "inline": true },
             { "name": "🔗 Download", "value": "[Release Page](${{ github.event.release.html_url }})", "inline": true },
             { "name": "📝 Files Changed", "value": "• ${{ steps.changed-files.outputs.all_changed_files }}", "inline": false }
