@@ -116,16 +116,6 @@ jobs:
                     "value": "[Release Page](${{ steps.release-info.outputs.html_url }})",
                     "inline": true
                   }
-                  # {
-                  #   "name": "📝 Files Changed",
-                  #   "value": "• ${{ steps.changed-files.outputs.all_changed_files }}",
-                  #   "inline": false
-                  # }
-                  # {
-                  #   "name": "📝 Release Notes",
-                  #   "value": "${{ steps.release-info.outputs.body }}",
-                  #   "inline": false
-                  # }
                 ],
                 "timestamp": "${{ steps.release-info.outputs.published_at }}",
                 "footer": {
