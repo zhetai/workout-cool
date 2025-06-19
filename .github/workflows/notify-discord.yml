@@ -31,7 +31,7 @@ jobs:
             fi
             
             # Récupère les infos du release via GitHub CLI
-            RELEASE_INFO=$(gh release view "$TAG_NAME" --json name,body,htmlUrl,author,publishedAt,tagName)
+            RELEASE_INFO=$(gh release view "$TAG_NAME" --json name,body,url,author,publishedAt,tagName)
             
             echo "tag_name=$(echo "$RELEASE_INFO" | jq -r '.tagName')" >> $GITHUB_OUTPUT
             echo "name=$(echo "$RELEASE_INFO" | jq -r '.name')" >> $GITHUB_OUTPUT
@@ -41,7 +41,7 @@ jobs:
             echo "$RELEASE_INFO" | jq -r '.body' >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
             
-            echo "html_url=$(echo "$RELEASE_INFO" | jq -r '.htmlUrl')" >> $GITHUB_OUTPUT
+            echo "html_url=$(echo "$RELEASE_INFO" | jq -r '.url')" >> $GITHUB_OUTPUT
             echo "author_login=$(echo "$RELEASE_INFO" | jq -r '.author.login')" >> $GITHUB_OUTPUT
             echo "author_html_url=https://github.com/$(echo "$RELEASE_INFO" | jq -r '.author.login')" >> $GITHUB_OUTPUT
             echo "published_at=$(echo "$RELEASE_INFO" | jq -r '.publishedAt')" >> $GITHUB_OUTPUT
