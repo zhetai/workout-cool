@@ -90,11 +90,9 @@ management._
 
 ### Prerequisites
 
-- Node.js 18+
-- Either:
-  - Docker
-  - OR PostgreSQL external database
-- pnpm (recommended) or npm
+- [Node.js](https://nodejs.org/) (v18+)
+- [pnpm](https://pnpm.io/) (v8+)
+- [Docker](https://www.docker.com/)
 
 ### Installation
 
@@ -111,48 +109,20 @@ management._
    pnpm install
    ```
 
-3. **Set up environment variables**
+3. **Copy environment variables**
 
    ```bash
    cp .env.example .env
    ```
 
-   Fill in your database URL and other required environment variables:
+4. **Start everything for development:**
 
-   ```env
-   DATABASE_URL="postgresql://username:password@localhost:5432/workout_cool"
-   BETTER_AUTH_SECRET="your-secret-key"
-   # ... other variables
+   ```sh
+   make dev
    ```
 
-4. **Set up the database**
-
-   #### Option 1: Using Docker
-
-   The project provides a convenient `make` command that handles everything:
-
-   ```bash
-   make init
-   ```
-
-   This single command will:
-
-   - Start the PostgreSQL database using Docker
-   - Run database migrations
-   - Start the development server
-
-   #### Option 2: Manual PostgreSQL Setup
-
-   If you prefer to use your own PostgreSQL installation:
-
-   ```bash
-   # Run migrations
-   npx prisma migrate deploy
-   npx prisma generate
-
-   # Start the development server
-   pnpm dev
-   ```
+   - This will start the database in Docker, run migrations, seed the DB, and start the Next.js dev server.
+   - To stop services run `make down`
 
 5. **Open your browser** Navigate to [http://localhost:3000](http://localhost:3000)
 
@@ -267,14 +237,14 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## Deployment
 
-### Using Docker (Not ready yet : todo)
+### Using Docker
 
 ```bash
 # Build the Docker image
-docker build -t workout-cool .
+docker build -t yourusername/workout-cool .
 
 # Run the container
-docker run -p 3000:3000 workout-cool
+docker run -p 3000:3000 --env-file .env.production yourusername/workout-cool
 ```
 
 ### Manual Deployment
@@ -347,3 +317,4 @@ Appear in the README and on the website as supporter by donating:
   Your support helps cover hosting costs, exercise database updates, and continuous improvement.<br>
   Thank you for keeping <strong>workout.cool</strong> alive and evolving 💪
 </p>
+````
