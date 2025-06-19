@@ -12,23 +12,12 @@ import { Button } from "@/components/ui/button";
 import { QuitWorkoutDialog } from "../../workout-builder/ui/quit-workout-dialog";
 
 interface WorkoutSessionHeaderProps {
-  elapsedTime: string;
-  isTimerRunning: boolean;
-  onToggleTimer: VoidFunction;
-  onResetTimer: VoidFunction;
   onQuitWorkout: VoidFunction;
 }
 
-export function WorkoutSessionHeader({
-  elapsedTime,
-  isTimerRunning,
-  onToggleTimer,
-  onResetTimer,
-  onQuitWorkout,
-}: WorkoutSessionHeaderProps) {
+export function WorkoutSessionHeader({ onQuitWorkout }: WorkoutSessionHeaderProps) {
   const t = useI18n();
   const [showQuitDialog, setShowQuitDialog] = useState(false);
-  const [resetCount, setResetCount] = useState(0);
   const [volumeUnit, setVolumeUnit] = useState<WeightUnit>("kg");
   const locale = useCurrentLocale();
   const { getExercisesCompleted, getTotalExercises, session, getTotalVolumeInUnit } = useWorkoutSession();

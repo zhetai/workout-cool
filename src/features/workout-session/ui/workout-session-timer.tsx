@@ -3,17 +3,13 @@
 import { useState } from "react";
 import { Play, Pause, RotateCcw } from "lucide-react";
 
-import { useI18n } from "locales/client";
 import { cn } from "@/shared/lib/utils";
 import { useWorkoutSession } from "@/features/workout-builder";
 import { Timer } from "@/components/ui/timer";
 import { Button } from "@/components/ui/button";
 
 export function WorkoutSessionTimer() {
-  const t = useI18n();
-
   const { isWorkoutActive, isTimerRunning, toggleTimer, resetTimer } = useWorkoutSession();
-  console.log("isWorkoutActive:", isWorkoutActive);
 
   const [resetCount, setResetCount] = useState(0);
 
@@ -27,7 +23,7 @@ export function WorkoutSessionTimer() {
   }
 
   return (
-    <div className="absolute bottom-16 left-0 right-0 flex justify-center mb-3">
+    <div className="absolute bottom-16 left-0 right-4 flex justify-center mb-3">
       <div className="bg-white dark:bg-slate-900 rounded-full px-6 py-4 border border-slate-200 dark:border-slate-700 shadow-lg backdrop-blur-sm">
         <div className="flex items-center justify-between gap-4">
           {/* Timer display */}

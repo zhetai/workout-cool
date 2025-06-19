@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { useState } from "react";
 import Image from "next/image";
 import { Play, Shuffle, Trash2, GripVertical, Loader2 } from "lucide-react";
@@ -44,7 +45,7 @@ export function ExerciseListItem({ exercise, muscle, onShuffle, onPick, onDelete
     setShowVideo(true);
   };
 
-  const handleOpenPickModal = () => {
+  const _handleOpenPickModal = () => {
     setShowPickModal(true);
   };
 

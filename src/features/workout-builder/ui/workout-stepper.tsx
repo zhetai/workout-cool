@@ -77,8 +77,7 @@ export function WorkoutStepper() {
     }
   }, [currentStep, selectedEquipment, selectedMuscles, fromSession]);
 
-  const { isWorkoutActive, session, startWorkout, formatElapsedTime, isTimerRunning, toggleTimer, resetTimer, quitWorkout } =
-    useWorkoutSession();
+  const { isWorkoutActive, session, startWorkout, quitWorkout } = useWorkoutSession();
 
   const canContinue = currentStep === 1 ? canProceedToStep2 : currentStep === 2 ? canProceedToStep3 : exercisesByMuscle.length > 0;
 
@@ -165,15 +164,7 @@ export function WorkoutStepper() {
   if (isWorkoutActive && session) {
     return (
       <div className="w-full max-w-6xl mx-auto">
-        {!showCongrats && (
-          <WorkoutSessionHeader
-            elapsedTime={formatElapsedTime()}
-            isTimerRunning={isTimerRunning}
-            onQuitWorkout={quitWorkout}
-            onResetTimer={resetTimer}
-            onToggleTimer={toggleTimer}
-          />
-        )}
+        {!showCongrats && <WorkoutSessionHeader onQuitWorkout={quitWorkout} />}
         <WorkoutSessionSets isWorkoutActive={isWorkoutActive} onCongrats={() => setShowCongrats(true)} showCongrats={showCongrats} />
       </div>
     );
