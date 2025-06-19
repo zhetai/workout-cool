@@ -9,6 +9,10 @@ on:
         description: "Tag name (leave empty for latest release)"
         required: false
         type: string
+      custom_title:
+        description: "Custom title for the release notification"
+        required: false
+        type: string
 
 jobs:
   Discord:
@@ -84,7 +88,7 @@ jobs:
             "avatar_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
             "embeds": [
               {
-                "title": "🚀 New Release: ${{ steps.release-info.outputs.tag_name }}",
+                "title": "🚀 New Release: ${{ steps.release-info.outputs.tag_name }}${{ github.event.inputs.custom_title && ' - ' || '' }}${{ github.event.inputs.custom_title || '' }}",
                 "description": "${{ steps.release-info.outputs.name }}",
                 "url": "${{ steps.release-info.outputs.html_url }}",
                 "color": 5763719,
