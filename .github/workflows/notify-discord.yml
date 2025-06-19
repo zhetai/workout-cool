@@ -16,7 +16,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v34
         with:
-          base_sha: ${{ github.event.release.target_commitish }}
+          base_sha: ${{ github.event.before || 'HEAD~1' }}
           separator: "\n• "
       - name: Discord notification
         env:
