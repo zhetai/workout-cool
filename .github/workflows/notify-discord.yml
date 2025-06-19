@@ -76,75 +76,63 @@ jobs:
           base_sha: ${{ steps.previous-release.outputs.previous_tag }}
           separator: "\n• "
           
-      - name: Prepare Discord message
-        id: discord-message
+      - name: Create Discord webhook payload
         run: |
-          # Utiliser jq pour créer un JSON valide
-          DESCRIPTION_FULL="${{ steps.release-info.outputs.name }}\n\n${{ steps.release-info.outputs.body }}"
-          
-          DISCORD_EMBEDS=$(jq -n \
-            --arg title "🚀 New Release: ${{ steps.release-info.outputs.tag_name }}" \
-            --arg description "$DESCRIPTION_FULL" \
-            --arg url "${{ steps.release-info.outputs.html_url }}" \
-            --arg tag "${{ steps.release-info.outputs.tag_name }}" \
-            --arg author "${{ steps.release-info.outputs.author_login }}" \
-            --arg author_url "${{ steps.release-info.outputs.author_html_url }}" \
-            --arg repo "${{ github.event.repository.name }}" \
-            --arg repo_url "${{ github.event.repository.html_url }}" \
-            --arg files "${{ steps.changed-files.outputs.all_changed_files }}" \
-            --arg timestamp "${{ steps.release-info.outputs.published_at }}" \
-            '[{
-              "title": $title,
-              "description": $description,
-              "url": $url,
-              "color": 5763719,
-              "thumbnail": {
-                "url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-              },
-              "fields": [
-                {
-                  "name": "📦 Version",
-                  "value": ("`" + $tag + "`"),
-                  "inline": true
+          # Créer un fichier JSON temporaire
+          cat > discord_payload.json << 'EOF'
+          {
+            "avatar_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+            "embeds": [
+              {
+                "title": "🚀 New Release: ${{ steps.release-info.outputs.tag_name }}",
+                "description": "${{ steps.release-info.outputs.name }}\n\n${{ steps.release-info.outputs.body }}",
+                "url": "${{ steps.release-info.outputs.html_url }}",
+                "color": 5763719,
+                "thumbnail": {
+                  "url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                 },
-                {
-                  "name": "👤 Released by",
-                  "value": ("[" + $author + "](" + $author_url + ")"),
-                  "inline": true
-                },
-                {
-                  "name": "📁 Repository",
-                  "value": ("[" + $repo + "](" + $repo_url + ")"),
-                  "inline": true
-                },
-                {
-                  "name": "🔗 Download",
-                  "value": ("[Release Page](" + $url + ")"),
-                  "inline": true
-                },
-                {
-                  "name": "📝 Files Changed",
-                  "value": ("• " + $files),
-                  "inline": false
+                "fields": [
+                  {
+                    "name": "📦 Version",
+                    "value": "`${{ steps.release-info.outputs.tag_name }}`",
+                    "inline": true
+                  },
+                  {
+                    "name": "👤 Released by",
+                    "value": "[${{ steps.release-info.outputs.author_login }}](${{ steps.release-info.outputs.author_html_url }})",
+                    "inline": true
+                  },
+                  {
+                    "name": "📁 Repository",
+                    "value": "[${{ github.event.repository.name }}](${{ github.event.repository.html_url }})",
+                    "inline": true
+                  },
+                  {
+                    "name": "🔗 Download",
+                    "value": "[Release Page](${{ steps.release-info.outputs.html_url }})",
+                    "inline": true
+                  },
+                  {
+                    "name": "📝 Files Changed",
+                    "value": "• ${{ steps.changed-files.outputs.all_changed_files }}",
+                    "inline": false
+                  }
+                ],
+                "timestamp": "${{ steps.release-info.outputs.published_at }}",
+                "footer": {
+                  "text": "Workout Cool • Release",
+                  "icon_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                 }
-              ],
-              "timestamp": $timestamp,
-              "footer": {
-                "text": "Workout Cool • Release",
-                "icon_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
               }
-            }]')
-          
-          echo "discord_embeds<<EOF" >> $GITHUB_OUTPUT
-          echo "$DISCORD_EMBEDS" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+            ]
+          }
+          EOF
 
-      - name: Discord notification
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
-          DISCORD_AVATAR: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-          DISCORD_EMBEDS: ${{ steps.discord-message.outputs.discord_embeds }}
-        uses: Ilshidur/action-discord@master
+      - name: Send Discord notification
+        run: |
+          curl -H "Content-Type: application/json" \
+               -d @discord_payload.json \
+               "${{ secrets.DISCORD_RELEASE_WEBHOOK }}"
 
 # https://stackoverflow.com/a/68068674/19395252
 # https://birdie0.github.io/discord-webhooks-guide/structure/embeds.html
