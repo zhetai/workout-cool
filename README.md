@@ -9,7 +9,7 @@
 <img src="https://img.shields.io/github/issues/Snouzy/workout-cool" alt="Issues">
 <img src="https://img.shields.io/github/languages/count/Snouzy/workout-cool" alt="Languages">
 <img src="https://img.shields.io/github/repo-size/Snouzy/workout-cool" alt="Repository Size">
-<a href="https://discord.com/invite/HfsmS7bzXh">
+<a href="https://discord.gg/NtrsUBuHUB">
    <img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white&style=flat-square" alt="Discord">
 </a>
 <a href="https://ko-fi.com/workoutcool">
@@ -318,7 +318,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - 🤝 **Contribute code** if you're a developer : let's build this together
 
 <div>
-  <a href="https://discord.com/invite/HfsmS7bzXh" target="_blank">
+  <a href="https://discord.gg/NtrsUBuHUB" target="_blank">
     <img src="https://img.shields.io/badge/Discord-Join%20Our%20Community-5865F2?logo=discord&logoColor=white&style=for-the-badge" alt="Discord">
   </a>
 </div>

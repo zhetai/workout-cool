@@ -11,7 +11,7 @@
 
 - **GitHub Discussions**: For general questions and ideas
 - **GitHub Issues**: For bug reports and feature requests
-- **Discord**: [Join our community](https://discord.gg/workout-cool) for real-time chat (incoming)
+- **Discord**: [Join our community](https://discord.gg/NtrsUBuHUB) for real-time chat (incoming)
 
 ### Resources
 

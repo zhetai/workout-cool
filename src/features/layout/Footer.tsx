@@ -24,7 +24,7 @@ const SOCIAL_LINKS = [
     label: "Email",
   },
   {
-    href: "https://discord.com/invite/HfsmS7bzXh",
+    href: "https://discord.gg/NtrsUBuHUB",
     icon: DiscordSvg,
     label: "Discord",
   },
