@@ -76,11 +76,30 @@ jobs:
           base_sha: ${{ steps.previous-release.outputs.previous_tag }}
           separator: "\n• "
           
+      - name: Prepare Discord message
+        id: discord-message
+        run: |
+          # Échapper les caractères spéciaux dans le JSON
+          TITLE="🚀 New Release: ${{ steps.release-info.outputs.tag_name }}"
+          DESCRIPTION="${{ steps.release-info.outputs.name }}"
+          BODY="${{ steps.release-info.outputs.body }}"
+          
+          # Échapper les guillemets et les sauts de ligne pour JSON
+          BODY_ESCAPED=$(echo "$BODY" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+          DESCRIPTION_FULL="$DESCRIPTION\\n\\n$BODY_ESCAPED"
+          
+          # Construire le JSON
+          DISCORD_EMBEDS="[{\"title\": \"$TITLE\", \"description\": \"$DESCRIPTION_FULL\", \"url\": \"${{ steps.release-info.outputs.html_url }}\", \"color\": 5763719, \"thumbnail\": {\"url\": \"https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png\"}, \"fields\": [{\"name\": \"📦 Version\", \"value\": \"\`${{ steps.release-info.outputs.tag_name }}\`\", \"inline\": true}, {\"name\": \"👤 Released by\", \"value\": \"[${{ steps.release-info.outputs.author_login }}](${{ steps.release-info.outputs.author_html_url }})\", \"inline\": true}, {\"name\": \"📁 Repository\", \"value\": \"[${{ github.event.repository.name }}](${{ github.event.repository.html_url }})\", \"inline\": true}, {\"name\": \"🔗 Download\", \"value\": \"[Release Page](${{ steps.release-info.outputs.html_url }})\", \"inline\": true}, {\"name\": \"📝 Files Changed\", \"value\": \"• ${{ steps.changed-files.outputs.all_changed_files }}\", \"inline\": false}], \"timestamp\": \"${{ steps.release-info.outputs.published_at }}\", \"footer\": {\"text\": \"Workout Cool • Release\", \"icon_url\": \"https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png\"}}]"
+          
+          echo "discord_embeds<<EOF" >> $GITHUB_OUTPUT
+          echo "$DISCORD_EMBEDS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
           DISCORD_AVATAR: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-          DISCORD_EMBEDS: '[{"title": "🚀 New Release: ${{ steps.release-info.outputs.tag_name }}", "description": "${{ steps.release-info.outputs.name }}\n\n${{ steps.release-info.outputs.body }}", "url": "${{ steps.release-info.outputs.html_url }}", "color": 5763719, "thumbnail": {"url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"}, "fields": [{"name": "📦 Version", "value": "`${{ steps.release-info.outputs.tag_name }}`", "inline": true}, {"name": "👤 Released by", "value": "[${{ steps.release-info.outputs.author_login }}](${{ steps.release-info.outputs.author_html_url }})", "inline": true}, {"name": "📁 Repository", "value": "[${{ github.event.repository.name }}](${{ github.event.repository.html_url }})", "inline": true}, {"name": "🔗 Download", "value": "[Release Page](${{ steps.release-info.outputs.html_url }})", "inline": true}, {"name": "📝 Files Changed", "value": "• ${{ steps.changed-files.outputs.all_changed_files }}", "inline": false}], "timestamp": "${{ steps.release-info.outputs.published_at }}", "footer": {"text": "Workout Cool • Release", "icon_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"}}]'
+          DISCORD_EMBEDS: ${{ steps.discord-message.outputs.discord_embeds }}
         uses: Ilshidur/action-discord@master
 
 # https://stackoverflow.com/a/68068674/19395252
