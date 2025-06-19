@@ -1,34 +1,38 @@
-### Review Process
+### ✅ Review & Contribution Flow
 
-- All PRs require at least one review from a maintainer
-- Address review feedback promptly
-- Keep discussions constructive and respectful
-- PRs will be merged using "Squash and merge"
-
-## Getting Help
-
-### Where to Ask Questions
-
-- **GitHub Discussions**: For general questions and ideas
-- **GitHub Issues**: For bug reports and feature requests
-- **Discord**: [Join our community](https://discord.gg/NtrsUBuHUB) for real-time chat (incoming)
-
-### Resources
-
-- [Feature-Sliced Design](https://feature-sliced.design/)
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Prisma Documentation](https://www.prisma.io/docs/)
-
-## Recognition
-
-Contributors are recognized in:
-
-- GitHub contributors list
-- Project documentation
-- Release notes for significant contributions
-
-Thank you for contributing to Workout Cool! 🏋️‍♂️💪
+- Before starting, **create an issue** for the task you want to work on.
+- **Assign yourself** to the issue so it’s clear who’s working on it.
+- Keep PRs focused: one issue = one PR (preferably small and scoped).
+- All PRs need **at least one maintainer review**.
+- We use **"Squash and merge"** to keep history clean.
+- Address review comments quickly and respectfully.
 
 ---
 
-**Questions?** Feel free to open an issue or reach out to the maintainers.
+### 🤔 Need Help?
+
+- **General questions** → use GitHub Discussions
+- **Bug reports or features** → open an Issue
+- **Live chat** → [Join our Discord](https://discord.gg/NtrsUBuHUB)
+
+---
+
+### 📚 Useful Links
+
+- [Feature-Sliced Design](https://feature-sliced.design/)
+- [Next.js Docs](https://nextjs.org/docs)
+- [Prisma Docs](https://www.prisma.io/docs/)
+
+---
+
+### 🌟 Recognition
+
+We credit contributors in:
+
+- the GitHub contributors list
+- release notes (for impactful work)
+- internal documentation if relevant
+
+Thanks again for contributing to Workout Cool! 💪
+
+Questions? Just open an issue or ping a maintainer.
