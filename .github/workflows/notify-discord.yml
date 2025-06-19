@@ -33,22 +33,63 @@ jobs:
             # Récupère les infos du release via GitHub CLI
             RELEASE_INFO=$(gh release view "$TAG_NAME" --json name,body,url,author,publishedAt,tagName)
             
-            echo "tag_name=$(echo "$RELEASE_INFO" | jq -r '.tagName')" >> $GITHUB_OUTPUT
-            echo "name=$(echo "$RELEASE_INFO" | jq -r '.name')" >> $GITHUB_OUTPUT
-            echo "body=$(echo "$RELEASE_INFO" | jq -r '.body')" >> $GITHUB_OUTPUT
-            echo "html_url=$(echo "$RELEASE_INFO" | jq -r '.url')" >> $GITHUB_OUTPUT
-            echo "author_login=$(echo "$RELEASE_INFO" | jq -r '.author.login')" >> $GITHUB_OUTPUT
-            echo "author_html_url=https://github.com/$(echo "$RELEASE_INFO" | jq -r '.author.login')" >> $GITHUB_OUTPUT
-            echo "published_at=$(echo "$RELEASE_INFO" | jq -r '.publishedAt')" >> $GITHUB_OUTPUT
+            # Utilise des délimiteurs pour éviter les problèmes d'échappement
+            echo "tag_name<<EOF" >> $GITHUB_OUTPUT
+            echo "$RELEASE_INFO" | jq -r '.tagName' >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "name<<EOF" >> $GITHUB_OUTPUT
+            echo "$RELEASE_INFO" | jq -r '.name' >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "body<<EOF" >> $GITHUB_OUTPUT
+            echo "$RELEASE_INFO" | jq -r '.body' >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "html_url<<EOF" >> $GITHUB_OUTPUT
+            echo "$RELEASE_INFO" | jq -r '.url' >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "author_login<<EOF" >> $GITHUB_OUTPUT
+            echo "$RELEASE_INFO" | jq -r '.author.login' >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "author_html_url<<EOF" >> $GITHUB_OUTPUT
+            echo "https://github.com/$(echo "$RELEASE_INFO" | jq -r '.author.login')" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "published_at<<EOF" >> $GITHUB_OUTPUT
+            echo "$RELEASE_INFO" | jq -r '.publishedAt' >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
           else
             # Pour trigger automatique, utilise les données de l'événement
-            echo "tag_name=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
-            echo "name=${{ github.event.release.name }}" >> $GITHUB_OUTPUT
-            echo "body=${{ github.event.release.body }}" >> $GITHUB_OUTPUT
-            echo "html_url=${{ github.event.release.html_url }}" >> $GITHUB_OUTPUT
-            echo "author_login=${{ github.event.release.author.login }}" >> $GITHUB_OUTPUT
-            echo "author_html_url=${{ github.event.release.author.html_url }}" >> $GITHUB_OUTPUT
-            echo "published_at=${{ github.event.release.published_at }}" >> $GITHUB_OUTPUT
+            echo "tag_name<<EOF" >> $GITHUB_OUTPUT
+            echo "${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "name<<EOF" >> $GITHUB_OUTPUT
+            echo "${{ github.event.release.name }}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "body<<EOF" >> $GITHUB_OUTPUT
+            echo "${{ github.event.release.body }}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "html_url<<EOF" >> $GITHUB_OUTPUT
+            echo "${{ github.event.release.html_url }}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "author_login<<EOF" >> $GITHUB_OUTPUT
+            echo "${{ github.event.release.author.login }}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "author_html_url<<EOF" >> $GITHUB_OUTPUT
+            echo "${{ github.event.release.author.html_url }}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "published_at<<EOF" >> $GITHUB_OUTPUT
+            echo "${{ github.event.release.published_at }}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
           fi
         env:
           GH_TOKEN: ${{ github.token }}
@@ -56,15 +97,19 @@ jobs:
       - name: Get previous release
         id: previous-release
         run: |
-          PREV_TAG=$(git tag --sort=-version:refname | grep -v '${{ steps.release-info.outputs.tag_name }}' | head -n1)
-          echo "previous_tag=${PREV_TAG}" >> $GITHUB_OUTPUT
+          PREV_TAG=$(git tag --sort=-version:refname | grep -v '${{ steps.release-info.outputs.tag_name }}' | head -n1 || echo "")
+          echo "previous_tag<<EOF" >> $GITHUB_OUTPUT
+          echo "${PREV_TAG}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
           
       - name: Get changed files since last release
         id: changed-files
+        if: steps.previous-release.outputs.previous_tag != ''
         uses: tj-actions/changed-files@v44
         with:
           base_sha: ${{ steps.previous-release.outputs.previous_tag }}
-          separator: "\n• "
+          separator: ", "
+          safe_output: false
           
       - name: Discord notification
         env:
@@ -83,7 +128,7 @@ jobs:
             { "name": "👤 Released by", "value": "[${{ steps.release-info.outputs.author_login }}](${{ steps.release-info.outputs.author_html_url }})", "inline": true },
             { "name": "📁 Repository", "value": "[${{ github.event.repository.name }}](${{ github.event.repository.html_url }})", "inline": true },
             { "name": "🔗 Download", "value": "[Release Page](${{ steps.release-info.outputs.html_url }})", "inline": true },
-            { "name": "📝 Files Changed", "value": "• ${{ steps.changed-files.outputs.all_changed_files }}", "inline": false }
+            { "name": "📝 Files Changed", "value": "${{ steps.changed-files.outputs.all_changed_files || 'No previous release to compare' }}", "inline": false }
           ],
           "timestamp": "${{ steps.release-info.outputs.published_at }}",
           "footer": {
