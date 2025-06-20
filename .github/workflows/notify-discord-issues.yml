@@ -1,0 +1,175 @@
+name: Discord Issue Notification
+
+on:
+  issues:
+    types: [opened, closed, reopened]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Issue number to notify about"
+        required: true
+        type: string
+
+jobs:
+  Discord:
+    runs-on: ubuntu-latest
+    name: Discord Issue Notifier
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get issue info
+        id: issue-info
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # For manual trigger, get the specific issue
+            ISSUE_NUMBER="${{ github.event.inputs.issue_number }}"
+            
+            # Get issue info via GitHub CLI
+            ISSUE_INFO=$(gh issue view "$ISSUE_NUMBER" --json number,title,body,url,author,state,createdAt,closedAt,labels)
+            
+            echo "number=$(echo "$ISSUE_INFO" | jq -r '.number')" >> $GITHUB_OUTPUT
+            echo "title=$(echo "$ISSUE_INFO" | jq -r '.title')" >> $GITHUB_OUTPUT
+            
+            # Use EOF for the body which may contain special characters
+            echo "body<<EOF" >> $GITHUB_OUTPUT
+            echo "$ISSUE_INFO" | jq -r '.body' >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "html_url=$(echo "$ISSUE_INFO" | jq -r '.url')" >> $GITHUB_OUTPUT
+            echo "author_login=$(echo "$ISSUE_INFO" | jq -r '.author.login')" >> $GITHUB_OUTPUT
+            echo "author_html_url=https://github.com/$(echo "$ISSUE_INFO" | jq -r '.author.login')" >> $GITHUB_OUTPUT
+            echo "state=$(echo "$ISSUE_INFO" | jq -r '.state')" >> $GITHUB_OUTPUT
+            echo "created_at=$(echo "$ISSUE_INFO" | jq -r '.createdAt')" >> $GITHUB_OUTPUT
+            echo "closed_at=$(echo "$ISSUE_INFO" | jq -r '.closedAt // empty')" >> $GITHUB_OUTPUT
+            
+            # Format labels
+            LABELS=$(echo "$ISSUE_INFO" | jq -r '.labels[]?.name' | tr '\n' ',' | sed 's/,$//')
+            echo "labels=${LABELS}" >> $GITHUB_OUTPUT
+            
+            # Set action to "opened" for manual dispatch
+            echo "action=opened" >> $GITHUB_OUTPUT
+          else
+            # For automatic trigger, use event data
+            echo "number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
+            echo "title=${{ github.event.issue.title }}" >> $GITHUB_OUTPUT
+            
+            # Use EOF for the automatic issue body as well
+            echo "body<<EOF" >> $GITHUB_OUTPUT
+            echo "${{ github.event.issue.body }}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            echo "html_url=${{ github.event.issue.html_url }}" >> $GITHUB_OUTPUT
+            echo "author_login=${{ github.event.issue.user.login }}" >> $GITHUB_OUTPUT
+            echo "author_html_url=${{ github.event.issue.user.html_url }}" >> $GITHUB_OUTPUT
+            echo "state=${{ github.event.issue.state }}" >> $GITHUB_OUTPUT
+            echo "created_at=${{ github.event.issue.created_at }}" >> $GITHUB_OUTPUT
+            echo "closed_at=${{ github.event.issue.closed_at }}" >> $GITHUB_OUTPUT
+            echo "action=${{ github.event.action }}" >> $GITHUB_OUTPUT
+            
+            # Format labels from event
+            LABELS="${{ join(github.event.issue.labels.*.name, ',') }}"
+            echo "labels=${LABELS}" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Set action emoji and color
+        id: action-style
+        run: |
+          case "${{ steps.issue-info.outputs.action }}" in
+            "opened")
+              echo "emoji=🆕" >> $GITHUB_OUTPUT
+              echo "color=5763719" >> $GITHUB_OUTPUT
+              echo "action_text=New Issue" >> $GITHUB_OUTPUT
+              ;;
+            "closed")
+              echo "emoji=✅" >> $GITHUB_OUTPUT
+              echo "color=3066993" >> $GITHUB_OUTPUT
+              echo "action_text=Issue Closed" >> $GITHUB_OUTPUT
+              ;;
+            "reopened")
+              echo "emoji=🔄" >> $GITHUB_OUTPUT
+              echo "color=15158332" >> $GITHUB_OUTPUT
+              echo "action_text=Issue Reopened" >> $GITHUB_OUTPUT
+              ;;
+            *)
+              echo "emoji=📝" >> $GITHUB_OUTPUT
+              echo "color=5763719" >> $GITHUB_OUTPUT
+              echo "action_text=Issue Updated" >> $GITHUB_OUTPUT
+              ;;
+          esac
+
+      - name: Create Discord webhook payload
+        run: |
+          # Truncate body if too long (Discord has limits)
+          BODY="${{ steps.issue-info.outputs.body }}"
+          if [ ${#BODY} -gt 500 ]; then
+            BODY="${BODY:0:500}..."
+          fi
+
+          # Prepare labels field
+          LABELS="${{ steps.issue-info.outputs.labels }}"
+          if [ -n "$LABELS" ]; then
+            LABELS_FIELD="{\"name\": \"🏷️ Labels\", \"value\": \"$(echo $LABELS | sed 's/,/, /g')\", \"inline\": true},"
+          else
+            LABELS_FIELD=""
+          fi
+
+          # Set timestamp based on action
+          if [ "${{ steps.issue-info.outputs.action }}" = "closed" ] && [ -n "${{ steps.issue-info.outputs.closed_at }}" ]; then
+            TIMESTAMP="${{ steps.issue-info.outputs.closed_at }}"
+          else
+            TIMESTAMP="${{ steps.issue-info.outputs.created_at }}"
+          fi
+
+          # Create a temporary JSON file
+          cat > discord_payload.json << EOF
+          {
+            "avatar_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+            "embeds": [
+              {
+                "title": "${{ steps.action-style.outputs.emoji }} ${{ steps.action-style.outputs.action_text }}: #${{ steps.issue-info.outputs.number }} - ${{ steps.issue-info.outputs.title }}",
+                "description": "${BODY}",
+                "url": "${{ steps.issue-info.outputs.html_url }}",
+                "color": ${{ steps.action-style.outputs.color }},
+                "thumbnail": {
+                  "url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                },
+                "fields": [
+                  {
+                    "name": "📋 Issue #",
+                    "value": "#${{ steps.issue-info.outputs.number }}",
+                    "inline": true
+                  },
+                  {
+                    "name": "👤 Author",
+                    "value": "[${{ steps.issue-info.outputs.author_login }}](${{ steps.issue-info.outputs.author_html_url }})",
+                    "inline": true
+                  },
+                  {
+                    "name": "📁 Repository",
+                    "value": "[${{ github.event.repository.name }}](${{ github.event.repository.html_url }})",
+                    "inline": true
+                  },
+                  ${LABELS_FIELD}
+                  {
+                    "name": "🔗 View Issue",
+                    "value": "[Open on GitHub](${{ steps.issue-info.outputs.html_url }})",
+                    "inline": true
+                  }
+                ],
+                "timestamp": "${TIMESTAMP}",
+                "footer": {
+                  "text": "Workout Cool • Issues",
+                  "icon_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                }
+              }
+            ]
+          }
+          EOF
+
+      - name: Send Discord notification
+        run: |
+          curl -H "Content-Type: application/json" \
+               -d @discord_payload.json \
+               "${{ secrets.DISCORD_ISSUES_WEBHOOK }}"
