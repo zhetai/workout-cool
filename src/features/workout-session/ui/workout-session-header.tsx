@@ -25,6 +25,23 @@ export function WorkoutSessionHeader({ onQuitWorkout }: WorkoutSessionHeaderProp
   const totalExercises = getTotalExercises();
   const totalVolume = getTotalVolumeInUnit(volumeUnit);
 
+  // Format time with animated colons
+  const formatTimeWithAnimatedColons = (date: Date) => {
+    const timeString = date.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" });
+    const parts = timeString.split(":");
+
+    if (parts.length === 2) {
+      return (
+        <>
+          {parts[0]}
+          <span className="animate-colon-blink">:</span>
+          {parts[1]}
+        </>
+      );
+    }
+    return timeString;
+  };
+
   // Load volume unit preference from localStorage
   useEffect(() => {
     const savedUnit = localStorage.getItem("volumeUnit") as WeightUnit;
@@ -54,8 +71,7 @@ export function WorkoutSessionHeader({ onQuitWorkout }: WorkoutSessionHeaderProp
         <div className="rounded-lg p-2 sm:p-3 bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700">
           <div className="flex items-center justify-between mb-2 sm:mb-3">
             <span className="text-emerald-400 font-medium text-xs tracking-wide">
-              {t("workout_builder.session.started_at")}{" "}
-              {new Date(session?.startedAt || "").toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}
+              {t("workout_builder.session.started_at")} {formatTimeWithAnimatedColons(new Date(session?.startedAt || ""))}
             </span>
 
             <Button
