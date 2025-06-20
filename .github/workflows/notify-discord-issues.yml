@@ -107,7 +107,7 @@ jobs:
           ${{ steps.issue-info.outputs.body }}
           BODY_EOF
 
-          # Truncate body if too long (Discord has limits) and escape for JSON
+          # Truncate body if too long (Discord has limits)
           BODY_LENGTH=$(wc -c < body_content.txt)
           if [ $BODY_LENGTH -gt 500 ]; then
             BODY=$(head -c 500 body_content.txt)
@@ -116,18 +116,10 @@ jobs:
             BODY=$(cat body_content.txt)
           fi
 
-          # Escape the body content for JSON
-          BODY_ESCAPED=$(echo "$BODY" | jq -Rs .)
-          echo "body_escaped=${BODY_ESCAPED}" >> $GITHUB_OUTPUT
-
-          # Prepare labels field
-          LABELS="${{ steps.issue-info.outputs.labels }}"
-          if [ -n "$LABELS" ]; then
-            LABELS_FORMATTED=$(echo "$LABELS" | sed 's/,/, /g')
-            echo "labels_field={\"name\": \"🏷️ Labels\", \"value\": \"${LABELS_FORMATTED}\", \"inline\": true}," >> $GITHUB_OUTPUT
-          else
-            echo "labels_field=" >> $GITHUB_OUTPUT
-          fi
+          # Save the body content safely
+          echo "body_content<<BODY_CONTENT_EOF" >> $GITHUB_OUTPUT
+          echo "$BODY" >> $GITHUB_OUTPUT
+          echo "BODY_CONTENT_EOF" >> $GITHUB_OUTPUT
 
           # Set timestamp based on action
           if [ "${{ steps.issue-info.outputs.action }}" = "closed" ] && [ -n "${{ steps.issue-info.outputs.closed_at }}" ]; then
@@ -138,13 +130,13 @@ jobs:
 
       - name: Create Discord webhook payload
         run: |
-          # Create the Discord payload using jq to properly escape everything
+          # Create the Discord payload using jq with --arg for all values
           jq -n \
             --arg avatar_url "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" \
             --arg title "${{ steps.action-style.outputs.emoji }} ${{ steps.action-style.outputs.action_text }}: #${{ steps.issue-info.outputs.number }} - ${{ steps.issue-info.outputs.title }}" \
-            --argjson description ${{ steps.prepare-content.outputs.body_escaped }} \
+            --arg description "${{ steps.prepare-content.outputs.body_content }}" \
             --arg url "${{ steps.issue-info.outputs.html_url }}" \
-            --argjson color ${{ steps.action-style.outputs.color }} \
+            --arg color "${{ steps.action-style.outputs.color }}" \
             --arg thumbnail_url "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" \
             --arg issue_number "#${{ steps.issue-info.outputs.number }}" \
             --arg author_name "${{ steps.issue-info.outputs.author_login }}" \
@@ -161,7 +153,7 @@ jobs:
                   "title": $title,
                   "description": $description,
                   "url": $url,
-                  "color": $color,
+                  "color": ($color | tonumber),
                   "thumbnail": {
                     "url": $thumbnail_url
                   },
