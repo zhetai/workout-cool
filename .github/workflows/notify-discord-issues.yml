@@ -74,15 +74,36 @@ jobs:
 
       - name: Create Discord webhook payload
         run: |
+          # Determine data source based on trigger type
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            ISSUE_NUMBER="${{ steps.issue-info.outputs.number }}"
+            ISSUE_TITLE="${{ steps.issue-info.outputs.title }}"
+            ISSUE_URL="${{ steps.issue-info.outputs.html_url }}"
+            AUTHOR_LOGIN="${{ steps.issue-info.outputs.author_login }}"
+            AUTHOR_URL="${{ steps.issue-info.outputs.author_html_url }}"
+            ISSUE_STATE="${{ steps.issue-info.outputs.state }}"
+            ISSUE_LABELS="${{ steps.issue-info.outputs.labels }}"
+            CREATED_AT="${{ steps.issue-info.outputs.created_at }}"
+          else
+            ISSUE_NUMBER="${{ github.event.issue.number }}"
+            ISSUE_TITLE="${{ github.event.issue.title }}"
+            ISSUE_URL="${{ github.event.issue.html_url }}"
+            AUTHOR_LOGIN="${{ github.event.issue.user.login }}"
+            AUTHOR_URL="${{ github.event.issue.user.html_url }}"
+            ISSUE_STATE="${{ github.event.issue.state }}"
+            ISSUE_LABELS="${{ github.event.issue.labels[0].name && join(github.event.issue.labels.*.name, ', ') || 'None' }}"
+            CREATED_AT="${{ github.event.issue.created_at }}"
+          fi
+
           # Create a temporary JSON file
-          cat > discord_payload.json << 'EOF'
+          cat > discord_payload.json << EOF
           {
             "avatar_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
             "embeds": [
               {
-                "title": "${{ steps.action-info.outputs.emoji }} Issue ${{ steps.action-info.outputs.action_text }}: #${{ github.event.issue.number }}",
-                "description": "${{ github.event.issue.title }}",
-                "url": "${{ github.event.issue.html_url }}",
+                "title": "${{ steps.action-info.outputs.emoji }} Issue ${{ steps.action-info.outputs.action_text }}: #${ISSUE_NUMBER}",
+                "description": "${ISSUE_TITLE}",
+                "url": "${ISSUE_URL}",
                 "color": ${{ steps.action-info.outputs.color }},
                 "thumbnail": {
                   "url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
@@ -90,12 +111,12 @@ jobs:
                 "fields": [
                   {
                     "name": "📋 Issue #",
-                    "value": "`#${{ github.event.issue.number }}`",
+                    "value": "\`#${ISSUE_NUMBER}\`",
                     "inline": true
                   },
                   {
                     "name": "👤 Author",
-                    "value": "[${{ github.event.issue.user.login }}](${{ github.event.issue.user.html_url }})",
+                    "value": "[${AUTHOR_LOGIN}](${AUTHOR_URL})",
                     "inline": true
                   },
                   {
@@ -105,21 +126,21 @@ jobs:
                   },
                   {
                     "name": "🏷️ Labels",
-                    "value": "${{ github.event.issue.labels[0].name && join(github.event.issue.labels.*.name, ', ') || 'None' }}",
+                    "value": "${ISSUE_LABELS}",
                     "inline": true
                   },
                   {
                     "name": "📊 State",
-                    "value": "`${{ github.event.issue.state }}`",
+                    "value": "\`${ISSUE_STATE}\`",
                     "inline": true
                   },
                   {
                     "name": "🔗 View Issue",
-                    "value": "[Issue Page](${{ github.event.issue.html_url }})",
+                    "value": "[Issue Page](${ISSUE_URL})",
                     "inline": true
                   }
                 ],
-                "timestamp": "${{ github.event.issue.created_at }}",
+                "timestamp": "${CREATED_AT}",
                 "footer": {
                   "text": "Workout Cool • Issue ${{ steps.action-info.outputs.action_text }}",
                   "icon_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
