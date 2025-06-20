@@ -99,74 +99,105 @@ jobs:
               ;;
           esac
 
-      - name: Create Discord webhook payload
+      - name: Prepare issue content
+        id: prepare-content
         run: |
-          # Truncate body if too long (Discord has limits)
-          BODY="${{ steps.issue-info.outputs.body }}"
-          if [ ${#BODY} -gt 500 ]; then
-            BODY="${BODY:0:500}..."
+          # Create a temp file for the body content
+          cat > body_content.txt << 'BODY_EOF'
+          ${{ steps.issue-info.outputs.body }}
+          BODY_EOF
+
+          # Truncate body if too long (Discord has limits) and escape for JSON
+          BODY_LENGTH=$(wc -c < body_content.txt)
+          if [ $BODY_LENGTH -gt 500 ]; then
+            BODY=$(head -c 500 body_content.txt)
+            BODY="${BODY}..."
+          else
+            BODY=$(cat body_content.txt)
           fi
+
+          # Escape the body content for JSON
+          BODY_ESCAPED=$(echo "$BODY" | jq -Rs .)
+          echo "body_escaped=${BODY_ESCAPED}" >> $GITHUB_OUTPUT
 
           # Prepare labels field
           LABELS="${{ steps.issue-info.outputs.labels }}"
           if [ -n "$LABELS" ]; then
-            LABELS_FIELD="{\"name\": \"🏷️ Labels\", \"value\": \"$(echo $LABELS | sed 's/,/, /g')\", \"inline\": true},"
+            LABELS_FORMATTED=$(echo "$LABELS" | sed 's/,/, /g')
+            echo "labels_field={\"name\": \"🏷️ Labels\", \"value\": \"${LABELS_FORMATTED}\", \"inline\": true}," >> $GITHUB_OUTPUT
           else
-            LABELS_FIELD=""
+            echo "labels_field=" >> $GITHUB_OUTPUT
           fi
 
           # Set timestamp based on action
           if [ "${{ steps.issue-info.outputs.action }}" = "closed" ] && [ -n "${{ steps.issue-info.outputs.closed_at }}" ]; then
-            TIMESTAMP="${{ steps.issue-info.outputs.closed_at }}"
+            echo "timestamp=${{ steps.issue-info.outputs.closed_at }}" >> $GITHUB_OUTPUT
           else
-            TIMESTAMP="${{ steps.issue-info.outputs.created_at }}"
+            echo "timestamp=${{ steps.issue-info.outputs.created_at }}" >> $GITHUB_OUTPUT
           fi
 
-          # Create a temporary JSON file
-          cat > discord_payload.json << EOF
-          {
-            "avatar_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-            "embeds": [
-              {
-                "title": "${{ steps.action-style.outputs.emoji }} ${{ steps.action-style.outputs.action_text }}: #${{ steps.issue-info.outputs.number }} - ${{ steps.issue-info.outputs.title }}",
-                "description": "${BODY}",
-                "url": "${{ steps.issue-info.outputs.html_url }}",
-                "color": ${{ steps.action-style.outputs.color }},
-                "thumbnail": {
-                  "url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                },
-                "fields": [
-                  {
-                    "name": "📋 Issue #",
-                    "value": "#${{ steps.issue-info.outputs.number }}",
-                    "inline": true
+      - name: Create Discord webhook payload
+        run: |
+          # Create the Discord payload using jq to properly escape everything
+          jq -n \
+            --arg avatar_url "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" \
+            --arg title "${{ steps.action-style.outputs.emoji }} ${{ steps.action-style.outputs.action_text }}: #${{ steps.issue-info.outputs.number }} - ${{ steps.issue-info.outputs.title }}" \
+            --argjson description ${{ steps.prepare-content.outputs.body_escaped }} \
+            --arg url "${{ steps.issue-info.outputs.html_url }}" \
+            --argjson color ${{ steps.action-style.outputs.color }} \
+            --arg thumbnail_url "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" \
+            --arg issue_number "#${{ steps.issue-info.outputs.number }}" \
+            --arg author_name "${{ steps.issue-info.outputs.author_login }}" \
+            --arg author_url "${{ steps.issue-info.outputs.author_html_url }}" \
+            --arg repo_name "${{ github.event.repository.name }}" \
+            --arg repo_url "${{ github.event.repository.html_url }}" \
+            --arg issue_url "${{ steps.issue-info.outputs.html_url }}" \
+            --arg timestamp "${{ steps.prepare-content.outputs.timestamp }}" \
+            --arg labels "${{ steps.issue-info.outputs.labels }}" \
+            '{
+              "avatar_url": $avatar_url,
+              "embeds": [
+                {
+                  "title": $title,
+                  "description": $description,
+                  "url": $url,
+                  "color": $color,
+                  "thumbnail": {
+                    "url": $thumbnail_url
                   },
-                  {
-                    "name": "👤 Author",
-                    "value": "[${{ steps.issue-info.outputs.author_login }}](${{ steps.issue-info.outputs.author_html_url }})",
-                    "inline": true
-                  },
-                  {
-                    "name": "📁 Repository",
-                    "value": "[${{ github.event.repository.name }}](${{ github.event.repository.html_url }})",
-                    "inline": true
-                  },
-                  ${LABELS_FIELD}
-                  {
-                    "name": "🔗 View Issue",
-                    "value": "[Open on GitHub](${{ steps.issue-info.outputs.html_url }})",
-                    "inline": true
+                  "fields": ([
+                    {
+                      "name": "📋 Issue #",
+                      "value": $issue_number,
+                      "inline": true
+                    },
+                    {
+                      "name": "👤 Author",
+                      "value": "[\($author_name)](\($author_url))",
+                      "inline": true
+                    },
+                    {
+                      "name": "📁 Repository",
+                      "value": "[\($repo_name)](\($repo_url))",
+                      "inline": true
+                    }
+                  ] + (if $labels != "" then [{
+                      "name": "🏷️ Labels",
+                      "value": ($labels | split(",") | join(", ")),
+                      "inline": true
+                    }] else [] end) + [{
+                      "name": "🔗 View Issue",
+                      "value": "[Open on GitHub](\($issue_url))",
+                      "inline": true
+                    }]),
+                  "timestamp": $timestamp,
+                  "footer": {
+                    "text": "Workout Cool • Issues",
+                    "icon_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                   }
-                ],
-                "timestamp": "${TIMESTAMP}",
-                "footer": {
-                  "text": "Workout Cool • Issues",
-                  "icon_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                 }
-              }
-            ]
-          }
-          EOF
+              ]
+            }' > discord_payload.json
 
       - name: Send Discord notification
         run: |
