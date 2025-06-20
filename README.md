@@ -270,10 +270,11 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - 🔄 **Spread the word** to fellow fitness enthusiasts who lost hope
 - 🤝 **Contribute code** if you're a developer : let's build this together
 
-<div>
+<div style="display:flex; align-items:center; flex-direction:column; justify-items:center; margin-top:30px;">
   <a href="https://discord.gg/NtrsUBuHUB" target="_blank">
     <img src="https://img.shields.io/badge/Discord-Join%20Our%20Community-5865F2?logo=discord&logoColor=white&style=for-the-badge" alt="Discord">
   </a>
+  <a href="https://www.producthunt.com/products/workout-cool?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-workout&#0045;cool" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=980519&theme=light&t=1750436372984" alt="Workout&#0046;cool - The&#0032;easiest&#0032;way&#0032;to&#0032;create&#0032;a&#0032;workout&#0032;routine&#0046; | Product Hunt" style="width: 150px; height: 54px;" /></a>
 </div>
 
 ## 💖 Sponsor This Project
@@ -291,7 +292,7 @@ Appear in the README and on the website as supporter by donating:
   </a> -->
 </div>
 
-<p align="center">
+<p align="center" style="margin-top:20px;">
   <em>If you believe in open-source fitness tools and want to help this project thrive,<br>
   consider buying me a coffee ☕ or sponsoring the continued development.</em>
 </p>
@@ -300,4 +301,3 @@ Appear in the README and on the website as supporter by donating:
   Your support helps cover hosting costs, exercise database updates, and continuous improvement.<br>
   Thank you for keeping <strong>workout.cool</strong> alive and evolving 💪
 </p>
-```
