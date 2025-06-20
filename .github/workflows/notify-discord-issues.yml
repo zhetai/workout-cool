@@ -37,23 +37,40 @@ jobs:
       - name: Determine action color and emoji
         id: action-info
         run: |
-          case "${{ github.event.action }}" in
-            "opened")
-              echo "color=15158332" >> $GITHUB_OUTPUT  # Red
-              echo "emoji=🔴" >> $GITHUB_OUTPUT
-              echo "action_text=Opened" >> $GITHUB_OUTPUT
-              ;;
-            "reopened")
-              echo "color=16776960" >> $GITHUB_OUTPUT  # Yellow
-              echo "emoji=🟡" >> $GITHUB_OUTPUT
-              echo "action_text=Reopened" >> $GITHUB_OUTPUT
-              ;;
-            "closed")
-              echo "color=5763719" >> $GITHUB_OUTPUT   # Green
-              echo "emoji=🟢" >> $GITHUB_OUTPUT
-              echo "action_text=Closed" >> $GITHUB_OUTPUT
-              ;;
-          esac
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # For manual trigger, use the current state
+            case "${{ steps.issue-info.outputs.state }}" in
+              "OPEN")
+                echo "color=15158332" >> $GITHUB_OUTPUT  # Red
+                echo "emoji=🔴" >> $GITHUB_OUTPUT
+                echo "action_text=Open" >> $GITHUB_OUTPUT
+                ;;
+              "CLOSED")
+                echo "color=5763719" >> $GITHUB_OUTPUT   # Green
+                echo "emoji=🟢" >> $GITHUB_OUTPUT
+                echo "action_text=Closed" >> $GITHUB_OUTPUT
+                ;;
+            esac
+          else
+            # For automatic trigger, use the action
+            case "${{ github.event.action }}" in
+              "opened")
+                echo "color=15158332" >> $GITHUB_OUTPUT  # Red
+                echo "emoji=🔴" >> $GITHUB_OUTPUT
+                echo "action_text=Opened" >> $GITHUB_OUTPUT
+                ;;
+              "reopened")
+                echo "color=16776960" >> $GITHUB_OUTPUT  # Yellow
+                echo "emoji=🟡" >> $GITHUB_OUTPUT
+                echo "action_text=Reopened" >> $GITHUB_OUTPUT
+                ;;
+              "closed")
+                echo "color=5763719" >> $GITHUB_OUTPUT   # Green
+                echo "emoji=🟢" >> $GITHUB_OUTPUT
+                echo "action_text=Closed" >> $GITHUB_OUTPUT
+                ;;
+            esac
+          fi
 
       - name: Create Discord webhook payload
         run: |
