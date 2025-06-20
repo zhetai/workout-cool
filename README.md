@@ -30,7 +30,7 @@
 - [Project Architecture](#project-architecture)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
-- [Deployment](#deployment)
+- [Deployment / Self-hosting](#deployment)
 - [Resources](#resources)
 - [License](#license)
 - [Sponsor This Project](#-sponsor-this-project)
@@ -162,7 +162,7 @@ id,name,name_en,description,description_en,full_video_url,full_video_image_url,i
 
 Want unlimited exercise for local development ?
 
-Just ask chatGPT the prompt from `./scripts/import-exercises-with-attributes.prompt.md`
+Just ask chatGPT with the prompt from `./scripts/import-exercises-with-attributes.prompt.md`
 
 ## Project Architecture
 
@@ -202,15 +202,13 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ### Development Workflow
 
-1. **Create an issue** for the feature/bug you want to work on
-2. **Assign yourself** to the issue
-3. Fork the repository
-4. Create a feature branch (`git checkout -b feature/amazing-feature`)
-5. Make your changes following our [code standards](#code-style)
-6. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-7. Push to the branch (`git push origin feature/amazing-feature`)
-8. Open a Pull Request (one issue = one PR)
-9. Address review comments promptly
+1. **Create an issue** for the feature/bug you want to work on. Say that you will work on it (or no)
+2. Fork the repository
+3. Create your feature|fix|chore|refactor branch (`git checkout -b feature/amazing-feature`)
+4. Make your changes following our [code standards](#code-style)
+5. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request (one issue = one PR)
 
 **📋 For complete contribution guidelines, see our [Contributing Guide](CONTRIBUTING.md)**
 
@@ -219,9 +217,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 - Follow TypeScript best practices
 - Use Feature-Sliced Design architecture
 - Write meaningful commit messages
-- Add tests for new features
 
-## Deployment
+## Deployment / Self-hosting
 
 ### Using Docker
 
