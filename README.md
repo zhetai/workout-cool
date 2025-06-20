@@ -7,17 +7,19 @@
 <img src="https://img.shields.io/github/forks/Snouzy/workout-cool" alt="Forks">
 <img src="https://img.shields.io/github/stars/Snouzy/workout-cool" alt="Stars">
 <img src="https://img.shields.io/github/issues/Snouzy/workout-cool" alt="Issues">
-<img src="https://img.shields.io/github/languages/count/Snouzy/workout-cool" alt="Languages">
 <img src="https://img.shields.io/github/repo-size/Snouzy/workout-cool" alt="Repository Size">
-<a href="https://discord.gg/NtrsUBuHUB">
-   <img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white&style=flat-square" alt="Discord">
-</a>
-<a href="https://ko-fi.com/workoutcool">
-   <img src="https://img.shields.io/badge/sponsor%20on-ko--fi-ff5f5f?logo=ko-fi&logoColor=white&style=flat-square">
-</a>
 <a href="LICENSE">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License">
 </a>
+
+<p>
+    <a href="https://discord.gg/NtrsUBuHUB">
+      <img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord">
+    </a>
+    <a href="https://ko-fi.com/workoutcool">
+      <img src="https://img.shields.io/badge/Ko--fi-Support%20Project-FF5E5B?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-fi">
+    </a>
+  </p>
 </p>
 </div>
 
@@ -270,11 +272,14 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - 🔄 **Spread the word** to fellow fitness enthusiasts who lost hope
 - 🤝 **Contribute code** if you're a developer : let's build this together
 
-<div style="display:flex; align-items:center; flex-direction:column; justify-items:center; margin-top:30px;">
+<div align="center">
   <a href="https://discord.gg/NtrsUBuHUB" target="_blank">
-    <img src="https://img.shields.io/badge/Discord-Join%20Our%20Community-5865F2?logo=discord&logoColor=white&style=for-the-badge" alt="Discord">
+    <img src="https://img.shields.io/badge/Discord-Join%20Our%20Community-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord">
   </a>
-  <a href="https://www.producthunt.com/products/workout-cool?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-workout&#0045;cool" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=980519&theme=light&t=1750436372984" alt="Workout&#0046;cool - The&#0032;easiest&#0032;way&#0032;to&#0032;create&#0032;a&#0032;workout&#0032;routine&#0046; | Product Hunt" style="width: 150px; height: 54px;" /></a>
+  <br><br>
+  <a href="https://www.producthunt.com/products/workout-cool?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-workout&#0045;cool" target="_blank">
+    <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=980519&theme=light&t=1750436372984" alt="Product Hunt" width="180">
+  </a>
 </div>
 
 ## 💖 Sponsor This Project
