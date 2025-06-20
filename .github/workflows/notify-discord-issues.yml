@@ -3,12 +3,37 @@ name: Discord Issue Notification
 on:
   issues:
     types: [opened, reopened, closed]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Issue number"
+        required: true
+        type: string
 
 jobs:
   Discord:
     runs-on: ubuntu-latest
     name: Discord Issue Notifier
     steps:
+      - uses: actions/checkout@v4
+        if: github.event_name == 'workflow_dispatch'
+
+      - name: Get issue info for manual trigger
+        id: issue-info
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          ISSUE_INFO=$(gh issue view ${{ github.event.inputs.issue_number }} --json number,title,url,author,state,labels,createdAt)
+          echo "number=$(echo "$ISSUE_INFO" | jq -r '.number')" >> $GITHUB_OUTPUT
+          echo "title=$(echo "$ISSUE_INFO" | jq -r '.title')" >> $GITHUB_OUTPUT
+          echo "html_url=$(echo "$ISSUE_INFO" | jq -r '.url')" >> $GITHUB_OUTPUT
+          echo "author_login=$(echo "$ISSUE_INFO" | jq -r '.author.login')" >> $GITHUB_OUTPUT
+          echo "author_html_url=https://github.com/$(echo "$ISSUE_INFO" | jq -r '.author.login')" >> $GITHUB_OUTPUT
+          echo "state=$(echo "$ISSUE_INFO" | jq -r '.state')" >> $GITHUB_OUTPUT
+          echo "created_at=$(echo "$ISSUE_INFO" | jq -r '.createdAt')" >> $GITHUB_OUTPUT
+          echo "labels=$(echo "$ISSUE_INFO" | jq -r '.labels | map(.name) | join(", ") // "None"')" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - name: Determine action color and emoji
         id: action-info
         run: |
