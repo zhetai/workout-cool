@@ -2,17 +2,9 @@
 
 <!-- Briefly describe the changes made -->
 
-## 🧪 Testing
-
-- [ ] I have tested my changes locally
-- [ ] Existing tests pass
-- [ ] I have added tests if necessary
-
 ## 📋 Checklist
 
 - [ ] My code follows the project conventions
-- [ ] I have checked for linting errors
-- [ ] The build passes without errors
 - [ ] This PR includes breaking changes
 - [ ] I have updated documentation if necessary
 
@@ -27,4 +19,4 @@
 
 ## 🔗 Related Issues
 
-<!-- Reference issues: Closes #123, Fixes #456 --> 
+<!-- Reference issues: Closes #123, Fixes #456 -->
