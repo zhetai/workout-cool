@@ -118,7 +118,6 @@ jobs:
             HEAD_REF="${{ steps.pr-info.outputs.head_ref }}"
             BASE_REF="${{ steps.pr-info.outputs.base_ref }}"
             IS_DRAFT="${{ steps.pr-info.outputs.is_draft }}"
-            MERGEABLE="${{ steps.pr-info.outputs.mergeable }}"
           else
             PR_NUMBER="${{ github.event.pull_request.number }}"
             PR_TITLE="${{ github.event.pull_request.title }}"
@@ -131,73 +130,87 @@ jobs:
             HEAD_REF="${{ github.event.pull_request.head.ref }}"
             BASE_REF="${{ github.event.pull_request.base.ref }}"
             IS_DRAFT="${{ github.event.pull_request.draft }}"
-            MERGEABLE="${{ github.event.pull_request.mergeable || 'UNKNOWN' }}"
           fi
 
-          # Create a temporary JSON file
-          cat > discord_payload.json << EOF
-          {
-            "avatar_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-            "embeds": [
-              {
-                "title": "${{ steps.action-info.outputs.emoji }} Pull Request ${{ steps.action-info.outputs.action_text }}: #${PR_NUMBER}",
-                "description": "${PR_TITLE}",
-                "url": "${PR_URL}",
-                "color": ${{ steps.action-info.outputs.color }},
-                "thumbnail": {
-                  "url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                },
-                "fields": [
-                  {
-                    "name": "📋 PR #",
-                    "value": "\`#${PR_NUMBER}\`",
-                    "inline": true
+          # Escape special characters for JSON
+          PR_TITLE_ESCAPED=$(echo "$PR_TITLE" | sed 's/"/\\"/g' | sed "s/'/\\'/g")
+          
+          # Create a temporary JSON file using jq to ensure valid JSON
+          jq -n \
+            --arg avatar_url "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" \
+            --arg title "${{ steps.action-info.outputs.emoji }} Pull Request ${{ steps.action-info.outputs.action_text }}: #${PR_NUMBER}" \
+            --arg description "$PR_TITLE_ESCAPED" \
+            --arg url "$PR_URL" \
+            --argjson color ${{ steps.action-info.outputs.color }} \
+            --arg thumbnail_url "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" \
+            --arg pr_number "#${PR_NUMBER}" \
+            --arg author_name "$AUTHOR_LOGIN" \
+            --arg author_url "$AUTHOR_URL" \
+            --arg repo_name "${{ github.event.repository.name }}" \
+            --arg repo_url "${{ github.event.repository.html_url }}" \
+            --arg branch "${HEAD_REF} → ${BASE_REF}" \
+            --arg labels "$PR_LABELS" \
+            --arg status "$PR_STATE" \
+            --arg pr_url "$PR_URL" \
+            --arg timestamp "$CREATED_AT" \
+            --arg footer_text "Workout Cool • PR ${{ steps.action-info.outputs.action_text }}" \
+            --arg footer_icon "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" \
+            '{
+              "avatar_url": $avatar_url,
+              "embeds": [
+                {
+                  "title": $title,
+                  "description": $description,
+                  "url": $url,
+                  "color": $color,
+                  "thumbnail": {
+                    "url": $thumbnail_url
                   },
-                  {
-                    "name": "👤 Author",
-                    "value": "[${AUTHOR_LOGIN}](${AUTHOR_URL})",
-                    "inline": true
-                  },
-                  {
-                    "name": "📁 Repository",
-                    "value": "[${{ github.event.repository.name }}](${{ github.event.repository.html_url }})",
-                    "inline": true
-                  },
-                  {
-                    "name": "🌿 Branch",
-                    "value": "\`${HEAD_REF}\` → \`${BASE_REF}\`",
-                    "inline": true
-                  },
-                  {
-                    "name": "🏷️ Labels",
-                    "value": "${PR_LABELS}",
-                    "inline": true
-                  },
-                  {
-                    "name": "📊 Status",
-                    "value": "\`${PR_STATE}\`${IS_DRAFT:+\" (Draft)\"}",
-                    "inline": true
-                  },
-                  {
-                    "name": "🔗 View PR",
-                    "value": "[Pull Request](${PR_URL})",
-                    "inline": true
-                  },
-                  {
-                    "name": "✅ Mergeable",
-                    "value": "\`${MERGEABLE}\`",
-                    "inline": true
+                  "fields": [
+                    {
+                      "name": "📋 PR #",
+                      "value": $pr_number,
+                      "inline": true
+                    },
+                    {
+                      "name": "👤 Author",
+                      "value": ("[\($author_name)](\($author_url))"),
+                      "inline": true
+                    },
+                    {
+                      "name": "📁 Repository",
+                      "value": ("[\($repo_name)](\($repo_url))"),
+                      "inline": true
+                    },
+                    {
+                      "name": "🌿 Branch",
+                      "value": $branch,
+                      "inline": true
+                    },
+                    {
+                      "name": "🏷️ Labels",
+                      "value": $labels,
+                      "inline": true
+                    },
+                    {
+                      "name": "📊 Status",
+                      "value": $status,
+                      "inline": true
+                    },
+                    {
+                      "name": "🔗 View PR",
+                      "value": ("[Pull Request](\($pr_url))"),
+                      "inline": true
+                    }
+                  ],
+                  "timestamp": $timestamp,
+                  "footer": {
+                    "text": $footer_text,
+                    "icon_url": $footer_icon
                   }
-                ],
-                "timestamp": "${CREATED_AT}",
-                "footer": {
-                  "text": "Workout Cool • PR ${{ steps.action-info.outputs.action_text }}",
-                  "icon_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                 }
-              }
-            ]
-          }
-          EOF
+              ]
+            }' > discord_payload.json
 
       - name: Send Discord notification
         run: |
