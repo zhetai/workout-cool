@@ -20,8 +20,29 @@ export function LanguageSelector() {
   const t = useI18n();
 
   const handleLanguageChange = async (newLocale: string) => {
-    await action.execute({ locale: newLocale });
+    // update cookie to prevent auto-detection conflicts
+    document.cookie = `detected-locale=${newLocale}; max-age=${60 * 60 * 24 * 365}; path=/; samesite=lax`;
+
+    // change locale immediately for better UX
     changeLocale(newLocale as "en" | "fr" | "es" | "zh-CN");
+
+    // save to database (fire and forget)
+    action.execute({ locale: newLocale });
+  };
+
+  const getLanguageName = (language: string) => {
+    switch (language) {
+      case "en":
+        return "English";
+      case "fr":
+        return "Français";
+      case "es":
+        return "Español";
+      case "zh-CN":
+        return "中文";
+      default:
+        return language;
+    }
   };
 
   return (
@@ -46,12 +67,7 @@ export function LanguageSelector() {
               onClick={() => handleLanguageChange(language)}
             >
               <span className="text-lg">{languageFlags[language]}</span>
-              <span className="text-base whitespace-nowrap">
-                {language === "en" ? "English" : 
-                 language === "fr" ? "Français" : 
-                 language === "es" ? "Español" :
-                 language === "zh-CN" ? "中文" : language}
-              </span>
+              <span className="text-base whitespace-nowrap">{getLanguageName(language)}</span>
             </button>
           </li>
         ))}
