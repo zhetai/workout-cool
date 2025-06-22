@@ -19,13 +19,21 @@ export const DonationAlert = ({ className }: DonationAlertProps) => {
     >
       <AlertDescription className="flex items-center gap-1 italic text-base">
         <span className="whitespace-pre-line">
-          Keep Workout.cool free. Support us by making a{" "}
+          Keep Workout.cool free. Support us via{" "}
           <Link
             className="font-medium text-gray-900 underline hover:text-gray-700 dark:text-gray-200"
             href="https://ko-fi.com/workoutcool"
             target="_blank"
           >
-            donation
+            Ko-fi
+          </Link>{" "}
+          or{" "}
+          <Link
+            className="font-medium text-gray-900 underline hover:text-gray-700 dark:text-gray-200"
+            href="https://github.com/sponsors/snouzy"
+            target="_blank"
+          >
+            GitHub Sponsors
           </Link>
           .
         </span>
