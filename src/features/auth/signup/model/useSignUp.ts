@@ -1,17 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 
 import { useI18n } from "locales/client";
-import { paths } from "@/shared/constants/paths";
 import { SignUpSchema } from "@/features/auth/signup/schema/signup.schema";
 import { signUpAction } from "@/features/auth/signup/model/signup.action";
 import { brandedToast } from "@/components/ui/toast";
 
 export const useSignUp = () => {
   const t = useI18n();
-  const router = useRouter();
 
   const mutation = useMutation({
     mutationFn: async (values: SignUpSchema) => {
@@ -28,8 +25,9 @@ export const useSignUp = () => {
       return result;
     },
 
-    onSuccess: () => {
-      router.push(`/${paths.verifyEmail}?signin=true`);
+    onSuccess: async () => {
+      window.location.href = "/profile";
+      // router.push(`/${paths.verifyEmail}?signin=true`);
     },
 
     onError: (error: unknown) => {
