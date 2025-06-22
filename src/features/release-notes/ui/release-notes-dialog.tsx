@@ -23,7 +23,7 @@ export function ReleaseNotesDialog() {
           </Button>
         </div>
       </DialogTrigger>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-md max-h-[60vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{t("release_notes.title")}</DialogTitle>
         </DialogHeader>
@@ -31,8 +31,8 @@ export function ReleaseNotesDialog() {
           {releaseNotes.map((note) => (
             <div className="border-b pb-2 last:border-b-0 last:pb-0 py-2" key={note.date}>
               <div className="text-xs text-muted-foreground">{formatDate(note.date, locale)}</div>
-              <div className="font-semibold mb-1">{t(note.titleKey as keyof typeof t)}</div>
-              <div className="text-sm mb-4">{t(note.contentKey as keyof typeof t)}</div>
+              <div className="font-semibold mb-1" dangerouslySetInnerHTML={{ __html: t(note.titleKey as keyof typeof t) }} />
+              <div className="text-sm mb-4" dangerouslySetInnerHTML={{ __html: t(note.contentKey as keyof typeof t) }} />
             </div>
           ))}
         </div>

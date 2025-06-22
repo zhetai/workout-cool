@@ -60,6 +60,11 @@ export default {
     title: "新功能",
     release_notes: "更新日志",
     notes: {
+      note_2025_06_23: {
+        title: "🇵🇹 葡萄牙语支持和捐赠横幅",
+        content:
+          "应用现已支持<strong>葡萄牙语</strong>！我们还添加了<em>捐赠横幅</em>以帮助通过<a href='https://github.com/sponsors/snouzy' target='_blank' rel='noopener' class='text-blue-500 hover:underline'>GitHub Sponsors</a>或<a href='https://ko-fi.com/workoutcool' target='_blank' rel='noopener' class='text-blue-500 hover:underline'>Ko-fi</a>支持项目的持续成本。🙏",
+      },
       note_2025_06_22: {
         title: "🌍 新语言支持和性能提升！",
         content: "应用现已支持中文和俄语！我们还改进了拖放功能的性能，提供更流畅的体验。⚡",
@@ -69,7 +74,8 @@ export default {
         content: "Workout.cool v1.2 现在是一个渐进式网络应用！将其安装在您的手机上，即可享受原生应用体验和离线访问。🚀",
       },
       note_2025_06_18: {
-        title: "🚀 在 Hacker News 上排名第一！",
+        title:
+          "🚀 在 <a href='https://news.ycombinator.com/item?id=44309320' target='_blank' rel='noopener' class='text-blue-500 hover:underline'>Hacker News</a> 上排名第一！",
         content: "Workout.cool 在 Hacker News 上登顶！感谢大家的大力支持，欢迎所有新用户！💪",
       },
       note_2025_06_01: {

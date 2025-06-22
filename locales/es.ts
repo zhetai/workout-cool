@@ -60,6 +60,11 @@ export default {
     title: "Novedades",
     release_notes: "Notas",
     notes: {
+      note_2025_06_23: {
+        title: "🇵🇹 Soporte de Portugués y Banner de Donación",
+        content:
+          "¡La app ahora soporta <strong>portugués</strong>! También hemos añadido un <em>banner de donación</em> para ayudar a cubrir los costos del proyecto via <a href='https://github.com/sponsors/snouzy' target='_blank' rel='noopener' class='text-blue-500 hover:underline'>GitHub Sponsors</a> o <a href='https://ko-fi.com/workoutcool' target='_blank' rel='noopener' class='text-blue-500 hover:underline'>Ko-fi</a>. 🙏",
+      },
       note_2025_06_22: {
         title: "🌍 ¡Nuevos idiomas y mejora de rendimiento!",
         content:
@@ -71,7 +76,8 @@ export default {
           "¡Workout.cool v1.2 ahora es una Progressive Web App! Instálala en tu teléfono para una experiencia de aplicación nativa con acceso sin conexión. 🚀",
       },
       note_2025_06_18: {
-        title: "🚀 ¡Destacado #1 en Hacker News!",
+        title:
+          "🚀 ¡Destacado #1 en <a href='https://news.ycombinator.com/item?id=44309320' target='_blank' rel='noopener' class='text-blue-500 hover:underline'>Hacker News</a>!",
         content:
           "¡Workout.cool alcanzó el primer lugar en Hacker News! ¡Gracias a todos por el increíble apoyo y bienvenidos a todos los nuevos usuarios! 💪",
       },
