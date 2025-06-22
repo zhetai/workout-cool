@@ -88,6 +88,7 @@ export default {
 
   // Donation Modal
   donation_modal: {
+    support_via: "Soutenir via...",
     title: "Soutenez le projet",
     congrats: "Félicitations pour la séance ! 🎉",
     subtitle: "Cette app vous aide gratuitement, mais elle a un coût réel pour moi...",

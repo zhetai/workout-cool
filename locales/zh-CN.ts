@@ -85,6 +85,7 @@ export default {
 
   // Donation Modal
   donation_modal: {
+    support_via: "支持方式...",
     title: "支持项目",
     congrats: "恭喜完成锻炼！🎉",
     subtitle: "这个应用免费帮助您，但对我来说有真正的成本...",

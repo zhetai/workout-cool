@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Heart, X, Code, Server } from "lucide-react";
+import { Heart, X, Code, Server, Coffee, Github } from "lucide-react";
 
 import { useI18n } from "locales/client";
 import { Button } from "@/components/ui/button";
@@ -38,16 +38,21 @@ export function DonationModal({ isOpen, onClose }: DonationModalProps) {
     return () => modal.removeEventListener("close", handleClose);
   }, [onClose]);
 
-  const handleDonate = () => {
+  const handleDonateKofi = () => {
     window.open("https://ko-fi.com/workoutcool", "_blank");
+    onClose();
+  };
+
+  const handleDonateGitHub = () => {
+    window.open("https://github.com/sponsors/snouzy", "_blank");
     onClose();
   };
 
   return (
     <dialog className="modal modal-bottom sm:modal-middle" ref={modalRef} style={{ padding: 0 }}>
-      <div className="modal-box max-w-lg">
+      <div className="modal-box max-w-lg flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4 flex-shrink-0">
           <div className="flex items-center gap-2">
             <Heart className="h-6 w-6 text-red-500" />
             <h3 className="font-bold text-lg text-slate-900 dark:text-slate-100">{t("donation_modal.title")}</h3>
@@ -60,7 +65,7 @@ export function DonationModal({ isOpen, onClose }: DonationModalProps) {
         </div>
 
         {/* Content */}
-        <div className="space-y-4 mb-6">
+        <div className="space-y-4 mb-6 flex-1 overflow-y-auto">
           <div className="text-center">
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{t("donation_modal.congrats")}</p>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed mt-2">{t("donation_modal.subtitle")}</p>
@@ -110,18 +115,29 @@ export function DonationModal({ isOpen, onClose }: DonationModalProps) {
         </div>
 
         {/* Actions */}
-        <div className="modal-action">
-          <form className="flex gap-2 w-full flex-col sm:flex-row" method="dialog">
-            <Button className="flex-1" onClick={onClose} size="small" variant="outline">
+        <div className="modal-action flex-shrink-0 mt-auto">
+          <form className="flex gap-2 w-full flex-col" method="dialog">
+            <p className="flex gap-2 flex-col sm:flex-row text-sm text-slate-600 dark:text-slate-400">{t("donation_modal.support_via")}</p>
+            <div className="flex gap-2 flex-col sm:flex-row">
+              <Button
+                className="flex-1 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white border-0"
+                onClick={handleDonateKofi}
+                size="large"
+              >
+                <Coffee className="h-4 w-4 mr-2" />
+                Ko-fi
+              </Button>
+              <Button
+                className="flex-1 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white border-0"
+                onClick={handleDonateGitHub}
+                size="large"
+              >
+                <Github className="h-4 w-4 mr-2" />
+                GitHub Sponsors
+              </Button>
+            </div>
+            <Button className="w-full" onClick={onClose} size="small" variant="outline">
               {t("donation_modal.later_button")}
-            </Button>
-            <Button
-              className="flex-1 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white border-0"
-              onClick={handleDonate}
-              size="large"
-            >
-              <Heart className="h-4 w-4 mr-2" />
-              {t("donation_modal.support_button")}
             </Button>
           </form>
         </div>
