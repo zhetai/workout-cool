@@ -18,7 +18,7 @@ function detectUserLocale(request: NextRequest): string {
     .sort((a, b) => b.quality - a.quality);
 
   // Map browser locales to supported locales
-  const supportedLocales = ["en", "fr", "es", "zh-cn", "ru"];
+  const supportedLocales = ["en", "fr", "es", "zh-cn", "ru", "pt"];
 
   for (const { locale } of languages) {
     // Exact match
