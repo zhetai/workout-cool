@@ -60,6 +60,10 @@ export default {
     title: "新功能",
     release_notes: "更新日志",
     notes: {
+      note_2025_06_22: {
+        title: "🌍 新语言支持和性能提升！",
+        content: "应用现已支持中文和俄语！我们还改进了拖放功能的性能，提供更流畅的体验。⚡",
+      },
       note_2025_06_19: {
         title: "📱 现已作为 PWA 提供！",
         content: "Workout.cool v1.2 现在是一个渐进式网络应用！将其安装在您的手机上，即可享受原生应用体验和离线访问。🚀",

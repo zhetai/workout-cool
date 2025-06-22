@@ -60,6 +60,11 @@ export default {
     title: "What's New",
     release_notes: "Release Notes",
     notes: {
+      note_2025_06_22: {
+        title: "🌍 New Languages & Performance Boost!",
+        content:
+          "The app is now available in Chinese and Russian! We've also improved drag'n'drop performance for a smoother experience. ⚡",
+      },
       note_2025_06_19: {
         title: "📱 Now Available as a PWA!",
         content:
