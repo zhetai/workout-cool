@@ -86,6 +86,12 @@ export default {
     },
   },
 
+  // Donation Alert
+  donation_alert: {
+    title: "Gardez Workout.cool gratuit. Soutenez-nous via",
+    or: "ou",
+  },
+
   // Donation Modal
   donation_modal: {
     support_via: "Soutenir via...",

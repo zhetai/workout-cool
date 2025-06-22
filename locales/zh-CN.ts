@@ -83,6 +83,12 @@ export default {
     },
   },
 
+  // Donation Alert
+  donation_alert: {
+    title: "保持 Workout.cool 免费。支持我们通过",
+    or: "或",
+  },
+
   // Donation Modal
   donation_modal: {
     support_via: "支持方式...",

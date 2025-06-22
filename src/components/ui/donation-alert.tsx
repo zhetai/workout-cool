@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
+import { useI18n } from "locales/client";
 import { cn } from "@/shared/lib/utils";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
@@ -9,6 +10,8 @@ interface DonationAlertProps {
 }
 
 export const DonationAlert = ({ className }: DonationAlertProps) => {
+  const t = useI18n();
+
   return (
     <Alert
       className={cn(
@@ -19,7 +22,7 @@ export const DonationAlert = ({ className }: DonationAlertProps) => {
     >
       <AlertDescription className="flex items-center gap-1 italic text-base">
         <span className="whitespace-pre-line">
-          Keep Workout.cool free. Support us via{" "}
+          {t("donation_alert.title")}{" "}
           <Link
             className="font-medium text-gray-900 underline hover:text-gray-700 dark:text-gray-200"
             href="https://ko-fi.com/workoutcool"

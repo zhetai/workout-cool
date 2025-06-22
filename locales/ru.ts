@@ -86,6 +86,12 @@ export default {
     },
   },
 
+  // Donation Alert
+  donation_alert: {
+    title: "Поддержите Workout.cool. Поддержите нас через",
+    or: "или",
+  },
+
   // Donation Modal
   donation_modal: {
     support_via: "Поддержать через...",

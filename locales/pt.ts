@@ -60,6 +60,11 @@ export default {
     title: "Novidades",
     release_notes: "Notas de Lançamento",
     notes: {
+      note_2025_06_22: {
+        title: "🌍 Novos idiomas e melhorias de desempenho!",
+        content:
+          "A aplicação agora está disponível em chinês e russo! Também melhoramos o desempenho do arrastar e largar para uma experiência mais fluida. ⚡",
+      },
       note_2025_06_19: {
         title: "📱 Agora disponível como PWA!",
         content:
@@ -72,21 +77,46 @@ export default {
       },
       note_2025_06_01: {
         title: "🎉 Novo: Dialogo de Notas de Lançamento",
-        content:
-          "Agora pode ver as novidades diretamente no cabeçalho! Fique atento a mais atualizações.",
+        content: "Agora pode ver as novidades diretamente no cabeçalho! Fique atento a mais atualizações.",
       },
       note_2025_05_20: {
         title: "Melhorias na UI",
-        content:
-          "Responsividade móvel aprimorada e efeitos subtis ao passar o cursor sobre botões.",
+        content: "Responsividade móvel aprimorada e efeitos subtis ao passar o cursor sobre botões.",
       },
     },
   },
 
+  // Donation Alert
+  donation_alert: {
+    title: "Mantém Workout.cool gratuito. Apoia-nos via",
+    or: "ou",
+  },
+
+  // Donation Modal
+  donation_modal: {
+    support_via: "Apoiar via...",
+    title: "Apoiar o projeto",
+    congrats: "Parabéns pelo seu treino! 🎉",
+    subtitle: "Esta app ajuda-o gratuitamente, mas tem um custo real para mim...",
+    costs_title: "A realidade dos custos",
+    costs_description:
+      "Actualmente, as doações nem sequer cobrem os custos básicos: servidores, autenticação, infraestrutura, base de dados, etc.",
+    open_source_title: "100% Open Source",
+    open_source_description:
+      "Esta app é completamente gratuita e de código aberto. Não há lucro - é um projeto de paixão para ajudar a comunidade e ajudar as pessoas a fazer exercício.",
+    no_ads: "Sem publicidade",
+    no_tracking: "Sem rastreamento",
+    impact_title: "O seu impacto",
+    impact_3_euros: "• Mesmo 3€ cobrem 1 semana de servidor",
+    impact_support: "• O seu apoio mantém a app gratuita para todos",
+    impact_footer: "Cada doação, mesmo pequena, faz uma diferença real! 🙏",
+    later_button: "Mais tarde",
+    support_button: "Apoiar o projeto",
+  },
+
   // Contact Support
   contact_support: "Contactar Suporte",
-  contact_support_subtitle:
-    "Descreva o seu problema e iremos ajudá-lo o mais rápido possível. Também pode escrever-nos diretamente para",
+  contact_support_subtitle: "Descreva o seu problema e iremos ajudá-lo o mais rápido possível. Também pode escrever-nos diretamente para",
 
   // Social Platforms
   social_platforms: {
@@ -106,8 +136,7 @@ export default {
 
   // Workout Builder
   workout_builder: {
-    confirm_delete:
-      "Tem a certeza de que pretende eliminar esta sessão de treino?",
+    confirm_delete: "Tem a certeza de que pretende eliminar esta sessão de treino?",
     steps: {
       equipment: {
         title: "Equipamento",
@@ -150,8 +179,7 @@ export default {
     error: {
       loading_exercises: "Erro ao carregar exercícios",
     },
-    no_exercises_found:
-      "Nenhum exercício encontrado. Experimente mudar a seleção de equipamento ou músculos.",
+    no_exercises_found: "Nenhum exercício encontrado. Experimente mudar a seleção de equipamento ou músculos.",
     equipment: {
       bodyweight: {
         label: "Peso corporal",
@@ -205,15 +233,12 @@ export default {
     },
     selection: {
       choose_your_arsenal: "Escolha o seu arsenal",
-      select_equipment_description:
-        "Selecione equipamento para desbloquear treinos personalizados",
+      select_equipment_description: "Selecione equipamento para desbloquear treinos personalizados",
       clear_all: "Limpar tudo",
       muscle_selection_coming_soon: "Seleção de músculos (Em breve)",
-      muscle_selection_description:
-        "Selecione o(s) músculo(s) que deseja treinar clicando neles.",
+      muscle_selection_description: "Selecione o(s) músculo(s) que deseja treinar clicando neles.",
       exercise_selection_coming_soon: "Seleção de exercícios (Em breve)",
-      exercise_selection_description:
-        "Nesta etapa verá recomendações de exercícios personalizadas.",
+      exercise_selection_description: "Nesta etapa verá recomendações de exercícios personalizadas.",
     },
     session: {
       back_to_workout: "Voltar ao treino",
@@ -245,13 +270,11 @@ export default {
       current_exercise: "Exercício atual",
       complete: "Concluído",
       active: "Ativo",
-      already_have_a_active_session:
-        "Já tem uma sessão ativa. Não é possível repetir sem terminar ou abandonar o treino.",
+      already_have_a_active_session: "Já tem uma sessão ativa. Não é possível repetir sem terminar ou abandonar o treino.",
       no_exercise_selected: "Nenhum exercício selecionado",
       quit_workout_title: "Abandonar treino?",
       progress: "Progresso",
-      quit_warning:
-        "Tem a certeza de que pretende abandonar? Pode guardar o progresso ou perdê-lo completamente.",
+      quit_warning: "Tem a certeza de que pretende abandonar? Pode guardar o progresso ou perdê-lo completamente.",
       save_and_quit: "Guardar e sair",
       quit_without_save: "Sair sem guardar",
       continue_workout: "Continuar treino",
@@ -327,8 +350,7 @@ export default {
     login: "Iniciar sessão",
     connecting: "A ligar...",
     login_to_your_account_title: "Inicie sessão na sua conta",
-    login_to_your_account_subtitle:
-      "Insira as suas credenciais abaixo para entrar",
+    login_to_your_account_subtitle: "Insira as suas credenciais abaixo para entrar",
     password_forgot: "Esqueceu-se da palavra-passe?",
     password_reset_success: "Palavra-passe redefinida com sucesso",
     dont_have_account: "Ainda não tem conta?",
@@ -401,15 +423,13 @@ export default {
     saving_short: "A guardar...",
     saved_short: "OK",
     looks_like_you_are_lost: "Parece que está perdido",
-    the_page_you_are_looking_for_is_not_available:
-      "A página que procura não está disponível",
+    the_page_you_are_looking_for_is_not_available: "A página que procura não está disponível",
     go_to_home: "Ir para o início",
     go_to_profile: "Ir para o perfil",
     terms: "Termos de Serviço",
     privacy: "Política de Privacidade",
     sales_terms: "Termos de Venda",
-    consent_banner:
-      "Utilizamos cookies para melhorar a sua experiência. Ao clicar em Aceitar, concorda com a nossa utilização de cookies.",
+    consent_banner: "Utilizamos cookies para melhorar a sua experiência. Ao clicar em Aceitar, concorda com a nossa utilização de cookies.",
     about: "Sobre nós",
     profile: "Perfil",
     donate: "Doar",

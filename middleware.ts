@@ -42,7 +42,7 @@ function detectUserLocale(request: NextRequest): string {
 }
 
 const I18nMiddleware = createI18nMiddleware({
-  locales: ["en", "fr", "es", "zh-CN", "ru"],
+  locales: ["en", "fr", "es", "zh-CN", "ru", "pt"],
   defaultLocale: "en",
   urlMappingStrategy: "rewrite",
 });

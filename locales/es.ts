@@ -86,6 +86,12 @@ export default {
     },
   },
 
+  // Donation Alert
+  donation_alert: {
+    title: "Mantén Workout.cool gratis. Apóyanos a través de",
+    or: "o",
+  },
+
   // Donation Modal
   donation_modal: {
     support_via: "Apoyar via",
