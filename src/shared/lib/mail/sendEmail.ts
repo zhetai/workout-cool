@@ -25,11 +25,15 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendEmail = async ({ from, to, subject, text, react }: EmailPayload) => {
-  return transporter.sendMail({
-    from: from ?? env.SMTP_FROM,
-    to,
-    subject,
-    text,
-    html: react ? await render(react) : undefined,
-  });
+  try {
+    return transporter.sendMail({
+      from: from ?? env.SMTP_FROM,
+      to,
+      subject,
+      text,
+      html: react ? await render(react) : undefined,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };

@@ -2,7 +2,7 @@ export default {
   email_sent: "Email sent",
   cant_send_email: "Can't send email",
   logout: "Logout",
-  verify_email: "Verify your email",
+  verify_email: "Verify your email. ⚠️ Don't forget to check your spam folder.",
   verify_email_subtitle: "Please verify your email to continue.",
   resend_email: "Resend email",
   resend_email_countdown: "Resend email in {seconds} seconds",
