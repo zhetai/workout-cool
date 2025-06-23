@@ -1,0 +1,14 @@
+name = "workout-cool"
+compatibility_date = "2025-06-23"
+
+[build]
+command = "pnpm install && pnpm build"
+cwd = "."
+watch_dir = "."
+
+[site]
+bucket = "./.next"
+entry-point = "."
+
+[env.production]
+# 可选：指定生产环境变量，如有敏感信息建议用 secrets 配置
